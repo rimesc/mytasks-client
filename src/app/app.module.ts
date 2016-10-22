@@ -7,17 +7,27 @@ import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawe
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar.component';
+import { DashboardComponent } from './dashboard.component';
+import { ProjectListComponent } from './project-list.component';
+import { ProjectDetailComponent } from './project-detail.component';
+import { TaskListComponent } from './task-list.component';
+import { AppRoutingModule }   from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavBarComponent
+    NavBarComponent,
+    DashboardComponent,
+    ProjectListComponent,
+    ProjectDetailComponent,
+    TaskListComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    Angular2FontawesomeModule
+    Angular2FontawesomeModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
