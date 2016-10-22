@@ -1,0 +1,19 @@
+<nav class="navbar navbar-dark navbar-fixed-top bg-inverse">
+  <div #navbar>
+    <a class="navbar-brand" href="/">myTasks</a>
+    <nav class="nav navbar-nav float-xs-left">
+      <a class="nav-item nav-link" href="/" href="/">Dashboard</a>
+      <a class="nav-item nav-link" href="/projects">Projects</a>
+      <a class="nav-item nav-link" href="/tasks}">Tasks</a>
+    </nav>
+    <nav class="nav navbar-nav float-xs-right">
+      <form class="nav-item form-inline float-xs-left">
+        <input type="text" class="form-control" placeholder="Search...">
+      </form>
+      <a class="nav-item nav-link" *ngIf="showAdminOptions" title="Settings" href="/admin"><fa name="cog"></fa></a>
+      <a class="nav-item nav-link" title="Profile" href="#"><fa name="user"></fa></a>
+      <a class="nav-item nav-link" title="Help" href="#"><fa name="question-circle"></fa></a>
+      <a class="nav-item nav-link" title="Logout" href="#" (click)="logout()"><fa name="sign-out"></fa></a>
+    </nav>
+  </div>
+</nav>
