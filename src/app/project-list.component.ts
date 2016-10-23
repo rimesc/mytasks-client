@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { Project } from './project';
 import { ProjectService } from './project.service';
+import { NewProjectModalComponent } from './new-project-modal.component'
 
 @Component({
   selector: 'project-list',
@@ -12,7 +15,8 @@ import { ProjectService } from './project.service';
 export class ProjectListComponent implements OnInit {
   projects: Project[]
 
-  constructor(private projectService: ProjectService) { }
+  constructor(private projectService: ProjectService,
+              private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.getProjects();
@@ -23,7 +27,7 @@ export class ProjectListComponent implements OnInit {
   }
 
   create(): void {
-    console.log("Create project.");
+    this.modalService.open(NewProjectModalComponent).result.then(() => this.getProjects());
   }
 
   linkTo(id: number): string {

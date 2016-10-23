@@ -18,6 +18,7 @@ import { ProjectListComponent } from './project-list.component';
 import { ProjectDetailComponent } from './project-detail.component';
 import { ProjectHeaderComponent } from './project-header.component';
 import { TaskListComponent } from './task-list.component';
+import { NewProjectModalComponent } from './new-project-modal.component';
 import { AppRoutingModule }   from './app-routing.module';
 import { ProjectService } from './project.service';
 
@@ -30,7 +31,8 @@ import { ProjectService } from './project.service';
     ProjectListComponent,
     ProjectDetailComponent,
     ProjectHeaderComponent,
-    TaskListComponent
+    TaskListComponent,
+    NewProjectModalComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +44,7 @@ import { ProjectService } from './project.service';
     AppRoutingModule
   ],
   providers: [ProjectService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [NewProjectModalComponent]
 })
 export class AppModule { }
