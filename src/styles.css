@@ -8,3 +8,7 @@ body {
 .main {
 	margin: 20px 0px; /*-15px*/
 }
+
+.btn-toolbar {
+	margin: 0.5rem 0;
+}

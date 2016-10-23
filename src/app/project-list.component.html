@@ -1,1 +1,19 @@
 <h1>Projects</h1>
+<div class="btn-toolbar" role="toolbar">
+  <div style="float: right" class="btn-group float-xs-right">
+	   <button class="btn btn-primary" (click)="create()"><fa name="plus"></fa> New Project</button>
+   </div>
+</div>
+<div style="clear: both"></div>
+<ul class="list-group project-list">
+	<li *ngFor="let project of projects" class="list-group-item">
+		<span class="tag tag-default tag-pill float-xs-right">{{project.numberOfOpenTasks}}</span>
+		<h5 class="list-group-item-heading"><a [routerLink]="linkTo(project.id)">{{project.name}}</a></h5>
+		<p class="list-group-item-text">
+			{{project.description}}
+		</p>
+	</li>
+	<li *ngIf="projects && projects.length == 0" class="list-group-item list-group-placeholder">
+		No projects to show.
+	</li>
+</ul>
