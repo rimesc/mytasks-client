@@ -9,6 +9,6 @@ body {
 	margin: 20px 0px; /*-15px*/
 }
 
-.btn-toolbar {
-	margin: 0.5rem 0;
+.page-header .btn-toolbar {
+	margin: 2px 0;
 }
