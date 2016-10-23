@@ -1,0 +1,32 @@
+<div class="project-header">
+	<div class="btn-toobar pull-left">
+		<div class="btn-group">
+			<button type="button" class="btn btn-primary" (click)="newTask()"><fa name="plus"></fa> New Task</button>
+		</div>
+	</div>
+	<div class="btn-toobar pull-right">
+		<div class="btn-group">
+			<button type="button" class="btn btn-secondary" (click)="edit()"><fa name="edit"></fa> Edit</button>
+			<button type="button" class="btn btn-secondary" (click)="delete()"><fa name="trash"></fa> Delete</button>
+		</div>
+	</div>
+	<div style="clear: both"></div>
+	<h1>{{project.name}}</h1>
+	<p class="lead">{{project.description}}</p>
+	<ul>
+		<li>
+			<a routerLink="tasks'">
+				<fa name="check-square-o"></fa>
+				<span>{{project.numberOfOpenTasks}} open task{{project.numberOfOpenTasks == 1 ? '' : 's'}}</span>
+			</a>
+		</li>
+		<li>
+			<!-- <a routerLink="notes"> -->
+			<span class="text-muted">
+				<fa name="file"></fa>
+				<span>1 note</span>
+			</span>
+			<!-- </a> -->
+		</li>
+	</ul>
+</div>
