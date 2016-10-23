@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { OnInit } from '@angular/core';
 
+import { Message } from './message';
 import { Project } from './project';
 import { ProjectService } from './project.service';
 
@@ -12,6 +13,7 @@ import { ProjectService } from './project.service';
 })
 export class ProjectDetailComponent implements OnInit {
   project: Project
+  messages: Message[] = [{code: 'Not found', severity: 'danger', detail: 'The requested project could not be found.'}, {code: 'foo', severity: 'warning', detail: 'bar'}, {code: 'foo', severity: 'success', detail: 'bar'}];
 
   constructor(private projectService: ProjectService, private route: ActivatedRoute) { }
 

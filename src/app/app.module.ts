@@ -7,10 +7,12 @@ import { HttpModule } from '@angular/http';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api/in-memory-web-api.module';
 import { InMemoryDataService }  from './in-memory-data.service';
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar.component';
+import { MessagesComponent } from './messages.component';
 import { DashboardComponent } from './dashboard.component';
 import { ProjectListComponent } from './project-list.component';
 import { ProjectDetailComponent } from './project-detail.component';
@@ -23,6 +25,7 @@ import { ProjectService } from './project.service';
   declarations: [
     AppComponent,
     NavBarComponent,
+    MessagesComponent,
     DashboardComponent,
     ProjectListComponent,
     ProjectDetailComponent,
@@ -34,6 +37,7 @@ import { ProjectService } from './project.service';
     FormsModule,
     HttpModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
+    NgbModule.forRoot(),
     Angular2FontawesomeModule,
     AppRoutingModule
   ],

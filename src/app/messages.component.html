@@ -1,0 +1,4 @@
+<ngb-alert *ngFor="let message of messages" [type]="message.severity" [dismissible]="message.severity !== 'danger'" (close)="close(message)">
+	<span *ngIf="message.code" class="alert-heading">{{message.code}}</span>
+	<span *ngIf="message.detail">{{message.detail}}</span>
+</ngb-alert>

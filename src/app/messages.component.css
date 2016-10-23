@@ -1,0 +1,8 @@
+:host >>> .alert-heading {
+  font-weight: bold;
+  display: inline;
+}
+
+:host >>> .alert-heading+* {
+  margin-left: 0.75rem;
+}
