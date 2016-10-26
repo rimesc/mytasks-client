@@ -21,6 +21,7 @@ import { TaskListComponent } from './task-list.component';
 import { NewProjectModalComponent } from './new-project-modal.component';
 import { AppRoutingModule }   from './app-routing.module';
 import { ProjectService } from './project.service';
+import { TaskService } from './task.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { ProjectService } from './project.service';
     Angular2FontawesomeModule,
     AppRoutingModule
   ],
-  providers: [ProjectService],
+  providers: [ProjectService, TaskService],
   bootstrap: [AppComponent],
   entryComponents: [NewProjectModalComponent]
 })
