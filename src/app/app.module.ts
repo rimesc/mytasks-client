@@ -9,14 +9,17 @@ import { InMemoryDataService }  from './in-memory-data.service';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
+import {MomentModule} from 'angular2-moment';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar.component';
 import { MessagesComponent } from './messages.component';
 import { DashboardComponent } from './dashboard.component';
 import { ProjectListComponent } from './project-list.component';
+import { ProjectComponent } from './project.component';
 import { ProjectDetailComponent } from './project-detail.component';
 import { ProjectHeaderComponent } from './project-header.component';
+import { ProjectTasksComponent } from './project-tasks.component';
 import { TaskListComponent } from './task-list.component';
 import { NewProjectModalComponent } from './new-project-modal.component';
 import { AppRoutingModule }   from './app-routing.module';
@@ -30,8 +33,10 @@ import { TaskService } from './task.service';
     MessagesComponent,
     DashboardComponent,
     ProjectListComponent,
+    ProjectComponent,
     ProjectDetailComponent,
     ProjectHeaderComponent,
+    ProjectTasksComponent,
     TaskListComponent,
     NewProjectModalComponent
   ],
@@ -42,6 +47,7 @@ import { TaskService } from './task.service';
     InMemoryWebApiModule.forRoot(InMemoryDataService),
     NgbModule.forRoot(),
     Angular2FontawesomeModule,
+    MomentModule,
     AppRoutingModule
   ],
   providers: [ProjectService, TaskService],

@@ -3,7 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent } from './dashboard.component';
 import { ProjectListComponent } from './project-list.component';
+import { ProjectComponent } from './project.component';
 import { ProjectDetailComponent } from './project-detail.component';
+import { ProjectTasksComponent } from './project-tasks.component';
 import { TaskListComponent } from './task-list.component';
 
 const routes: Routes = [
@@ -17,7 +19,17 @@ const routes: Routes = [
   },
   {
     path: 'projects/:id',
-    component: ProjectDetailComponent
+    component: ProjectComponent,
+    children: [
+      {
+        path: '',
+        component: ProjectDetailComponent
+      },
+      {
+        path: 'tasks',
+        component: ProjectTasksComponent
+      }
+    ]
   },
   {
     path: 'tasks',
