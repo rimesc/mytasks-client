@@ -1,15 +1,17 @@
 <messages [messages]="messages"></messages>
 <div *ngIf="project">
-  <div class="btn-group" data-toggle="buttons">
-    <label *ngFor="let filter of filters" class="btn btn-outline-primary" [class.active]="filter === activeFilter">
-      <input type="radio" name="options" id="{{filter.id}}" autocomplete="off" [checked]="filter === activeFilter" (click)="activateFilter(filter)">{{filter.label}}
-    </label>
-  </div>
-  <div class="navbar-form  pull-right">
-    <button type="button" class="btn btn-primary" (click)="newTask()">
-      <fa name="plus"></fa>
-      <span>New Task</span>
-    </button>
+  <div class="btn-toolbar">
+    <div class="btn-group" data-toggle="buttons">
+      <label *ngFor="let filter of filters" class="btn btn-outline-primary" [class.active]="filter === activeFilter">
+        <input type="radio" name="options" id="{{filter.id}}" autocomplete="off" [checked]="filter === activeFilter" (click)="activateFilter(filter)">{{filter.label}}
+      </label>
+    </div>
+    <div class="navbar-form  pull-right">
+      <button type="button" class="btn btn-primary" (click)="newTask()">
+        <fa name="plus"></fa>
+        <span>New Task</span>
+      </button>
+    </div>
   </div>
 
   <div style="clear: both"></div>
