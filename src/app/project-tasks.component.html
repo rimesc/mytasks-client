@@ -4,37 +4,22 @@
     <label *ngFor="let filter of filters" class="btn btn-outline-primary" [class.active]="filter === activeFilter">
       <input type="radio" name="options" id="{{filter.id}}" autocomplete="off" [checked]="filter === activeFilter" (click)="activateFilter(filter)">{{filter.label}}
     </label>
-  </div>	<div class="navbar-form  pull-right">
-		<button type="button" class="btn btn-primary" (click)="newTask()">
+  </div>
+  <div class="navbar-form  pull-right">
+    <button type="button" class="btn btn-primary" (click)="newTask()">
       <fa name="plus"></fa>
       <span>New Task</span>
     </button>
-	</div>
+  </div>
 
-	<div style="clear: both"></div>
+  <div style="clear: both"></div>
 
-	<ul class="list-group task-list">
-		<li *ngFor="let task of tasks" class="list-group-item">
-			<div class="task-summary list-group-item-heading">
-				<a routerLink="/tasks/{{task.id}}">
-					<span [class.line-through]="task.state == 'DONE'">{{task.summary}}</span>
-				</a>
-			</div>
-			<div class="pull-left">
-				<fa class="text-muted" name="clock-o"></fa>
-				<span class="text-muted">{{isModified(task) ? 'Last modified' : 'Created'}}</span>
-				<span class="text-muted">{{task.updated | amTimeAgo}}</span>
-				<ul class="tags text-muted" style="display: inline-block; padding-bottom: 0; margin-left: 15px">
-					<li *ngFor="let tag of task.tags"><fa name="tag"></fa> {{tag}}</li>
-				</ul>
-			</div>
-			<div class="pull-right">
-				<span class="text-muted"><fa name="warning"></fa> {{task.priority}}</span>
-			</div>
-			<div style="clear: both"></div>
-		</li>
-		<li *ngIf="tasks && tasks.length === 0" class="list-group-item list-group-placeholder">
-			No tasks to show.
-		</li>
-	</ul>
+  <ul class="list-group task-list">
+    <li *ngFor="let task of tasks" class="list-group-item">
+      <task-item [task]="task"></task-item>
+    </li>
+    <li *ngIf="tasks && tasks.length === 0" class="list-group-item list-group-placeholder">
+      No tasks to show.
+    </li>
+  </ul>
 </div>

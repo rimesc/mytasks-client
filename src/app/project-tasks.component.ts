@@ -55,10 +55,6 @@ export class ProjectTasksComponent implements OnInit {
     this.getTasks();
   }
 
-  isModified(task: Task): boolean {
-    return task.updated !== task.created;
-  }
-
 }
 
 class Filter {

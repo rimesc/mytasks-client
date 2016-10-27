@@ -20,6 +20,7 @@ import { ProjectComponent } from './project.component';
 import { ProjectDetailComponent } from './project-detail.component';
 import { ProjectHeaderComponent } from './project-header.component';
 import { ProjectTasksComponent } from './project-tasks.component';
+import { TaskItemComponent } from './task-item.component';
 import { TaskListComponent } from './task-list.component';
 import { NewProjectModalComponent } from './new-project-modal.component';
 import { AppRoutingModule }   from './app-routing.module';
@@ -37,6 +38,7 @@ import { TaskService } from './task.service';
     ProjectDetailComponent,
     ProjectHeaderComponent,
     ProjectTasksComponent,
+    TaskItemComponent,
     TaskListComponent,
     NewProjectModalComponent
   ],

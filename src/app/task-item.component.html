@@ -1,0 +1,17 @@
+<div class="task-summary list-group-item-heading">
+  <a routerLink="/tasks/{{task.id}}">
+    <span [class.line-through]="task.state == 'DONE'">{{task.summary}}</span>
+  </a>
+</div>
+<div class="pull-left">
+  <fa class="text-muted" name="clock-o"></fa>
+  <span class="text-muted">{{isModified() ? 'Last modified' : 'Created'}}</span>
+  <span class="text-muted">{{task.updated | amTimeAgo}}</span>
+  <ul class="tags text-muted" style="display: inline-block; padding-bottom: 0; margin-left: 15px">
+    <li *ngFor="let tag of task.tags"><fa name="tag"></fa> {{tag}}</li>
+  </ul>
+</div>
+<div class="pull-right">
+  <span class="text-muted"><fa name="warning"></fa> {{task.priority}}</span>
+</div>
+<div style="clear: both"></div>
