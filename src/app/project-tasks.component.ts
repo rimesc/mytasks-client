@@ -15,9 +15,9 @@ export class ProjectTasksComponent {
   project: Project
   tasks: Task[];
   filters: Filter[] = [
-    {id: 'OPEN', label: 'Open tasks'},
-    {id: 'CLOSED', label: 'Closed tasks'},
-    {id: 'ALL', label: 'All tasks'}
+    {id: 'OPEN', label: 'Open tasks', states: ['TO_DO', 'IN_PROGRESS', 'ON_HOLD']},
+    {id: 'CLOSED', label: 'Closed tasks', states: ['DONE']},
+    {id: 'ALL', label: 'All tasks', states: []}
   ];
   activeFilter: Filter = this.filters[0];
 
@@ -40,12 +40,18 @@ export class ProjectTasksComponent {
   getTasks(): void {
     this.route.parent.params.forEach((params: Params) => {
       let id = +params['id'];
-      this.taskService.getTasks(id).then(tasks => this.tasks = tasks);
+      if (this.activeFilter.states.length > 0) {
+        this.taskService.getFilteredTasks(id, this.activeFilter.states).then(tasks => this.tasks = tasks);
+      }
+      else {
+        this.taskService.getTasks(id).then(tasks => this.tasks = tasks);
+      }
     });
   }
 
   activateFilter(filter: Filter): void {
     this.activeFilter = filter;
+    this.getTasks();
   }
 
   isModified(task: Task): boolean {
@@ -57,4 +63,5 @@ export class ProjectTasksComponent {
 class Filter {
   id: string;
   label: string;
+  states: string[];
 }
