@@ -33,7 +33,7 @@
 			</div>
 			<div style="clear: both"></div>
 		</li>
-		<li *ngIf="!tasks" class="list-group-item list-group-placeholder">
+		<li *ngIf="tasks && tasks.length === 0" class="list-group-item list-group-placeholder">
 			No tasks to show.
 		</li>
 	</ul>
