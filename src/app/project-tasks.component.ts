@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { Project } from './project';
@@ -11,7 +12,7 @@ import { TaskService } from './task.service';
   templateUrl: './project-tasks.component.html',
   styleUrls: ['./project-tasks.component.css']
 })
-export class ProjectTasksComponent {
+export class ProjectTasksComponent implements OnInit {
   project: Project
   tasks: Task[];
   filters: Filter[] = [
