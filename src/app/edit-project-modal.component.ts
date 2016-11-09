@@ -2,22 +2,19 @@ import { Component, Input } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { ProjectService } from './project.service';
+import { ProjectForm } from './project-form';
 
 @Component({
   selector: 'edit-project-modal',
-  templateUrl: './edit-project-modal.component.html',
-  styleUrls: ['./edit-project-modal.component.css']
+  templateUrl: './edit-project-modal.component.html'
 })
 export class EditProjectModalComponent {
-  name: string;
-  description: string;
+  project = new ProjectForm();
 
-  constructor(public activeModal: NgbActiveModal,
-              private projectService: ProjectService) { }
+  constructor(public activeModal: NgbActiveModal) { }
 
-  submit(): void {
-    this.activeModal.close({name: this.name, description: this.description});
+  submit(project: ProjectForm): void {
+    this.activeModal.close(project);
   }
 
   cancel(): void {

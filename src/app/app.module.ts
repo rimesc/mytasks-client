@@ -25,6 +25,7 @@ import { TaskItemComponent } from './task-item.component';
 import { TaskListComponent } from './task-list.component';
 import { NewProjectModalComponent } from './new-project-modal.component';
 import { EditProjectModalComponent } from './edit-project-modal.component';
+import { ProjectFormComponent } from './project-form.component';
 import { AppRoutingModule }   from './app-routing.module';
 import { ProjectService } from './project.service';
 import { TaskService } from './task.service';
@@ -44,7 +45,8 @@ import { TaskService } from './task.service';
     TaskItemComponent,
     TaskListComponent,
     NewProjectModalComponent,
-    EditProjectModalComponent
+    EditProjectModalComponent,
+    ProjectFormComponent
   ],
   imports: [
     BrowserModule,
