@@ -1,4 +1,5 @@
 <messages [messages]="messages"></messages>
 <div *ngIf="project">
+  <project-toolbar (edit)="editProject()" (delete)="deleteProject()" (newTask)="newTask()"></project-toolbar>
   <project-header [project]="project"></project-header>
 </div>

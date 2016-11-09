@@ -5,11 +5,11 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProjectService } from './project.service';
 
 @Component({
-  selector: 'new-project-modal',
-  templateUrl: './new-project-modal.component.html',
-  styleUrls: ['./new-project-modal.component.css']
+  selector: 'edit-project-modal',
+  templateUrl: './edit-project-modal.component.html',
+  styleUrls: ['./edit-project-modal.component.css']
 })
-export class NewProjectModalComponent {
+export class EditProjectModalComponent {
   name: string;
   description: string;
 
@@ -17,7 +17,7 @@ export class NewProjectModalComponent {
               private projectService: ProjectService) { }
 
   submit(): void {
-    this.projectService.createProject(this.name, this.description).then(project => this.activeModal.close(project));
+    this.activeModal.close({name: this.name, description: this.description});
   }
 
   cancel(): void {

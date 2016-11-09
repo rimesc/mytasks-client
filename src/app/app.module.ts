@@ -19,10 +19,12 @@ import { ProjectListComponent } from './project-list.component';
 import { ProjectComponent } from './project.component';
 import { ProjectDetailComponent } from './project-detail.component';
 import { ProjectHeaderComponent } from './project-header.component';
+import { ProjectToolbarComponent } from './project-toolbar.component';
 import { ProjectTasksComponent } from './project-tasks.component';
 import { TaskItemComponent } from './task-item.component';
 import { TaskListComponent } from './task-list.component';
 import { NewProjectModalComponent } from './new-project-modal.component';
+import { EditProjectModalComponent } from './edit-project-modal.component';
 import { AppRoutingModule }   from './app-routing.module';
 import { ProjectService } from './project.service';
 import { TaskService } from './task.service';
@@ -37,10 +39,12 @@ import { TaskService } from './task.service';
     ProjectComponent,
     ProjectDetailComponent,
     ProjectHeaderComponent,
+    ProjectToolbarComponent,
     ProjectTasksComponent,
     TaskItemComponent,
     TaskListComponent,
-    NewProjectModalComponent
+    NewProjectModalComponent,
+    EditProjectModalComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +58,6 @@ import { TaskService } from './task.service';
   ],
   providers: [ProjectService, TaskService],
   bootstrap: [AppComponent],
-  entryComponents: [NewProjectModalComponent]
+  entryComponents: [NewProjectModalComponent, EditProjectModalComponent]
 })
 export class AppModule { }

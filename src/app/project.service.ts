@@ -34,6 +34,14 @@ export class ProjectService {
                .catch(this.handleError);
   }
 
+  updateProject(project: Project) {
+    // TODO the real API will return the updated project as the response body, but the in-memory one doesn't
+    return this.http.put(this.url + '/' + project.id, JSON.stringify(project), {headers: this.headers})
+               .toPromise()
+               .then(response => project)
+               .catch(this.handleError);
+  }
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);

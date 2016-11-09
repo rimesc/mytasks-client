@@ -10,17 +10,4 @@ import { Project } from './project';
 export class ProjectHeaderComponent {
   @Input()
   project: Project
-
-  edit(): void {
-    console.log("Edit project.");
-  }
-
-  delete(): void {
-    console.log("Delete project.");
-  }
-
-  newTask(): void {
-    console.log("New task.");
-  }
-
 }
