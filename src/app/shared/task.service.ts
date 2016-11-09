@@ -3,7 +3,7 @@ import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Task } from './task';
+import { Task } from '../api/task';
 
 @Injectable()
 export class TaskService {

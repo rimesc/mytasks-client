@@ -7,9 +7,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteProjectModalComponent } from './delete-project-modal.component'
 import { EditProjectModalComponent } from './edit-project-modal.component'
 
-import { Message } from './message';
-import { Project } from './project';
-import { ProjectService } from './project.service';
+import { Message } from '../shared/message';
+import { Project } from '../api/project';
+import { ProjectService } from '../shared/project.service';
 
 @Component({
   selector: 'project-view',

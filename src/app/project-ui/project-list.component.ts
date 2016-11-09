@@ -3,9 +3,9 @@ import { OnInit } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { Project } from './project';
+import { Project } from '../api/project';
 import { ProjectForm } from './project-form';
-import { ProjectService } from './project.service';
+import { ProjectService } from '../shared/project.service';
 import { NewProjectModalComponent } from './new-project-modal.component'
 
 @Component({

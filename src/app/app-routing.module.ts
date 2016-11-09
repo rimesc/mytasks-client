@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent } from './dashboard.component';
-import { ProjectListComponent } from './project-list.component';
-import { ProjectComponent } from './project.component';
-import { ProjectDetailComponent } from './project-detail.component';
-import { ProjectTasksComponent } from './project-tasks.component';
-import { TaskListComponent } from './task-list.component';
+import { ProjectListComponent } from './project-ui/project-list.component';
+import { ProjectComponent } from './project-ui/project.component';
+import { ProjectDetailComponent } from './project-ui/project-detail.component';
+import { ProjectTasksComponent } from './project-ui/project-tasks.component';
+import { TaskListComponent } from './project-ui/task-list.component';
 
 const routes: Routes = [
   {

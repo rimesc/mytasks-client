@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Project } from './project';
+import { Project } from '../api/project';
 
 @Component({
   selector: 'project-header',

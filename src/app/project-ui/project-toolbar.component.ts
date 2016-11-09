@@ -4,8 +4,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { EditProjectModalComponent } from './edit-project-modal.component'
 
-import { Project } from './project';
-import { ProjectService } from './project.service';
+import { Project } from '../api/project';
+import { ProjectService } from '../shared/project.service';
 
 @Component({
   selector: 'project-toolbar',

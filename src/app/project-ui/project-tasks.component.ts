@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { Project } from './project';
-import { Task } from './task';
-import { ProjectService } from './project.service';
-import { TaskService } from './task.service';
+import { Project } from '../api/project';
+import { Task } from '../api/task';
+import { ProjectService } from '../shared/project.service';
+import { TaskService } from '../shared/task.service';
 
 @Component({
   selector: 'project-tasks',
