@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { OnInit } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { DeleteProjectModalComponent } from './delete-project-modal.component'
 import { EditProjectModalComponent } from './edit-project-modal.component'
 
 import { Message } from './message';
@@ -20,6 +21,7 @@ export class ProjectDetailComponent implements OnInit {
 
   constructor(private projectService: ProjectService,
               private modalService: NgbModal,
+              private router: Router,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -48,7 +50,9 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   deleteProject(): void {
-    console.log("Delete project.");
+    let ref = this.modalService.open(DeleteProjectModalComponent);
+    (ref.componentInstance as DeleteProjectModalComponent).projectName = this.project.name;
+    ref.result.then(() => this.projectService.deleteProject(this.project.id)).then(() => this.router.navigate(['projects']), () => {});
   }
 
   newTask(): void {
