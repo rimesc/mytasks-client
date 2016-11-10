@@ -15,21 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'projects',
-    component: ProjectListComponent
-  },
-  {
-    path: 'projects/:id',
-    component: ProjectComponent,
-    children: [
-      {
-        path: '',
-        component: ProjectDetailComponent
-      },
-      {
-        path: 'tasks',
-        component: ProjectTasksComponent
-      }
-    ]
+    loadChildren: 'app/project-ui/project-ui.module#ProjectUiModule'
   },
   {
     path: 'tasks',

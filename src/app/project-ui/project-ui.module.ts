@@ -1,14 +1,12 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { MomentModule } from 'angular2-moment';
 
 import { SharedModule } from '../shared/shared.module';
-import { AppRoutingModule }   from '../app-routing.module';
 
 import { ProjectListComponent } from './project-list.component';
 import { ProjectComponent } from './project.component';
@@ -22,6 +20,7 @@ import { NewProjectModalComponent } from './new-project-modal.component';
 import { EditProjectModalComponent } from './edit-project-modal.component';
 import { DeleteProjectModalComponent } from './delete-project-modal.component';
 import { ProjectFormComponent } from './project-form.component';
+import { ProjectUiRoutingModule } from './project-ui-routing.module';
 
 @NgModule({
   declarations: [
@@ -39,13 +38,12 @@ import { ProjectFormComponent } from './project-form.component';
     ProjectFormComponent
   ],
   imports: [
-    BrowserModule,
+    CommonModule,
     FormsModule,
-    HttpModule,
     Angular2FontawesomeModule,
     MomentModule,
     SharedModule,
-    AppRoutingModule
+    ProjectUiRoutingModule
   ],
   entryComponents: [NewProjectModalComponent, EditProjectModalComponent, DeleteProjectModalComponent]
 })
