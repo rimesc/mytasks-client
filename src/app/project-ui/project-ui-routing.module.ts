@@ -5,7 +5,6 @@ import { ProjectListComponent } from './project-list.component';
 import { ProjectComponent } from './project.component';
 import { ProjectDetailComponent } from './project-detail.component';
 import { ProjectTasksComponent } from './project-tasks.component';
-import { TaskListComponent } from './task-list.component';
 
 const routes: Routes = [
   {

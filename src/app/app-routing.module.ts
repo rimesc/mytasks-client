@@ -6,7 +6,6 @@ import { ProjectListComponent } from './project-ui/project-list.component';
 import { ProjectComponent } from './project-ui/project.component';
 import { ProjectDetailComponent } from './project-ui/project-detail.component';
 import { ProjectTasksComponent } from './project-ui/project-tasks.component';
-import { TaskListComponent } from './project-ui/task-list.component';
 
 const routes: Routes = [
   {
@@ -19,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'tasks',
-    component: TaskListComponent
+    loadChildren: 'app/task-ui/task-ui.module#TaskUiModule'
   },
   {
     path: '',

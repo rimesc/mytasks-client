@@ -11,6 +11,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ApiModule } from './api/api.module';
 import { ProjectUiModule } from './project-ui/project-ui.module';
+import { TaskUiModule } from './task-ui/task-ui.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
@@ -32,6 +33,7 @@ import { AppRoutingModule }   from './app-routing.module';
     AppRoutingModule,
     ApiModule,
     ProjectUiModule,
+    TaskUiModule,
     SharedModule
   ],
   bootstrap: [AppComponent]

@@ -15,7 +15,6 @@ import { ProjectHeaderComponent } from './project-header.component';
 import { ProjectToolbarComponent } from './project-toolbar.component';
 import { ProjectTasksComponent } from './project-tasks.component';
 import { TaskItemComponent } from './task-item.component';
-import { TaskListComponent } from './task-list.component';
 import { NewProjectModalComponent } from './new-project-modal.component';
 import { EditProjectModalComponent } from './edit-project-modal.component';
 import { DeleteProjectModalComponent } from './delete-project-modal.component';
@@ -31,7 +30,6 @@ import { ProjectUiRoutingModule } from './project-ui-routing.module';
     ProjectToolbarComponent,
     ProjectTasksComponent,
     TaskItemComponent,
-    TaskListComponent,
     NewProjectModalComponent,
     EditProjectModalComponent,
     DeleteProjectModalComponent,
