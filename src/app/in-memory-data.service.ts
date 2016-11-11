@@ -1,6 +1,9 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import * as moment from 'moment/moment';
 
+import { Priority } from './api/priority';
+import { State } from './api/state';
+
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     let now = moment();
@@ -35,8 +38,8 @@ export class InMemoryDataService implements InMemoryDbService {
        * Ut quis urna mattis, placerat felis vitae, efficitur ipsum.
        * Aliquam rhoncus mauris eu eros pellentesque, vel elementum velit iaculis.
        * Maecenas varius erat nec`,
-       priority: 'HIGH',
-       state: 'TO_DO',
+       priority: Priority.HIGH,
+       state: State.TO_DO,
        created: moment(now).toDate(),
        updated: moment(now).toDate(),
        tags: ['Bug', 'Version 1'],
@@ -44,8 +47,8 @@ export class InMemoryDataService implements InMemoryDbService {
       {id: 2,
        summary: 'Second sample task',
        description: 'This is the second sample task.',
-       priority: 'CRITICAL',
-       state: 'DONE',
+       priority: Priority.CRITICAL,
+       state: State.DONE,
        created: moment(now).subtract(1, 'week').toDate(),
        updated: moment(now).subtract(1, 'week').toDate(),
        tags: ['Feature'],
@@ -53,24 +56,24 @@ export class InMemoryDataService implements InMemoryDbService {
       {id: 3,
        summary: 'Third sample task',
        description: 'This is the third sample task.',
-       priority: 'LOW',
-       state: 'TO_DO',
+       priority: Priority.LOW,
+       state: State.TO_DO,
        created: moment(now).subtract(1, 'day').toDate(),
        updated: moment(now).subtract(15, 'minutes').toDate(),
        project: 1},
       {id: 4,
        summary: 'Fourth sample task',
        description: 'This is the fourth sample task.',
-       priority: 'NORMAL',
-       state: 'IN_PROGRESS',
+       priority: Priority.NORMAL,
+       state: State.IN_PROGRESS,
        created: moment(now).subtract(1, 'year').toDate(),
        updated: moment(now).subtract(2, 'years').toDate(),
        project: 2},
       {id: 5,
        summary: 'Fifth sample task',
        description: 'This is the fifth sample task.',
-       priority: 'HIGH',
-       state: 'HIGH',
+       priority: Priority.HIGH,
+       state: State.ON_HOLD,
        created: moment(now).subtract(3, 'months').toDate(),
        updated: moment(now).subtract(3, 'months').toDate(),
        project: 3}

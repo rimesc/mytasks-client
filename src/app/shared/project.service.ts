@@ -26,7 +26,7 @@ export class ProjectService {
                .catch(this.handleError);
   }
 
-  createProject(name: string, description: string) {
+  createProject(name: string, description: string): Promise<Project> {
     // TODO we shouldn't need to set numberOfOpenTasks with the real API, but it helps for the in-memory one
     return this.http.post(this.url, JSON.stringify({name: name, description: description, numberOfOpenTasks: 0}), {headers: this.headers})
                .toPromise()

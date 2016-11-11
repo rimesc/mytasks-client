@@ -4,6 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import { Project } from '../api/project';
 import { Task } from '../api/task';
+import { State } from '../api/state';
 import { ProjectService } from '../shared/project.service';
 import { TaskService } from '../shared/task.service';
 
@@ -16,8 +17,8 @@ export class ProjectTasksComponent implements OnInit {
   project: Project
   tasks: Task[];
   filters: Filter[] = [
-    {id: 'OPEN', label: 'Open tasks', states: ['TO_DO', 'IN_PROGRESS', 'ON_HOLD']},
-    {id: 'CLOSED', label: 'Closed tasks', states: ['DONE']},
+    {id: 'OPEN', label: 'Open tasks', states: [State.TO_DO, State.IN_PROGRESS, State.ON_HOLD]},
+    {id: 'CLOSED', label: 'Closed tasks', states: [State.DONE]},
     {id: 'ALL', label: 'All tasks', states: []}
   ];
   activeFilter: Filter = this.filters[0];
@@ -60,5 +61,5 @@ export class ProjectTasksComponent implements OnInit {
 class Filter {
   id: string;
   label: string;
-  states: string[];
+  states: State[];
 }

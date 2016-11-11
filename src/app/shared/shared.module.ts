@@ -9,12 +9,14 @@ import { MomentModule } from 'angular2-moment';
 import { ApiModule } from '../api/api.module';
 
 import { MessagesComponent } from './messages.component';
+import { EnumValuesPipe } from './enum-values.pipe';
 import { ProjectService } from './project.service';
 import { TaskService } from './task.service';
 
 @NgModule({
   declarations: [
     MessagesComponent,
+    EnumValuesPipe
   ],
   imports: [
     CommonModule,
@@ -31,7 +33,8 @@ import { TaskService } from './task.service';
     Angular2FontawesomeModule,
     MomentModule,
     ApiModule,
-    MessagesComponent
+    MessagesComponent,
+    EnumValuesPipe
   ],
   providers: [ProjectService, TaskService],
 })

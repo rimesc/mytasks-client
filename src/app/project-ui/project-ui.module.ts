@@ -18,6 +18,7 @@ import { TaskItemComponent } from './task-item.component';
 import { NewProjectModalComponent } from './new-project-modal.component';
 import { EditProjectModalComponent } from './edit-project-modal.component';
 import { DeleteProjectModalComponent } from './delete-project-modal.component';
+import { NewTaskModalComponent } from './new-task-modal.component';
 import { ProjectFormComponent } from './project-form.component';
 import { ProjectUiRoutingModule } from './project-ui-routing.module';
 
@@ -33,6 +34,7 @@ import { ProjectUiRoutingModule } from './project-ui-routing.module';
     NewProjectModalComponent,
     EditProjectModalComponent,
     DeleteProjectModalComponent,
+    NewTaskModalComponent,
     ProjectFormComponent
   ],
   imports: [
@@ -43,6 +45,6 @@ import { ProjectUiRoutingModule } from './project-ui-routing.module';
     SharedModule,
     ProjectUiRoutingModule
   ],
-  entryComponents: [NewProjectModalComponent, EditProjectModalComponent, DeleteProjectModalComponent]
+  entryComponents: [NewProjectModalComponent, EditProjectModalComponent, DeleteProjectModalComponent, NewTaskModalComponent]
 })
 export class ProjectUiModule { }

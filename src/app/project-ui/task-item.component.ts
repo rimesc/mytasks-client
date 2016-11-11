@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 
+import { Priority } from '../api/priority';
 import { Task } from '../api/task';
 
 @Component({
@@ -10,6 +11,8 @@ import { Task } from '../api/task';
 export class TaskItemComponent  {
   @Input()
   task: Task;
+
+  priorities = Priority;
 
   isModified(): boolean {
     return this.task.updated !== this.task.created;

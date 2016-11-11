@@ -4,12 +4,16 @@ import { OnInit } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { DeleteProjectModalComponent } from './delete-project-modal.component'
-import { EditProjectModalComponent } from './edit-project-modal.component'
+import { DeleteProjectModalComponent } from './delete-project-modal.component';
+import { EditProjectModalComponent } from './edit-project-modal.component';
+import { NewTaskModalComponent } from './new-task-modal.component';
 
 import { Message } from '../shared/message';
 import { Project } from '../api/project';
 import { ProjectService } from '../shared/project.service';
+import { TaskService } from '../shared/task.service';
+
+import { TaskForm } from './task-form';
 
 @Component({
   selector: 'project-view',
@@ -20,6 +24,7 @@ export class ProjectDetailComponent implements OnInit {
   project: Project
 
   constructor(private projectService: ProjectService,
+              private taskService: TaskService,
               private modalService: NgbModal,
               private router: Router,
               private route: ActivatedRoute) { }
@@ -56,7 +61,11 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   newTask(): void {
-    console.log("New task.");
+    this.modalService.open(NewTaskModalComponent).result.then(task => this.createTask(task), () => {});
+  }
+
+  private createTask(task: TaskForm): void {
+    this.taskService.createTask(this.project.id, task.summary, task.description, task.priority).then(() => this.getProject())
   }
 
 }
