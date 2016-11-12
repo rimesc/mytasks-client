@@ -7,6 +7,7 @@ export class Task {
   description: string;
   priority: Priority;
   state: State;
+  tags: string[];
   created: Date;
   updated: Date;
   project: number;

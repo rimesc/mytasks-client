@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { MomentModule } from 'angular2-moment';
+import { TagInputModule } from 'ng2-tag-input';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -42,6 +43,7 @@ import { ProjectUiRoutingModule } from './project-ui-routing.module';
     FormsModule,
     Angular2FontawesomeModule,
     MomentModule,
+    TagInputModule,
     SharedModule,
     ProjectUiRoutingModule
   ],

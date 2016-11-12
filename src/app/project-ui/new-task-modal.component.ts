@@ -9,7 +9,8 @@ import { TaskForm } from './task-form';
 
 @Component({
   selector: 'new-task-modal',
-  templateUrl: './new-task-modal.component.html'
+  templateUrl: './new-task-modal.component.html',
+  styleUrls: ['./new-task-modal.component.css']
 })
 export class NewTaskModalComponent {
   task = new TaskForm();

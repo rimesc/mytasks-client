@@ -30,10 +30,11 @@ export class TaskService {
     return promises.reduceRight((p1, p2, i, arr) => p1.then(t1 => p2.then(t2 => t1.concat(t2))));
   }
 
-  createTask(project: number, summary: string, description: string, priority: Priority): Promise<Task> {
+  createTask(project: number, summary: string, description: string, priority: Priority, tags: string[]): Promise<Task> {
     let now = moment();
     let task = { summary: summary, description: description,
                  priority: priority, state: State.TO_DO,
+                 tags: tags,
                  created: moment(now).toDate(), updated: moment(now).toDate(),
                  project: project };
     return this.http.post(this.url, JSON.stringify(task), {headers: this.headers})

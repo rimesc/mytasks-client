@@ -65,7 +65,7 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   private createTask(task: TaskForm): void {
-    this.taskService.createTask(this.project.id, task.summary, task.description, task.priority).then(() => this.getProject())
+    this.taskService.createTask(this.project.id, task.summary, task.description, task.priority, task.tags).then(() => this.getProject())
   }
 
 }
