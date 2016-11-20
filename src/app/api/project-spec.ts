@@ -1,4 +1,4 @@
-export class ProjectForm {
+export class ProjectSpec {
   name: string;
   description: string;
 }

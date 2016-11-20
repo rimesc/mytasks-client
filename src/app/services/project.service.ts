@@ -6,6 +6,7 @@ import 'rxjs/add/operator/toPromise';
 import { API_BASE } from './service-constants';
 import { ServiceUtil } from './service-util';
 import { Project } from '../api/project';
+import { ProjectSpec } from '../api/project-spec';
 
 @Injectable()
 export class ProjectService extends ServiceUtil {
@@ -28,15 +29,15 @@ export class ProjectService extends ServiceUtil {
                .catch(this.handleError);
   }
 
-  createProject(name: string, description: string): Promise<Project> {
-    return this.http.post(this.url(), JSON.stringify({name: name, description: description}), {headers: this.headers})
+  createProject(project: ProjectSpec): Promise<Project> {
+    return this.http.post(this.url(), this.toJson(project), {headers: this.headers})
                .toPromise()
                .then(response => response.json() as Project)
                .catch(this.handleError);
   }
 
-  updateProject(project: Project) {
-    return this.http.put(this.url(project.id), JSON.stringify(project), {headers: this.headers})
+  updateProject(id: number, project: ProjectSpec) {
+    return this.http.post(this.url(id), this.toJson(project), {headers: this.headers})
                .toPromise()
                .then(response => response.json() as Project)
                .catch(this.handleError);
@@ -46,6 +47,13 @@ export class ProjectService extends ServiceUtil {
     return this.http.delete(this.url(id))
                .toPromise()
                .catch(this.handleError);
+  }
+
+  private toJson(project: ProjectSpec): string {
+    return JSON.stringify({
+      name: project.name,
+      description: project.description
+    });
   }
 
 }

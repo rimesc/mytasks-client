@@ -3,13 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-// Imports for loading & configuring the in-memory web api
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api/in-memory-web-api.module';
-import { InMemoryDataService }  from './in-memory-data.service';
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ApiModule } from './api/api.module';
+import { ServicesModule } from './services/services.module';
 import { ProjectUiModule } from './project-ui/project-ui.module';
 import { TaskUiModule } from './task-ui/task-ui.module';
 import { SharedModule } from './shared/shared.module';
@@ -28,10 +25,10 @@ import { AppRoutingModule }   from './app-routing.module';
   imports: [
     BrowserModule,
     HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
     NgbModule.forRoot(),
     AppRoutingModule,
     ApiModule,
+    ServicesModule,
     ProjectUiModule,
     TaskUiModule,
     SharedModule

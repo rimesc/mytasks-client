@@ -10,10 +10,10 @@ import { NewTaskModalComponent } from './new-task-modal.component';
 
 import { Message } from '../shared/message';
 import { Project } from '../api/project';
-import { ProjectService } from '../shared/project.service';
-import { TaskService } from '../shared/task.service';
-
-import { TaskForm } from './task-form';
+import { ProjectSpec } from '../api/project-spec';
+import { TaskSpec } from '../api/task-spec';
+import { ProjectService } from '../services/project.service';
+import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'project-view',
@@ -40,17 +40,17 @@ export class ProjectDetailComponent implements OnInit {
     });
   }
 
-  updateProject(project: Project): void {
-    this.projectService.updateProject(project).then(project => this.project = project);
+  updateProject(project: ProjectSpec): void {
+    this.projectService.updateProject(this.project.id, project).then(project => this.project = project);
   }
 
   editProject(): void {
     let ref = this.modalService.open(EditProjectModalComponent);
     (ref.componentInstance as EditProjectModalComponent).project = this.project;
-    ref.result.then(project => {
+    ref.result.then((project: ProjectSpec) => {
       this.project.name = project.name;
       this.project.description = project.description;
-      this.updateProject(this.project)
+      this.updateProject(project);
     }, () => {});
   }
 
@@ -61,11 +61,14 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   newTask(): void {
-    this.modalService.open(NewTaskModalComponent).result.then(task => this.createTask(task), () => {});
+    this.modalService.open(NewTaskModalComponent).result.then(task => {
+      task.project = this.project.id;
+      this.createTask(task);
+    }, () => {});
   }
 
-  private createTask(task: TaskForm): void {
-    this.taskService.createTask(this.project.id, task.summary, task.description, task.priority, task.tags).then(() => this.getProject())
+  private createTask(task: TaskSpec): void {
+    this.taskService.createTask(task).then(() => this.getProject());
   }
 
 }

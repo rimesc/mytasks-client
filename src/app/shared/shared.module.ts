@@ -10,8 +10,6 @@ import { ApiModule } from '../api/api.module';
 
 import { MessagesComponent } from './messages.component';
 import { EnumValuesPipe } from './enum-values.pipe';
-import { ProjectService } from './project.service';
-import { TaskService } from './task.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +33,6 @@ import { TaskService } from './task.service';
     ApiModule,
     MessagesComponent,
     EnumValuesPipe
-  ],
-  providers: [ProjectService, TaskService],
+  ]
 })
 export class SharedModule { }

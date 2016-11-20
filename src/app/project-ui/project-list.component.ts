@@ -4,8 +4,8 @@ import { OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Project } from '../api/project';
-import { ProjectForm } from './project-form';
-import { ProjectService } from '../shared/project.service';
+import { ProjectSpec } from '../api/project-spec';
+import { ProjectService } from '../services/project.service';
 import { NewProjectModalComponent } from './new-project-modal.component'
 
 @Component({
@@ -31,8 +31,8 @@ export class ProjectListComponent implements OnInit {
     this.modalService.open(NewProjectModalComponent).result.then(project => this.createProject(project), () => {});
   }
 
-  private createProject(project: ProjectForm): void {
-    this.projectService.createProject(project.name, project.description).then(() => this.getProjects())
+  private createProject(project: ProjectSpec): void {
+    this.projectService.createProject(project).then(() => this.getProjects())
   }
 
   linkTo(id: number): string {

@@ -5,7 +5,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { EnumValues } from 'enum-values';
 
 import { Priority } from '../api/priority';
-import { TaskForm } from './task-form';
+import { TaskSpec } from '../api/task-spec';
 
 @Component({
   selector: 'new-task-modal',
@@ -13,7 +13,7 @@ import { TaskForm } from './task-form';
   styleUrls: ['./new-task-modal.component.css']
 })
 export class NewTaskModalComponent {
-  task = new TaskForm();
+  task = new TaskSpec();
   priorities = Priority;
 
   constructor(public activeModal: NgbActiveModal) { }

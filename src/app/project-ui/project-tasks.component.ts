@@ -5,8 +5,8 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Project } from '../api/project';
 import { Task } from '../api/task';
 import { State } from '../api/state';
-import { ProjectService } from '../shared/project.service';
-import { TaskService } from '../shared/task.service';
+import { ProjectService } from '../services/project.service';
+import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'project-tasks',

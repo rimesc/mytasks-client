@@ -2,8 +2,6 @@ import { Component, Input } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { ProjectForm } from './project-form';
-
 @Component({
   selector: 'delete-project-modal',
   templateUrl: './delete-project-modal.component.html'
