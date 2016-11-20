@@ -1,8 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
-import { EnumValues } from 'enum-values';
 
 import { Priority } from '../api/priority';
 import { TaskSpec } from '../api/task-spec';
