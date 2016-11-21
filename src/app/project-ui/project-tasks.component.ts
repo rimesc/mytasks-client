@@ -4,6 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import { Project } from '../api/project';
 import { Task } from '../api/task';
+import { TaskSpec } from '../api/task-spec';
 import { State } from '../api/state';
 import { ProjectService } from '../services/project.service';
 import { TaskService } from '../services/task.service';
@@ -54,6 +55,11 @@ export class ProjectTasksComponent implements OnInit {
   activateFilter(filter: Filter): void {
     this.activeFilter = filter;
     this.getTasks();
+  }
+
+  createTask(task: TaskSpec): void {
+    task.project = this.project.id;
+    this.taskService.createTask(task).then(() => this.getTasks());
   }
 
 }

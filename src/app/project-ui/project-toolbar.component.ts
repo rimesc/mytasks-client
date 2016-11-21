@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditProjectModalComponent } from './edit-project-modal.component'
 
 import { Project } from '../api/project';
+import { TaskSpec } from '../api/task-spec';
 import { ProjectService } from '../services/project.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class ProjectToolbarComponent {
   @Output()
   edit = new EventEmitter<void>();
   @Output()
-  newTask = new EventEmitter<void>();
+  newTask = new EventEmitter<TaskSpec>();
   @Output()
   delete = new EventEmitter<void>();
 

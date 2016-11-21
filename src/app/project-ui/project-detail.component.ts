@@ -6,7 +6,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { DeleteProjectModalComponent } from './delete-project-modal.component';
 import { EditProjectModalComponent } from './edit-project-modal.component';
-import { NewTaskModalComponent } from './new-task-modal.component';
 
 import { Message } from '../shared/message';
 import { Project } from '../api/project';
@@ -60,14 +59,8 @@ export class ProjectDetailComponent implements OnInit {
     ref.result.then(() => this.projectService.deleteProject(this.project.id)).then(() => this.router.navigate(['projects']), () => {});
   }
 
-  newTask(): void {
-    this.modalService.open(NewTaskModalComponent).result.then(task => {
-      task.project = this.project.id;
-      this.createTask(task);
-    }, () => {});
-  }
-
-  private createTask(task: TaskSpec): void {
+  createTask(task: TaskSpec): void {
+    task.project = this.project.id;
     this.taskService.createTask(task).then(() => this.getProject());
   }
 

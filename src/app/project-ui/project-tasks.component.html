@@ -7,10 +7,7 @@
       </label>
     </div>
     <div class="navbar-form  pull-right">
-      <button type="button" class="btn btn-primary" (click)="newTask()">
-        <fa name="plus"></fa>
-        <span>New Task</span>
-      </button>
+			<new-task-button (submit)="createTask($event)"></new-task-button>
     </div>
   </div>
 
