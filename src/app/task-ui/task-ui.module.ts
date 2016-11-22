@@ -8,16 +8,21 @@ import { MomentModule } from 'angular2-moment';
 
 import { SharedModule } from '../shared/shared.module';
 
+import { TaskComponent } from './task.component';
 import { TaskListComponent } from './task-list.component';
+import { TaskDetailComponent } from './task-detail.component';
 import { TaskUiRoutingModule } from './task-ui-routing.module';
 
 @NgModule({
   declarations: [
-    TaskListComponent
+    TaskComponent,
+    TaskListComponent,
+    TaskDetailComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
+    NgbModule,
     Angular2FontawesomeModule,
     MomentModule,
     SharedModule,

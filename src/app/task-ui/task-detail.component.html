@@ -1,0 +1,35 @@
+<messages [messages]="messages"></messages>
+<div *ngIf="task">
+	<h1 class="page-header">{{task.summary}}</h1>
+	<tags [tags]="task.tags"></tags>
+	<div class="btn-toolbar pull-right">
+		<div class="btn-group" role="group">
+			<button type="submit" class="btn btn-secondary" *ngFor="let transition of availableTransitions()" (click)="performTransition(transition)">{{transition.label}}</button>
+		</div>
+		<div class="btn-group" role="group">
+			<button class="btn btn-secondary" (click)="editTask()">
+				<fa name="edit"></fa>
+			</button>
+			<button class="btn btn-secondary" (click)="deleteTask()">
+				<fa name="trash"></fa>
+			</button>
+		</div>
+	</div>
+	<div>
+    <span class="text-muted">{{states[task.state]}}</span>
+		<span class="text-muted"><fa name="warning"></fa> {{priorities[task.priority]}}</span>
+	</div>
+	<div class="readme">
+		<!--
+		<a role="button" title="Edit" class="btn edit" data-ng-if="isDefined(readMe)" data-ng-href="/projects/edit/{{project.id}}/documentation">
+			<span class="glyphicon glyphicon-edit"></span>
+		</a>
+		-->
+		<div class="markdown" *ngIf="readMe" [innerHTML]="readMe.html"></div>
+		<div *ngIf="!readMe">
+			<a role="button" class="btn btn-primary" routerLink="/tasks/edit/{{task.id}}/documentation">
+				Edit notes
+			</a>
+		</div>
+	</div>
+</div>

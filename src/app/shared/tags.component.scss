@@ -1,0 +1,16 @@
+@import '../../../node_modules/bootstrap/scss/_variables.scss';
+
+ul {
+  color: $text-muted;
+	list-style: none;
+	padding: 0px 0px 10px 0px;
+}
+
+li {
+	display: inline;
+	padding: 0px 10px;
+}
+
+li:FIRST-CHILD {
+	padding-left: 0px;
+}

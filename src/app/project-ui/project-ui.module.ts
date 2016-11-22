@@ -43,6 +43,7 @@ import { ProjectUiRoutingModule } from './project-ui-routing.module';
   imports: [
     CommonModule,
     FormsModule,
+    NgbModule,
     Angular2FontawesomeModule,
     MomentModule,
     TagInputModule,

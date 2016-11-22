@@ -9,11 +9,13 @@ import { MomentModule } from 'angular2-moment';
 import { ApiModule } from '../api/api.module';
 
 import { MessagesComponent } from './messages.component';
+import { TagsComponent } from './tags.component';
 import { EnumValuesPipe } from './enum-values.pipe';
 
 @NgModule({
   declarations: [
     MessagesComponent,
+    TagsComponent,
     EnumValuesPipe
   ],
   imports: [
@@ -32,6 +34,7 @@ import { EnumValuesPipe } from './enum-values.pipe';
     MomentModule,
     ApiModule,
     MessagesComponent,
+    TagsComponent,
     EnumValuesPipe
   ]
 })
