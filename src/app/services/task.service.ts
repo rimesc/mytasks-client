@@ -31,6 +31,13 @@ export class TaskService extends ServiceUtil {
                .catch(this.handleError);
   }
 
+  getTask(id: number): Promise<Task> {
+    return this.http.get(this.url(id))
+               .toPromise()
+               .then(response => this.fromJson(response.json()))
+               .catch(this.handleError);
+  }
+
   createTask(task: TaskSpec): Promise<Task> {
     return this.http.post(this.url(), this.toJson(task), {headers: this.headers})
                .toPromise()
