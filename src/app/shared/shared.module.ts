@@ -11,12 +11,14 @@ import { ApiModule } from '../api/api.module';
 import { MessagesComponent } from './messages.component';
 import { TagsComponent } from './tags.component';
 import { EnumValuesPipe } from './enum-values.pipe';
+import { TitleCasePipe } from './title-case.pipe';
 
 @NgModule({
   declarations: [
     MessagesComponent,
     TagsComponent,
-    EnumValuesPipe
+    EnumValuesPipe,
+    TitleCasePipe
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { EnumValuesPipe } from './enum-values.pipe';
     ApiModule,
     MessagesComponent,
     TagsComponent,
-    EnumValuesPipe
+    EnumValuesPipe,
+    TitleCasePipe
   ]
 })
 export class SharedModule { }

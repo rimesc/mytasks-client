@@ -31,7 +31,7 @@
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<label for="priority" class="control-label">Priority</label>
 					<select [(ngModel)]="task.priority" class="form-control" id="taskPriority" name="priority">
-						<option *ngFor="let p of priorities | values" [value]="p">{{priorities[p]}}</option>
+						<option *ngFor="let p of priorities | values" [value]="p">{{priorities[p] | titlecase}}</option>
 					</select>
 				</div>
 			</div>

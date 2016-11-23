@@ -16,8 +16,8 @@
 		</div>
 	</div>
 	<div>
-    <span class="text-muted">{{states[task.state]}}</span>
-		<span class="text-muted"><fa name="warning"></fa> {{priorities[task.priority]}}</span>
+    <span class="text-muted">{{states[task.state] | titlecase}}</span>
+		<span class="text-muted"><fa name="warning"></fa> {{priorities[task.priority] | titlecase}}</span>
 	</div>
 	<div class="readme">
 		<!--
