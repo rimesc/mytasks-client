@@ -24,6 +24,6 @@
 	</div>
 	<div class="readme">
 		<h2><span>Notes</span></h2>
-		<markdown-view [notes]="note"></markdown-view>
+		<markdown-view [notes]="note" (update)="updateNotes($event)"></markdown-view>
 	</div>
 </div>

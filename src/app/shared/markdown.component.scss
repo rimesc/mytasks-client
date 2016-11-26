@@ -1,3 +1,5 @@
+@import '../../../node_modules/bootstrap/scss/_variables.scss';
+
 .markdown {
 	text-align: justify;
 }
@@ -29,4 +31,23 @@
 	font-weight: 800;
 	text-transform: uppercase;
 	color: #777;
+}
+
+.edit {
+	color: #000;
+	opacity: 0.2;
+	float: right;
+	padding: 0;
+	border: 0;
+	background: none;
+}
+
+.edit:HOVER {
+	color: #000;
+	opacity: 1.0;
+}
+
+.placeholder {
+	margin-top: $spacer;
+	color: $text-muted;
 }

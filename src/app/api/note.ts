@@ -1,4 +1,4 @@
 export class Note {
-  html: string;
-  markdown: string;
+  html: string = '';
+  markdown: string = '';
 }

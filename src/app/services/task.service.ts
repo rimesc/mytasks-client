@@ -7,6 +7,7 @@ import { API_BASE } from './service-constants';
 import { ServiceUtil } from './service-util';
 import { Task } from '../api/task';
 import { TaskSpec } from '../api/task-spec';
+import { UpdateTask } from '../api/update-task';
 import { Priority } from '../api/priority';
 import { State } from '../api/state';
 import { Note } from '../api/note';
@@ -46,6 +47,13 @@ export class TaskService extends ServiceUtil {
                .catch(this.handleError);
   }
 
+  updateTask(id: number, task: UpdateTask): Promise<Task> {
+    return this.http.post(this.url(id), this.toUpdateJson(task), {headers: this.headers})
+               .toPromise()
+               .then(response => this.fromJson(response.json()))
+               .catch(this.handleError);
+  }
+
   getNotes(id: number): Promise<Note> {
     return this.http.get(this.url(id + '/readme'))
                .toPromise()
@@ -77,5 +85,13 @@ export class TaskService extends ServiceUtil {
     });
   }
 
+  private toUpdateJson(task: UpdateTask): string {
+    return JSON.stringify({
+      summary: task.summary,
+      description: task.description,
+      priority: task.priority,
+      tags: task.tags
+    });
+  }
 
 }

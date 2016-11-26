@@ -11,6 +11,7 @@ import { ApiModule } from '../api/api.module';
 
 import { MessagesComponent } from './messages.component';
 import { MarkdownComponent } from './markdown.component';
+import { EditNotesModalComponent } from './edit-notes-modal.component';
 import { TagsComponent } from './tags.component';
 import { EnumValuesPipe } from './enum-values.pipe';
 import { TitleCasePipe } from './title-case.pipe';
@@ -19,6 +20,7 @@ import { TitleCasePipe } from './title-case.pipe';
   declarations: [
     MessagesComponent,
     MarkdownComponent,
+    EditNotesModalComponent,
     TagsComponent,
     EnumValuesPipe,
     TitleCasePipe
@@ -41,9 +43,11 @@ import { TitleCasePipe } from './title-case.pipe';
     ApiModule,
     MessagesComponent,
     MarkdownComponent,
+    EditNotesModalComponent,
     TagsComponent,
     EnumValuesPipe,
     TitleCasePipe
-  ]
+  ],
+  entryComponents: [EditNotesModalComponent]
 })
 export class SharedModule { }
