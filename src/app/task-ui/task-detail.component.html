@@ -1,4 +1,7 @@
 <messages [messages]="messages"></messages>
+<div *ngIf="project">
+	<a routerLink="/projects/{{project.id}}">{{project.name}}</a>
+</div>
 <div *ngIf="task">
 	<h1 class="page-header">{{task.summary}}</h1>
 	<tags [tags]="task.tags"></tags>
@@ -20,16 +23,7 @@
 		<span class="text-muted"><fa name="warning"></fa> {{priorities[task.priority] | titlecase}}</span>
 	</div>
 	<div class="readme">
-		<!--
-		<a role="button" title="Edit" class="btn edit" data-ng-if="isDefined(readMe)" data-ng-href="/projects/edit/{{project.id}}/documentation">
-			<span class="glyphicon glyphicon-edit"></span>
-		</a>
-		-->
-		<div class="markdown" *ngIf="readMe" [innerHTML]="readMe.html"></div>
-		<div *ngIf="!readMe">
-			<a role="button" class="btn btn-primary" routerLink="/tasks/edit/{{task.id}}/documentation">
-				Edit notes
-			</a>
-		</div>
+		<h2><span>Notes</span></h2>
+		<markdown-view [notes]="note"></markdown-view>
 	</div>
 </div>

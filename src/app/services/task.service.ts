@@ -9,6 +9,7 @@ import { Task } from '../api/task';
 import { TaskSpec } from '../api/task-spec';
 import { Priority } from '../api/priority';
 import { State } from '../api/state';
+import { Note } from '../api/note';
 
 @Injectable()
 export class TaskService extends ServiceUtil {
@@ -42,6 +43,13 @@ export class TaskService extends ServiceUtil {
     return this.http.post(this.url(), this.toJson(task), {headers: this.headers})
                .toPromise()
                .then(response => this.fromJson(response.json()))
+               .catch(this.handleError);
+  }
+
+  getNotes(id: number): Promise<Note> {
+    return this.http.get(this.url(id + '/readme'))
+               .toPromise()
+               .then(response => response.json())
                .catch(this.handleError);
   }
 

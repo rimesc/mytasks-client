@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Project } from '../api/project';
 import { Task } from '../api/task';
+import { Note } from '../api/note';
 import { Priority } from '../api/priority';
 import { State } from '../api/state';
 import { ProjectService } from '../services/project.service';
@@ -22,11 +23,12 @@ const transitions: Transition[] = [
 @Component({
   selector: 'task-view',
   templateUrl: './task-detail.component.html',
-  styleUrls: ['./task-detail.component.css']
+  styleUrls: ['./task-detail.component.scss']
 })
 export class TaskDetailComponent implements OnInit {
   task: Task;
   project: Project;
+  note: Note;
   priorities = Priority;
   states = State;
 
@@ -46,12 +48,17 @@ export class TaskDetailComponent implements OnInit {
       this.taskService.getTask(id).then(task => {
         this.task = task;
         this.getProject();
+        this.getNotes();
       });
     });
   }
 
   getProject(): void {
     this.projectService.getProject(this.task.project).then(project => this.project = project);
+  }
+
+  getNotes(): void {
+    this.taskService.getNotes(this.task.id).then(note => this.note = note);
   }
 
   availableTransitions(): Transition[] {
@@ -61,7 +68,7 @@ export class TaskDetailComponent implements OnInit {
 }
 
 interface Transition {
-  label: string,
-  from: State,
-  to: State
+  label: string;
+  from: State;
+  to: State;
 }
