@@ -65,6 +65,10 @@ export class TaskDetailComponent implements OnInit {
     return transitions.filter(t => t.from === this.task.state);
   }
 
+  performTransition(transition: Transition) {
+    this.taskService.updateState(this.task.id, transition.to).then(task => this.task = task);
+  }
+
   updateNotes(markdown: string): void {
     this.taskService.updateTask(this.task.id, {
       summary: this.task.summary,
