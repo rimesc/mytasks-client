@@ -22,6 +22,7 @@ import { DeleteProjectModalComponent } from './delete-project-modal.component';
 import { NewTaskButtonComponent } from './new-task-button.component';
 import { NewTaskModalComponent } from './new-task-modal.component';
 import { ProjectFormComponent } from './project-form.component';
+import { TaskFormComponent } from './task-form.component';
 import { ProjectUiRoutingModule } from './project-ui-routing.module';
 
 @NgModule({
@@ -38,7 +39,8 @@ import { ProjectUiRoutingModule } from './project-ui-routing.module';
     DeleteProjectModalComponent,
     NewTaskButtonComponent,
     NewTaskModalComponent,
-    ProjectFormComponent
+    ProjectFormComponent,
+    TaskFormComponent
   ],
   imports: [
     CommonModule,
