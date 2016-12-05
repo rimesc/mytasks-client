@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { MomentModule } from 'angular2-moment';
-import { TagInputModule } from 'ng2-tag-input';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -22,7 +21,6 @@ import { DeleteProjectModalComponent } from './delete-project-modal.component';
 import { NewTaskButtonComponent } from './new-task-button.component';
 import { NewTaskModalComponent } from './new-task-modal.component';
 import { ProjectFormComponent } from './project-form.component';
-import { TaskFormComponent } from './task-form.component';
 import { ProjectUiRoutingModule } from './project-ui-routing.module';
 
 @NgModule({
@@ -39,8 +37,7 @@ import { ProjectUiRoutingModule } from './project-ui-routing.module';
     DeleteProjectModalComponent,
     NewTaskButtonComponent,
     NewTaskModalComponent,
-    ProjectFormComponent,
-    TaskFormComponent
+    ProjectFormComponent
   ],
   imports: [
     CommonModule,
@@ -48,7 +45,6 @@ import { ProjectUiRoutingModule } from './project-ui-routing.module';
     NgbModule,
     Angular2FontawesomeModule,
     MomentModule,
-    TagInputModule,
     SharedModule,
     ProjectUiRoutingModule
   ],
