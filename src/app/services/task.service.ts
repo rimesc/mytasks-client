@@ -54,6 +54,12 @@ export class TaskService extends ServiceUtil {
                .catch(this.handleError);
   }
 
+  deleteTask(id: number) {
+    return this.http.delete(this.url(id))
+               .toPromise()
+               .catch(this.handleError);
+  }
+
   updateState(id: number, state: State): Promise<Task> {
     return this.http.post(this.url(id), {state: state}, {headers: this.headers})
                .toPromise()

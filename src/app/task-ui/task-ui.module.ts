@@ -11,13 +11,15 @@ import { SharedModule } from '../shared/shared.module';
 import { TaskComponent } from './task.component';
 import { TaskListComponent } from './task-list.component';
 import { TaskDetailComponent } from './task-detail.component';
+import { DeleteTaskModalComponent } from './delete-task-modal.component';
 import { TaskUiRoutingModule } from './task-ui-routing.module';
 
 @NgModule({
   declarations: [
     TaskComponent,
     TaskListComponent,
-    TaskDetailComponent
+    TaskDetailComponent,
+    DeleteTaskModalComponent
   ],
   imports: [
     CommonModule,
@@ -27,6 +29,7 @@ import { TaskUiRoutingModule } from './task-ui-routing.module';
     MomentModule,
     SharedModule,
     TaskUiRoutingModule
-  ]
+  ],
+  entryComponents: [DeleteTaskModalComponent]
 })
 export class TaskUiModule { }

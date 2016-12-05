@@ -1,0 +1,19 @@
+<div class="modal-header">
+	<h4 class="modal-title">Delete Task</h4>
+</div>
+<form (ngSubmit)="submit()">
+	<div class="modal-body">
+		<p>
+			Are you sure you want to delete this task and all associated tasks?
+		</p>
+		<p>
+			<strong>This action is irreversible.</strong>
+		</p>
+	</div>
+	<div class="modal-footer">
+		<div>
+			<button type="submit" class="btn btn-danger">Delete</button>
+			<button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+		</div>
+	</div>
+</form>

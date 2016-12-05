@@ -4,6 +4,8 @@ import { OnInit } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { DeleteTaskModalComponent } from './delete-task-modal.component';
+
 import { Project } from '../api/project';
 import { Task } from '../api/task';
 import { Note } from '../api/note';
@@ -54,6 +56,12 @@ export class TaskDetailComponent implements OnInit {
 
   getProject(): void {
     this.projectService.getProject(this.task.project).then(project => this.project = project);
+  }
+
+  deleteTask(): void {
+    let ref = this.modalService.open(DeleteTaskModalComponent);
+    (ref.componentInstance as DeleteTaskModalComponent).projectName = this.project.name;
+    ref.result.then(() => this.taskService.deleteTask(this.task.id)).then(() => this.router.navigate(['projects/' + this.project.id + '/tasks']), () => {});
   }
 
   getNotes(): void {
