@@ -30,7 +30,6 @@ export class TaskDetailComponent implements OnInit {
   project: Project;
   note: Note;
   priorities = Priority;
-  states = State;
 
   constructor(private projectService: ProjectService,
               private taskService: TaskService,

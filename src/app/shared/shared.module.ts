@@ -10,6 +10,7 @@ import { MomentModule } from 'angular2-moment';
 import { ApiModule } from '../api/api.module';
 
 import { MessagesComponent } from './messages.component';
+import { StateBadgeComponent } from './state-badge.component'
 import { MarkdownComponent } from './markdown.component';
 import { EditNotesModalComponent } from './edit-notes-modal.component';
 import { TagsComponent } from './tags.component';
@@ -19,6 +20,7 @@ import { TitleCasePipe } from './title-case.pipe';
 @NgModule({
   declarations: [
     MessagesComponent,
+    StateBadgeComponent,
     MarkdownComponent,
     EditNotesModalComponent,
     TagsComponent,
@@ -42,6 +44,7 @@ import { TitleCasePipe } from './title-case.pipe';
     MomentModule,
     ApiModule,
     MessagesComponent,
+    StateBadgeComponent,
     MarkdownComponent,
     EditNotesModalComponent,
     TagsComponent,

@@ -1,10 +1,10 @@
 <messages [messages]="messages"></messages>
-<div *ngIf="project">
+<div class="project-header" *ngIf="project">
 	<a routerLink="/projects/{{project.id}}">{{project.name}}</a>
 </div>
 <div *ngIf="task">
+	<state-badge [state]="task.state"></state-badge>
 	<h1 class="page-header">{{task.summary}}</h1>
-	<tags [tags]="task.tags"></tags>
 	<div class="btn-toolbar pull-right">
 		<div class="btn-group" role="group">
 			<button type="submit" class="btn btn-secondary" *ngFor="let transition of availableTransitions()" (click)="performTransition(transition)">{{transition.label}}</button>
@@ -19,8 +19,11 @@
 		</div>
 	</div>
 	<div>
-    <span class="text-muted">{{states[task.state] | titlecase}}</span>
-		<span class="text-muted"><fa name="warning"></fa> {{priorities[task.priority] | titlecase}}</span>
+		<span class="text-muted small-caps"><fa name="warning"></fa> {{priorities[task.priority] | titlecase}} priority</span>
+		<span *ngIf="task.tags && task.tags.length > 0">
+		<span class="divider">|</span>
+		<tags [tags]="task.tags"></tags>
+		</span>
 	</div>
 	<div class="readme">
 		<h2><span>Notes</span></h2>

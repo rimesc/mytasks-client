@@ -20,3 +20,16 @@ h2 span {
 	padding-right: 7px;
 }
 
+span.small-caps {
+	text-transform: uppercase;
+	font-size: $font-size-sm;
+}
+
+span.divider {
+	color: $gray-lighter;
+	padding: 0 $spacer-x*0.5;
+}
+
+.project-header {
+	margin-bottom: $spacer-y;
+}
