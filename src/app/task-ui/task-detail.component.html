@@ -3,8 +3,6 @@
 	<a routerLink="/projects/{{project.id}}">{{project.name}}</a>
 </div>
 <div *ngIf="task">
-	<state-badge [state]="task.state"></state-badge>
-	<h1 class="page-header">{{task.summary}}</h1>
 	<div class="btn-toolbar pull-right">
 		<div class="btn-group" role="group">
 			<button type="submit" class="btn btn-secondary" *ngFor="let transition of availableTransitions()" (click)="performTransition(transition)">{{transition.label}}</button>
@@ -18,6 +16,8 @@
 			</button>
 		</div>
 	</div>
+	<state-badge [state]="task.state"></state-badge>
+	<h1 class="page-header">{{task.summary}}</h1>
 	<div>
 		<span class="text-muted small-caps"><fa name="warning"></fa> {{priorities[task.priority] | titlecase}} priority</span>
 		<span *ngIf="task.tags && task.tags.length > 0">
