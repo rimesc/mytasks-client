@@ -4,6 +4,7 @@ import { OnInit } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { EditTaskModalComponent } from './edit-task-modal.component';
 import { DeleteTaskModalComponent } from './delete-task-modal.component';
 
 import { Project } from '../api/project';
@@ -11,6 +12,8 @@ import { Task } from '../api/task';
 import { Note } from '../api/note';
 import { Priority } from '../api/priority';
 import { State } from '../api/state';
+import { TaskSpec } from '../api/task-spec';
+import { UpdateTask } from '../api/update-task';
 import { ProjectService } from '../services/project.service';
 import { TaskService } from '../services/task.service';
 
@@ -58,10 +61,26 @@ export class TaskDetailComponent implements OnInit {
     this.projectService.getProject(this.task.project).then(project => this.project = project);
   }
 
+  updateTask(task: UpdateTask): void {
+    this.taskService.updateTask(this.task.id, task).then(task => this.task = task).then(() => this.getNotes());
+  }
+
   deleteTask(): void {
     let ref = this.modalService.open(DeleteTaskModalComponent);
     (ref.componentInstance as DeleteTaskModalComponent).projectName = this.project.name;
     ref.result.then(() => this.taskService.deleteTask(this.task.id)).then(() => this.router.navigate(['projects/' + this.project.id + '/tasks']), () => {});
+  }
+
+  editTask(): void {
+    let ref = this.modalService.open(EditTaskModalComponent);
+    (ref.componentInstance as EditTaskModalComponent).task = Object.assign({}, this.task);
+    ref.result.then((task: UpdateTask) => {
+      this.task.summary = task.summary;
+      this.task.description = task.description;
+      this.task.priority = task.priority;
+      this.task.tags = task.tags;
+      this.updateTask(task);
+    }, () => {});
   }
 
   getNotes(): void {

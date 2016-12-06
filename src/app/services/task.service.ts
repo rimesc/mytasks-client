@@ -92,7 +92,7 @@ export class TaskService extends ServiceUtil {
     return JSON.stringify({
       summary: task.summary,
       description: task.description,
-      priority: task.priority,
+      priority: Priority[task.priority],
       tags: task.tags,
       project: task.project
     });
@@ -102,7 +102,7 @@ export class TaskService extends ServiceUtil {
     return JSON.stringify({
       summary: task.summary,
       description: task.description,
-      priority: task.priority,
+      priority: Priority[task.priority],
       tags: task.tags
     });
   }

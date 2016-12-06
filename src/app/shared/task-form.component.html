@@ -36,7 +36,7 @@
 	</div>
 	<div class="modal-footer">
 		<div>
-			<button type="submit" class="btn btn-primary" [disabled]="!theForm.form.valid">Create</button>
+			<button type="submit" class="btn btn-primary" [disabled]="!theForm.form.valid">{{action}}</button>
 			<button type="button" class="btn btn-default" (click)="cancel.emit()">Cancel</button>
 		</div>
 	</div>

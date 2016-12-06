@@ -45,7 +45,7 @@ export class ProjectDetailComponent implements OnInit {
 
   editProject(): void {
     let ref = this.modalService.open(EditProjectModalComponent);
-    (ref.componentInstance as EditProjectModalComponent).project = this.project;
+    (ref.componentInstance as EditProjectModalComponent).project = Object.assign({}, this.project);
     ref.result.then((project: ProjectSpec) => {
       this.project.name = project.name;
       this.project.description = project.description;

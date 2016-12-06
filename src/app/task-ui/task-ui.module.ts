@@ -11,6 +11,7 @@ import { SharedModule } from '../shared/shared.module';
 import { TaskComponent } from './task.component';
 import { TaskListComponent } from './task-list.component';
 import { TaskDetailComponent } from './task-detail.component';
+import { EditTaskModalComponent } from './edit-task-modal.component';
 import { DeleteTaskModalComponent } from './delete-task-modal.component';
 import { TaskUiRoutingModule } from './task-ui-routing.module';
 
@@ -19,6 +20,7 @@ import { TaskUiRoutingModule } from './task-ui-routing.module';
     TaskComponent,
     TaskListComponent,
     TaskDetailComponent,
+    EditTaskModalComponent,
     DeleteTaskModalComponent
   ],
   imports: [
@@ -30,6 +32,6 @@ import { TaskUiRoutingModule } from './task-ui-routing.module';
     SharedModule,
     TaskUiRoutingModule
   ],
-  entryComponents: [DeleteTaskModalComponent]
+  entryComponents: [EditTaskModalComponent, DeleteTaskModalComponent]
 })
 export class TaskUiModule { }
