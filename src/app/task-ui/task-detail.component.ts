@@ -7,6 +7,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditTaskModalComponent } from './edit-task-modal.component';
 import { DeleteTaskModalComponent } from './delete-task-modal.component';
 
+import { Error } from '../api/error';
+import { Message } from '../shared/message';
 import { Project } from '../api/project';
 import { Task } from '../api/task';
 import { Note } from '../api/note';
@@ -35,6 +37,7 @@ export class TaskDetailComponent implements OnInit {
   project: Project;
   note: Note;
   priorities = Priority;
+  messages: Message[] = [];
 
   constructor(private projectService: ProjectService,
               private taskService: TaskService,
@@ -49,16 +52,20 @@ export class TaskDetailComponent implements OnInit {
   getTask(): void {
     this.route.params.forEach((params: Params) => {
       let id = +params['id'];
-      this.taskService.getTask(id).then(task => {
-        this.task = task;
-        this.getProject();
-        this.getNotes();
-      });
+      this.taskService.getTask(id)
+        .then(task => {
+          this.task = task;
+          this.getProject();
+          this.getNotes();
+        })
+        .catch((error: Error) => this.messages.push({ code: error.code, detail: error.message, severity: 'danger'}));
     });
   }
 
   getProject(): void {
-    this.projectService.getProject(this.task.project).then(project => this.project = project);
+    this.projectService.getProject(this.task.project)
+      .then(project => this.project = project)
+      .catch((error: Error) => this.messages.push({ code: error.code, detail: error.message, severity: 'danger'}));
   }
 
   updateTask(task: UpdateTask): void {
@@ -68,7 +75,9 @@ export class TaskDetailComponent implements OnInit {
   deleteTask(): void {
     let ref = this.modalService.open(DeleteTaskModalComponent);
     (ref.componentInstance as DeleteTaskModalComponent).projectName = this.project.name;
-    ref.result.then(() => this.taskService.deleteTask(this.task.id)).then(() => this.router.navigate(['projects/' + this.project.id + '/tasks']), () => {});
+    ref.result
+      .then(() => this.taskService.deleteTask(this.task.id))
+      .then(() => this.router.navigate(['projects/' + this.project.id + '/tasks']), () => {});
   }
 
   editTask(): void {
@@ -84,7 +93,9 @@ export class TaskDetailComponent implements OnInit {
   }
 
   getNotes(): void {
-    this.taskService.getNotes(this.task.id).then(note => this.note = note);
+    this.taskService.getNotes(this.task.id)
+      .then(note => this.note = note)
+      .catch(() => this.note = undefined);
   }
 
   availableTransitions(): Transition[] {

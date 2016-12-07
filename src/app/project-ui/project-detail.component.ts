@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteProjectModalComponent } from './delete-project-modal.component';
 import { EditProjectModalComponent } from './edit-project-modal.component';
 
+import { Error } from '../api/error';
 import { Message } from '../shared/message';
 import { Project } from '../api/project';
 import { ProjectSpec } from '../api/project-spec';
@@ -20,7 +21,8 @@ import { TaskService } from '../services/task.service';
   styleUrls: []
 })
 export class ProjectDetailComponent implements OnInit {
-  project: Project
+  project: Project;
+  messages: Message[] = [];
 
   constructor(private projectService: ProjectService,
               private taskService: TaskService,
@@ -35,7 +37,9 @@ export class ProjectDetailComponent implements OnInit {
   getProject(): void {
     this.route.params.forEach((params: Params) => {
       let id = +params['id'];
-      this.projectService.getProject(id).then(project => this.project = project);
+      this.projectService.getProject(id)
+        .then(project => this.project = project)
+        .catch((error: Error) => this.messages.push({ code: error.code, detail: error.message, severity: 'danger'}));
     });
   }
 
