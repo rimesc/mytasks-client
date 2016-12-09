@@ -13,7 +13,8 @@
       <a class="nav-item nav-link" *ngIf="showAdminOptions" title="Settings" href="/admin"><fa name="cog"></fa></a>
       <a class="nav-item nav-link" title="Profile" href="#"><fa name="user"></fa></a>
       <a class="nav-item nav-link" title="Help" href="#"><fa name="question-circle"></fa></a>
-      <a class="nav-item nav-link" title="Logout" href="#" (click)="logout()"><fa name="sign-out"></fa></a>
+      <button *ngIf="!auth.authenticated()" class="nav-item nav-link" title="Login" (click)="auth.login()"><fa name="sign-in"></fa></button>
+      <button *ngIf="auth.authenticated()" class="nav-item nav-link" title="Logout" (click)="auth.logout()"><fa name="sign-out"></fa></button>
     </nav>
   </div>
 </nav>
