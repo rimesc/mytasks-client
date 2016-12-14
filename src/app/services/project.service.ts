@@ -1,5 +1,5 @@
 import { Injectable, Inject }    from '@angular/core';
-import { Http } from '@angular/http';
+import { AuthHttp } from 'angular2-jwt';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -11,7 +11,7 @@ import { ProjectSpec } from '../api/project-spec';
 @Injectable()
 export class ProjectService extends ServiceUtil {
 
-  constructor(@Inject(API_BASE) api: string, private http: Http) {
+  constructor(@Inject(API_BASE) api: string, private http: AuthHttp) {
     super(api + 'projects/');
   }
 
