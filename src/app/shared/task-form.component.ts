@@ -4,7 +4,7 @@ import { Priority } from '../api/priority';
 import { TaskForm } from '../api/task-form';
 
 @Component({
-  selector: 'task-form',
+  selector: 'my-task-form',
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.css']
 })

@@ -7,7 +7,7 @@ import { NewTaskModalComponent } from './new-task-modal.component';
 import { TaskForm } from '../api/task-form';
 
 @Component({
-  selector: 'new-task-button',
+  selector: 'my-new-task-button',
   templateUrl: './new-task-button.component.html',
   styleUrls: ['./new-task-button.component.css']
 })

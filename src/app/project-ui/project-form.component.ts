@@ -3,7 +3,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ProjectForm } from '../api/project-form';
 
 @Component({
-  selector: 'project-form',
+  selector: 'my-project-form',
   templateUrl: './project-form.component.html',
   styleUrls: ['./project-form.component.css']
 })

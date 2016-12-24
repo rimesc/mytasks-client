@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'dashboard',
+  selector: 'my-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: []
 })

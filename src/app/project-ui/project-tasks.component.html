@@ -1,4 +1,4 @@
-<messages [messages]="messages"></messages>
+<my-messages [messages]="messages"></my-messages>
 <div *ngIf="project">
   <div class="btn-toolbar">
     <div class="btn-group" data-toggle="buttons">
@@ -7,7 +7,7 @@
       </label>
     </div>
     <div class="navbar-form  pull-right">
-			<new-task-button (submit)="createTask($event)"></new-task-button>
+			<my-new-task-button (submit)="createTask($event)"></my-new-task-button>
     </div>
   </div>
 
@@ -15,7 +15,7 @@
 
   <ul class="list-group task-list">
     <li *ngFor="let task of tasks" class="list-group-item">
-      <task-item [task]="task"></task-item>
+      <my-task-item [task]="task"></my-task-item>
     </li>
     <li *ngIf="tasks && tasks.length === 0" class="list-group-item list-group-placeholder">
       No tasks to show.

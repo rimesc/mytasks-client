@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 
 @Component({
-  selector: 'nav-bar',
+  selector: 'my-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: [ './nav-bar.component.css' ]
 })

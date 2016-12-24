@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'project',
+  selector: 'my-project',
   template: '<router-outlet></router-outlet>',
   styleUrls: []
 })

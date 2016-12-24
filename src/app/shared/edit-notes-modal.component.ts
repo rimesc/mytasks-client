@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { ProjectForm } from '../api/project-form';
-
 @Component({
-  selector: 'edit-notes-modal',
+  selector: 'my-edit-notes-modal',
   templateUrl: './edit-notes-modal.component.html'
 })
 export class EditNotesModalComponent {

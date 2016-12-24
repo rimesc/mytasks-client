@@ -6,15 +6,15 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Project } from '../api/project';
 import { ProjectForm } from '../api/project-form';
 import { ProjectService } from '../services/project.service';
-import { NewProjectModalComponent } from './new-project-modal.component'
+import { NewProjectModalComponent } from './new-project-modal.component';
 
 @Component({
-  selector: 'project-list',
+  selector: 'my-project-list',
   templateUrl: './project-list.component.html',
   styleUrls: []
 })
 export class ProjectListComponent implements OnInit {
-  projects: Project[]
+  projects: Project[];
 
   constructor(private projectService: ProjectService,
               private modalService: NgbModal) { }
@@ -32,7 +32,7 @@ export class ProjectListComponent implements OnInit {
   }
 
   private createProject(project: ProjectForm): void {
-    this.projectService.createProject(project).then(() => this.getProjects())
+    this.projectService.createProject(project).then(() => this.getProjects());
   }
 
   linkTo(id: number): string {

@@ -5,7 +5,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TaskForm } from '../api/task-form';
 
 @Component({
-  selector: 'new-task-modal',
+  selector: 'my-new-task-modal',
   templateUrl: './new-task-modal.component.html',
 })
 export class NewTaskModalComponent {

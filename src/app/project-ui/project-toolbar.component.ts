@@ -1,15 +1,9 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-import { EditProjectModalComponent } from './edit-project-modal.component'
-
-import { Project } from '../api/project';
 import { TaskForm } from '../api/task-form';
-import { ProjectService } from '../services/project.service';
 
 @Component({
-  selector: 'project-toolbar',
+  selector: 'my-project-toolbar',
   templateUrl: './project-toolbar.component.html',
   styleUrls: ['./project-toolbar.component.css']
 })

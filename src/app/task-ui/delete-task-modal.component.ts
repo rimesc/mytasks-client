@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'delete-task-modal',
+  selector: 'my-delete-task-modal',
   templateUrl: './delete-task-modal.component.html'
 })
 export class DeleteTaskModalComponent {

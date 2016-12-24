@@ -4,7 +4,7 @@ import { Priority } from '../api/priority';
 import { Task } from '../api/task';
 
 @Component({
-  selector: 'task-item',
+  selector: 'my-task-item',
   templateUrl: './task-item.component.html',
   styleUrls: ['./task-item.component.css']
 })

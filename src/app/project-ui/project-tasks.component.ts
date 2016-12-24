@@ -10,7 +10,7 @@ import { ProjectService } from '../services/project.service';
 import { TaskService } from '../services/task.service';
 
 @Component({
-  selector: 'project-tasks',
+  selector: 'my-project-tasks',
   templateUrl: './project-tasks.component.html',
   styleUrls: ['./project-tasks.component.css']
 })

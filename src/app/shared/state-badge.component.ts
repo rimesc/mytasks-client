@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import { State } from '../api/state';
 
 @Component({
-  selector: 'state-badge',
+  selector: 'my-state-badge',
   template: `
     <span class="tag tag-{{context()}}">{{states[state] | titlecase}}</span>
   `,
@@ -16,7 +16,7 @@ export class StateBadgeComponent {
   states = State;
 
   context(): string {
-    switch(this.state) {
+    switch (this.state) {
       case State.TO_DO:
         return 'info';
       case State.IN_PROGRESS:

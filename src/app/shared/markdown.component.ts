@@ -6,7 +6,7 @@ import { Notes } from '../api/notes';
 import { EditNotesModalComponent } from '../shared/edit-notes-modal.component';
 
 @Component({
-  selector: 'markdown-view',
+  selector: 'my-markdown-view',
   templateUrl: './markdown.component.html',
   styleUrls: ['./markdown.component.scss']
 })

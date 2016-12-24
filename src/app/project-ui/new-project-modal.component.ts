@@ -5,7 +5,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProjectForm } from '../api/project-form';
 
 @Component({
-  selector: 'new-project-modal',
+  selector: 'my-new-project-modal',
   templateUrl: './new-project-modal.component.html'
 })
 export class NewProjectModalComponent {

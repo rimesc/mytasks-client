@@ -16,7 +16,7 @@ import { ProjectService } from '../services/project.service';
 import { TaskService } from '../services/task.service';
 
 @Component({
-  selector: 'project-view',
+  selector: 'my-project-detail',
   templateUrl: './project-detail.component.html',
   styleUrls: ['./project-detail.component.scss']
 })
@@ -43,8 +43,8 @@ export class ProjectDetailComponent implements OnInit {
     });
   }
 
-  updateProject(project: ProjectForm): void {
-    this.projectService.updateProject(this.project.id, project).then(project => this.project = project);
+  updateProject(form: ProjectForm): void {
+    this.projectService.updateProject(this.project.id, form).then(project => this.project = project);
   }
 
   editProject(): void {

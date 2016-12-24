@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'delete-project-modal',
+  selector: 'my-delete-project-modal',
   templateUrl: './delete-project-modal.component.html'
 })
 export class DeleteProjectModalComponent {

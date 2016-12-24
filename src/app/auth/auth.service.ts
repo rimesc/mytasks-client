@@ -51,9 +51,9 @@ export class AuthService {
       if (!this.authenticated()) {
         reject('Not authenticated');
       }
-      let profile = localStorage.getItem(USER_PROFILE);
-      if (profile) {
-        resolve(JSON.parse(profile));
+      let storedProfile = localStorage.getItem(USER_PROFILE);
+      if (storedProfile) {
+        resolve(JSON.parse(storedProfile));
       }
       this.lock.getProfile(this.getToken(), (error, profile) => {
         if (error) {

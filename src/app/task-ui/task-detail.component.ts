@@ -25,7 +25,7 @@ const transitions: Transition[] = [
 ];
 
 @Component({
-  selector: 'task-view',
+  selector: 'my-task-detail',
   templateUrl: './task-detail.component.html',
   styleUrls: ['./task-detail.component.scss']
 })
@@ -55,8 +55,8 @@ export class TaskDetailComponent implements OnInit {
     });
   }
 
-  updateTask(task: TaskForm): void {
-    this.taskService.updateTask(this.task.id, task).then(task => this.task = task);
+  updateTask(form: TaskForm): void {
+    this.taskService.updateTask(this.task.id, form).then(task => this.task = task);
   }
 
   deleteTask(): void {
