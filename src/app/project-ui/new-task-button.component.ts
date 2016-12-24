@@ -4,7 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { NewTaskModalComponent } from './new-task-modal.component';
 
-import { TaskSpec } from '../api/task-spec';
+import { TaskForm } from '../api/task-form';
 
 @Component({
   selector: 'new-task-button',
@@ -13,7 +13,7 @@ import { TaskSpec } from '../api/task-spec';
 })
 export class NewTaskButtonComponent {
   @Output()
-  submit = new EventEmitter<TaskSpec>();
+  submit = new EventEmitter<TaskForm>();
 
   constructor(private modalService: NgbModal) { }
 

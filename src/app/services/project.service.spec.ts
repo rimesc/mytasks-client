@@ -5,6 +5,8 @@ import { async, inject, TestBed } from '@angular/core/testing';
 import { BaseRequestOptions, Http, Response, ResponseOptions, ResponseType, RequestMethod } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 
+import { AuthHttp } from 'angular2-jwt';
+
 import { API_BASE } from './service-constants';
 import { ProjectService } from './project.service';
 import { Project } from '../api/project';
@@ -18,7 +20,7 @@ describe('ProjectService', () => {
         BaseRequestOptions,
         MockBackend,
         {
-          provide: Http,
+          provide: AuthHttp,
           useFactory: (backend: MockBackend, defaultOptions: BaseRequestOptions) => {
             return new Http(backend, defaultOptions);
           },
@@ -56,31 +58,29 @@ describe('ProjectService', () => {
   describe('getProjects()', () => {
 
     it ('should load the list of projects', async(inject([ProjectService, MockBackend], (service: ProjectService, backend: MockBackend) => {
-      mockResponse.body = `{
-        "projects": [
-          {
-            "id": 1,
-            "name": "My first project",
-            "description": "This is my first project.",
-            "numberOfOpenTasks": 2,
-            "href": "/api/projects/1"
-          },
-          {
-            "id": 2,
-            "name": "My second project",
-            "description": "This is my second project.",
-            "numberOfOpenTasks": 3,
-            "href": "/api/projects/2"
-          },
-          {
-            "id": 3,
-            "name": "My third project",
-            "description": "This is my third project.",
-            "numberOfOpenTasks": 0,
-            "href": "/api/projects/3"
-          }
-        ]
-      }`;
+      mockResponse.body = `[
+        {
+          "id": 1,
+          "name": "My first project",
+          "description": "This is my first project.",
+          "numberOfOpenTasks": 2,
+          "href": "/api/projects/1"
+        },
+        {
+          "id": 2,
+          "name": "My second project",
+          "description": "This is my second project.",
+          "numberOfOpenTasks": 3,
+          "href": "/api/projects/2"
+        },
+        {
+          "id": 3,
+          "name": "My third project",
+          "description": "This is my third project.",
+          "numberOfOpenTasks": 0,
+          "href": "/api/projects/3"
+        }
+      ]`;
       service.getProjects().then(projects => {
         expect(actualRequest.url).toEqual('http://www.example.com/api/projects/');
         expect(actualRequest.method).toEqual(RequestMethod.Get);
@@ -158,20 +158,6 @@ describe('ProjectService', () => {
       });
     })));
 
-    it ('should strip out unexpected fields',
-        async(inject([ProjectService, MockBackend], (service: ProjectService, backend: MockBackend) => {
-      mockResponse.body = `{
-        "id": 4,
-        "name": "My new project",
-        "description": "This is my new project.",
-        "numberOfOpenTasks": 0,
-        "href": "/api/projects/4"
-      }`;
-      service.createProject({ name: 'My new project', description: 'This is my new project.', 'id': 3 } as Project).then(project => {
-        expect(actualRequest.body).toEqual(JSON.stringify({ name: 'My new project', description: 'This is my new project.' }));
-      });
-    })));
-
   });
 
   describe('updateProject()', () => {
@@ -200,18 +186,40 @@ describe('ProjectService', () => {
       });
     })));
 
-    it ('should strip out unexpected fields',
-        async(inject([ProjectService, MockBackend], (service: ProjectService, backend: MockBackend) => {
+    it('should handle project not found gracefully',
+       async(inject([ProjectService, MockBackend], (service: ProjectService, backend: MockBackend) => {
+      mockResponse.type = ResponseType.Error;
+      mockResponse.status = 404;
       mockResponse.body = `{
-        "id": 4,
-        "name": "My new project",
-        "description": "This is my new project.",
-        "numberOfOpenTasks": 0,
-        "href": "/api/projects/4"
+        "code": "Not Found",
+        "message": "The requested project could not be found."
       }`;
-      service.updateProject(1, { name: 'My updated project', description: 'This is my updated project.', 'id': 3 } as Project)
-             .then(project => {
-        expect(actualRequest.body).toEqual(JSON.stringify({ name: 'My updated project', description: 'This is my updated project.' }));
+      service.updateProject(1, { name: 'My updated project', description: 'This is my updated project.' })
+             .then(project => fail('Unexpectedly succeeded in updating project: ' + project)).catch(error =>
+               expect(error).toEqual({ code: 'Not Found', message: 'The requested project could not be found.'})
+      );
+    })));
+
+  });
+
+  describe('updateNotes()', () => {
+
+    it ('should update the notes for an existing project',
+        async(inject([ProjectService, MockBackend], (service: ProjectService, backend: MockBackend) => {
+      const markdown = 'These are *edited* notes.';
+      mockResponse.body = `{
+        "raw": "These are *edited* notes.",
+        "html": "<p>These are <em>edited</em> notes.</p>",
+        "href": "/api/projects/1/notes"
+      }`;
+      service.updateNotes(1, markdown).then(notes => {
+        expect(actualRequest.url).toEqual('http://www.example.com/api/projects/1/notes');
+        expect(actualRequest.method).toEqual(RequestMethod.Post);
+        expect(actualRequest.body).toEqual(markdown);
+        expect(notes).toEqual({
+          raw: 'These are *edited* notes.', html: '<p>These are <em>edited</em> notes.</p>',
+          href: '/api/projects/1/notes'
+        });
       });
     })));
 
@@ -223,9 +231,9 @@ describe('ProjectService', () => {
         "code": "Not Found",
         "message": "The requested project could not be found."
       }`;
-      service.updateProject(1, { name: 'My updated project', description: 'This is my updated project.' })
-             .then(project => fail('Unexpectedly succeeded in updating project' + project)).catch(error =>
-               expect(error).toEqual({ code: 'Not Found', message: 'The requested project could not be found.'})
+      service.updateNotes(1, '')
+        .then(notes => fail('Unexpectedly succeeded in updating notes: ' + notes)).catch(error =>
+          expect(error).toEqual({ code: 'Not Found', message: 'The requested project could not be found.'})
       );
     })));
 

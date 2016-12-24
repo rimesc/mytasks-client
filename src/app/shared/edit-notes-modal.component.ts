@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { ProjectSpec } from '../api/project-spec';
+import { ProjectForm } from '../api/project-form';
 
 @Component({
   selector: 'edit-notes-modal',

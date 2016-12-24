@@ -4,7 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import { Project } from '../api/project';
 import { Task } from '../api/task';
-import { TaskSpec } from '../api/task-spec';
+import { TaskForm } from '../api/task-form';
 import { State } from '../api/state';
 import { ProjectService } from '../services/project.service';
 import { TaskService } from '../services/task.service';
@@ -15,7 +15,7 @@ import { TaskService } from '../services/task.service';
   styleUrls: ['./project-tasks.component.css']
 })
 export class ProjectTasksComponent implements OnInit {
-  project: Project
+  project: Project;
   tasks: Task[];
   filters: Filter[] = [
     {id: 'OPEN', label: 'Open tasks', states: [State.TO_DO, State.IN_PROGRESS, State.ON_HOLD]},
@@ -45,8 +45,7 @@ export class ProjectTasksComponent implements OnInit {
       let id = +params['id'];
       if (this.activeFilter.states.length > 0) {
         this.taskService.getFilteredTasks(id, this.activeFilter.states).then(tasks => this.tasks = tasks);
-      }
-      else {
+      } else {
         this.taskService.getTasks(id).then(tasks => this.tasks = tasks);
       }
     });
@@ -57,9 +56,8 @@ export class ProjectTasksComponent implements OnInit {
     this.getTasks();
   }
 
-  createTask(task: TaskSpec): void {
-    task.project = this.project.id;
-    this.taskService.createTask(task).then(() => this.getTasks());
+  createTask(task: TaskForm): void {
+    this.taskService.createTask(this.project.id, task).then(() => this.getTasks());
   }
 
 }

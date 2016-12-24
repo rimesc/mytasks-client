@@ -9,7 +9,7 @@
 <div style="clear: both"></div>
 <ul class="list-group project-list">
 	<li *ngFor="let project of projects" class="list-group-item">
-		<span class="tag tag-default tag-pill float-xs-right">{{project.numberOfOpenTasks}}</span>
+		<span class="tag tag-default tag-pill float-xs-right">{{project.tasks.open}}</span>
 		<h5 class="list-group-item-heading"><a [routerLink]="linkTo(project.id)">{{project.name}}</a></h5>
 		<p class="list-group-item-text">
 			{{project.description}}

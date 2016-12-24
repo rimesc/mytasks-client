@@ -6,7 +6,7 @@
 		<li>
 			<a routerLink="tasks">
 				<fa name="check-square-o"></fa>
-				<span>{{project.numberOfOpenTasks}} open task{{project.numberOfOpenTasks == 1 ? '' : 's'}}</span>
+				<span>{{project.tasks.open}} open task{{project.tasks.open == 1 ? '' : 's'}}</span>
 			</a>
 		</li>
 		<li>

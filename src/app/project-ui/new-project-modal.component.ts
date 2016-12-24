@@ -2,18 +2,18 @@ import { Component } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { ProjectSpec } from '../api/project-spec';
+import { ProjectForm } from '../api/project-form';
 
 @Component({
   selector: 'new-project-modal',
   templateUrl: './new-project-modal.component.html'
 })
 export class NewProjectModalComponent {
-  project = new ProjectSpec();
+  project = new ProjectForm();
 
   constructor(public activeModal: NgbActiveModal) { }
 
-  submit(project: ProjectSpec): void {
+  submit(project: ProjectForm): void {
     this.activeModal.close(project);
   }
 

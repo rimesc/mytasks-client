@@ -1,0 +1,31 @@
+@import '../../../node_modules/bootstrap/scss/_variables.scss';
+
+div.readme {
+	margin-top: 50px;
+}
+
+h2 {
+	width: 100%;
+	font-size: $font-size-h6;
+	font-weight: 400;
+	text-transform: uppercase;
+	color: $gray-light;
+	border-bottom: 1px solid $gray-lighter;
+	line-height: 0.1em;
+	margin: 10px 0 20px;
+} 
+
+h2 span {
+	background: $body-bg;
+	padding-right: 7px;
+}
+
+span.small-caps {
+	text-transform: uppercase;
+	font-size: $font-size-sm;
+}
+
+span.divider {
+	color: $gray-lighter;
+	padding: 0 $spacer-x*0.5;
+}

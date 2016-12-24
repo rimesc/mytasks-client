@@ -10,15 +10,15 @@ import { EditProjectModalComponent } from './edit-project-modal.component';
 import { Error } from '../api/error';
 import { Message } from '../shared/message';
 import { Project } from '../api/project';
-import { ProjectSpec } from '../api/project-spec';
-import { TaskSpec } from '../api/task-spec';
+import { ProjectForm } from '../api/project-form';
+import { TaskForm } from '../api/task-form';
 import { ProjectService } from '../services/project.service';
 import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'project-view',
   templateUrl: './project-detail.component.html',
-  styleUrls: []
+  styleUrls: ['./project-detail.component.scss']
 })
 export class ProjectDetailComponent implements OnInit {
   project: Project;
@@ -43,14 +43,14 @@ export class ProjectDetailComponent implements OnInit {
     });
   }
 
-  updateProject(project: ProjectSpec): void {
+  updateProject(project: ProjectForm): void {
     this.projectService.updateProject(this.project.id, project).then(project => this.project = project);
   }
 
   editProject(): void {
     let ref = this.modalService.open(EditProjectModalComponent);
-    (ref.componentInstance as EditProjectModalComponent).project = Object.assign({}, this.project);
-    ref.result.then((project: ProjectSpec) => {
+    (ref.componentInstance as EditProjectModalComponent).project = { name: this.project.name, description: this.project.description };
+    ref.result.then((project: ProjectForm) => {
       this.project.name = project.name;
       this.project.description = project.description;
       this.updateProject(project);
@@ -63,9 +63,13 @@ export class ProjectDetailComponent implements OnInit {
     ref.result.then(() => this.projectService.deleteProject(this.project.id)).then(() => this.router.navigate(['projects']), () => {});
   }
 
-  createTask(task: TaskSpec): void {
-    task.project = this.project.id;
-    this.taskService.createTask(task).then(() => this.getProject());
+  updateNotes(markdown: string): void {
+    this.projectService.updateNotes(this.project.id, markdown).then(notes => this.project.notes = notes);
+  }
+
+  createTask(task: TaskForm): void {
+    console.log(task);
+    this.taskService.createTask(this.project.id, task).then(() => this.getProject());
   }
 
 }

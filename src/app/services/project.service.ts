@@ -1,4 +1,5 @@
 import { Injectable, Inject }    from '@angular/core';
+import { Headers } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 
 import 'rxjs/add/operator/toPromise';
@@ -6,7 +7,8 @@ import 'rxjs/add/operator/toPromise';
 import { API_BASE } from './service-constants';
 import { ServiceUtil } from './service-util';
 import { Project } from '../api/project';
-import { ProjectSpec } from '../api/project-spec';
+import { ProjectForm } from '../api/project-form';
+import { Notes } from '../api/notes';
 
 @Injectable()
 export class ProjectService extends ServiceUtil {
@@ -18,7 +20,7 @@ export class ProjectService extends ServiceUtil {
   getProjects(): Promise<Project[]> {
     return this.http.get(this.url())
                .toPromise()
-               .then(response => response.json().projects as Project[])
+               .then(response => response.json() as Project[])
                .catch(this.handleError);
   }
 
@@ -29,17 +31,24 @@ export class ProjectService extends ServiceUtil {
                .catch(this.handleError);
   }
 
-  createProject(project: ProjectSpec): Promise<Project> {
-    return this.http.post(this.url(), this.toJson(project), {headers: this.headers})
+  createProject(project: ProjectForm): Promise<Project> {
+    return this.http.post(this.url(), JSON.stringify(project), {headers: this.headers})
                .toPromise()
                .then(response => response.json() as Project)
                .catch(this.handleError);
   }
 
-  updateProject(id: number, project: ProjectSpec) {
-    return this.http.post(this.url(id), this.toJson(project), {headers: this.headers})
+  updateProject(id: number, project: ProjectForm) {
+    return this.http.post(this.url(id), JSON.stringify(project), {headers: this.headers})
                .toPromise()
                .then(response => response.json() as Project)
+               .catch(this.handleError);
+  }
+
+  updateNotes(id: number, raw: string): Promise<Notes> {
+    return this.http.post(this.url(id + '/notes'), raw, {headers: new Headers({'Content-Type': 'text/markdown'})})
+               .toPromise()
+               .then(response => response.json())
                .catch(this.handleError);
   }
 
@@ -47,13 +56,6 @@ export class ProjectService extends ServiceUtil {
     return this.http.delete(this.url(id))
                .toPromise()
                .catch(this.handleError);
-  }
-
-  private toJson(project: ProjectSpec): string {
-    return JSON.stringify({
-      name: project.name,
-      description: project.description
-    });
   }
 
 }

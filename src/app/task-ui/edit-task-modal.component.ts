@@ -2,18 +2,18 @@ import { Component } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { TaskSpec } from '../api/task-spec';
+import { TaskForm } from '../api/task-form';
 
 @Component({
   selector: 'edit-task-modal',
   templateUrl: './edit-task-modal.component.html'
 })
 export class EditTaskModalComponent {
-  task: TaskSpec;
+  task: TaskForm;
 
   constructor(public activeModal: NgbActiveModal) { }
 
-  submit(task: TaskSpec): void {
+  submit(task: TaskForm): void {
     this.activeModal.close(task);
   }
 

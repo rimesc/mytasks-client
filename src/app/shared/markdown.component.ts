@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { Note } from '../api/note';
+import { Notes } from '../api/notes';
 import { EditNotesModalComponent } from '../shared/edit-notes-modal.component';
 
 @Component({
@@ -12,7 +12,7 @@ import { EditNotesModalComponent } from '../shared/edit-notes-modal.component';
 })
 export class MarkdownComponent {
   @Input()
-  notes: Note;
+  notes: Notes;
 
   @Output()
   update = new EventEmitter<string>();
@@ -21,12 +21,12 @@ export class MarkdownComponent {
 
   edit(): void {
     let ref = this.modalService.open(EditNotesModalComponent);
-    let markdown = this.notes ? this.notes.markdown : '';
+    let markdown = this.notes ? this.notes.raw : '';
     (ref.componentInstance as EditNotesModalComponent).markdown = markdown;
-    ref.result.then((markdown: string) => this.update.emit(markdown), () => {});
+    ref.result.then((text: string) => this.update.emit(text), () => {});
   }
 
   hasNotes(): boolean {
-    return this.notes && this.notes.markdown.length > 0;
+    return this.notes && this.notes.raw.length > 0;
   }
 }

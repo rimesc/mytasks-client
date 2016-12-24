@@ -2,4 +2,8 @@
 <div *ngIf="project">
   <project-toolbar (edit)="editProject()" (delete)="deleteProject()" (newTask)="createTask($event)"></project-toolbar>
   <project-header [project]="project"></project-header>
+	<div class="readme">
+		<h2><span>Notes</span></h2>
+		<markdown-view [notes]="project.notes" (update)="updateNotes($event)"></markdown-view>
+	</div>
 </div>

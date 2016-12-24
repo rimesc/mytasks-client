@@ -1,8 +1,8 @@
 <messages [messages]="messages"></messages>
-<div class="project-header" *ngIf="project">
-	<a routerLink="/projects/{{project.id}}">{{project.name}}</a>
-</div>
 <div *ngIf="task">
+	<div class="project-header">
+		<a routerLink="/projects/{{task.project.id}}">{{task.project.name}}</a>
+	</div>
 	<div class="btn-toolbar pull-right">
 		<div class="btn-group" role="group">
 			<button type="submit" class="btn btn-secondary" *ngFor="let transition of availableTransitions()" (click)="performTransition(transition)">{{transition.label}}</button>
@@ -27,6 +27,6 @@
 	</div>
 	<div class="readme">
 		<h2><span>Notes</span></h2>
-		<markdown-view [notes]="note" (update)="updateNotes($event)"></markdown-view>
+		<markdown-view [notes]="task.notes" (update)="updateNotes($event)"></markdown-view>
 	</div>
 </div>

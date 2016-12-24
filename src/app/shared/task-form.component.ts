@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Priority } from '../api/priority';
-import { TaskSpec } from '../api/task-spec';
+import { TaskForm } from '../api/task-form';
 
 @Component({
   selector: 'task-form',
@@ -13,12 +13,12 @@ export class TaskFormComponent {
   action: string;
 
   @Input()
-  task: TaskSpec;
+  task: TaskForm;
 
   priorities = Priority;
 
   @Output()
-  submit = new EventEmitter<TaskSpec>();
+  submit = new EventEmitter<TaskForm>();
 
   @Output()
   cancel = new EventEmitter<void>();

@@ -9,13 +9,10 @@ import { DeleteTaskModalComponent } from './delete-task-modal.component';
 
 import { Error } from '../api/error';
 import { Message } from '../shared/message';
-import { Project } from '../api/project';
 import { Task } from '../api/task';
-import { Note } from '../api/note';
+import { TaskForm } from '../api/task-form';
 import { Priority } from '../api/priority';
 import { State } from '../api/state';
-import { TaskSpec } from '../api/task-spec';
-import { UpdateTask } from '../api/update-task';
 import { ProjectService } from '../services/project.service';
 import { TaskService } from '../services/task.service';
 
@@ -34,8 +31,6 @@ const transitions: Transition[] = [
 })
 export class TaskDetailComponent implements OnInit {
   task: Task;
-  project: Project;
-  note: Note;
   priorities = Priority;
   messages: Message[] = [];
 
@@ -55,47 +50,34 @@ export class TaskDetailComponent implements OnInit {
       this.taskService.getTask(id)
         .then(task => {
           this.task = task;
-          this.getProject();
-          this.getNotes();
         })
         .catch((error: Error) => this.messages.push({ code: error.code, detail: error.message, severity: 'danger'}));
     });
   }
 
-  getProject(): void {
-    this.projectService.getProject(this.task.project)
-      .then(project => this.project = project)
-      .catch((error: Error) => this.messages.push({ code: error.code, detail: error.message, severity: 'danger'}));
-  }
-
-  updateTask(task: UpdateTask): void {
-    this.taskService.updateTask(this.task.id, task).then(task => this.task = task).then(() => this.getNotes());
+  updateTask(task: TaskForm): void {
+    this.taskService.updateTask(this.task.id, task).then(task => this.task = task);
   }
 
   deleteTask(): void {
     let ref = this.modalService.open(DeleteTaskModalComponent);
-    (ref.componentInstance as DeleteTaskModalComponent).projectName = this.project.name;
+    (ref.componentInstance as DeleteTaskModalComponent).projectName = this.task.project.name;
     ref.result
       .then(() => this.taskService.deleteTask(this.task.id))
-      .then(() => this.router.navigate(['projects/' + this.project.id + '/tasks']), () => {});
+      .then(() => this.router.navigate(['projects/' + this.task.project.id + '/tasks']), () => {});
   }
 
   editTask(): void {
     let ref = this.modalService.open(EditTaskModalComponent);
-    (ref.componentInstance as EditTaskModalComponent).task = Object.assign({}, this.task);
-    ref.result.then((task: UpdateTask) => {
+    (ref.componentInstance as EditTaskModalComponent).task = {
+      summary: this.task.summary, priority: this.task.priority, tags: this.task.tags
+    };
+    ref.result.then((task: TaskForm) => {
       this.task.summary = task.summary;
-      this.task.description = task.description;
       this.task.priority = task.priority;
       this.task.tags = task.tags;
       this.updateTask(task);
     }, () => {});
-  }
-
-  getNotes(): void {
-    this.taskService.getNotes(this.task.id)
-      .then(note => this.note = note)
-      .catch(() => this.note = undefined);
   }
 
   availableTransitions(): Transition[] {
@@ -107,12 +89,7 @@ export class TaskDetailComponent implements OnInit {
   }
 
   updateNotes(markdown: string): void {
-    this.taskService.updateTask(this.task.id, {
-      summary: this.task.summary,
-      description: markdown,
-      priority: this.task.priority,
-      tags: this.task.tags
-    }).then(() => this.getNotes());
+    this.taskService.updateNotes(this.task.id, markdown).then(notes => this.task.notes = notes);
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { ProjectSpec } from '../api/project-spec';
+import { ProjectForm } from '../api/project-form';
 
 @Component({
   selector: 'project-form',
@@ -12,10 +12,10 @@ export class ProjectFormComponent {
   action: string;
 
   @Input()
-  project: ProjectSpec;
+  project: ProjectForm;
 
   @Output()
-  submit = new EventEmitter<ProjectSpec>();
+  submit = new EventEmitter<ProjectForm>();
 
   @Output()
   cancel = new EventEmitter<void>();
