@@ -4,11 +4,14 @@
   </a>
 </div>
 <div class="pull-left">
-  <fa class="text-muted" name="clock-o"></fa>
-  <span class="text-muted">{{isModified() ? 'Last modified' : 'Created'}}</span>
-  <span class="text-muted">{{task.updated | amTimeAgo}}</span>
+	<my-state-badge [state]="task.state"></my-state-badge>
   <div style="display: inline-block; padding-bottom: 0; margin-left: 15px">
     <my-tags [tags]="task.tags"></my-tags>
+  </div>
+  <div style="display: inline-block; padding-bottom: 0; margin-left: 15px">
+    <fa class="text-muted" name="clock-o"></fa>
+    <span class="text-muted">{{isModified() ? 'Last modified' : 'Created'}}</span>
+    <span class="text-muted">{{task.updated | amTimeAgo}}</span>
   </div>
 </div>
 <div class="pull-right">
