@@ -10,11 +10,10 @@
   </div>
   <div style="display: inline-block; padding-bottom: 0; margin-left: 15px">
     <fa class="text-muted" name="clock-o"></fa>
-    <span class="text-muted">{{isModified() ? 'Last modified' : 'Created'}}</span>
-    <span class="text-muted">{{task.updated | amTimeAgo}}</span>
+    <span class="text-muted modification-time">{{isModified() ? 'Last modified' : 'Created'}} {{task.updated | amTimeAgo}}</span>
   </div>
 </div>
 <div class="pull-right">
-  <span class="text-muted"><fa name="warning"></fa> {{priorities[task.priority] | titlecase}}</span>
+  <span class="text-muted"><fa name="warning"></fa> <span class="priority">{{priorities[task.priority] | titlecase}}</span></span>
 </div>
 <div style="clear: both"></div>

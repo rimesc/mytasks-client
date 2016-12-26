@@ -15,7 +15,7 @@ export class TaskItemComponent  {
   priorities = Priority;
 
   isModified(): boolean {
-    return this.task.updated !== this.task.created;
+    return !!this.task.updated;
   }
 
 }
