@@ -6,7 +6,7 @@
 		<li>
 			<a routerLink="tasks">
 				<fa name="check-square-o"></fa>
-				<span class="open-tasks">{{project.tasks.open}} open task{{project.tasks.open == 1 ? '' : 's'}}</span>
+				<span class="open-tasks">{{project.tasks.open | pluralise:'open task'}}</span>
 			</a>
 		</li>
 		<li>

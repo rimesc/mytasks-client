@@ -18,6 +18,7 @@ import { TagsComponent } from './tags.component';
 import { TaskFormComponent } from './task-form.component';
 import { EnumValuesPipe } from './enum-values.pipe';
 import { TitleCasePipe } from './title-case.pipe';
+import { PluralisePipe } from './pluralise.pipe';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { TitleCasePipe } from './title-case.pipe';
     TagsComponent,
     TaskFormComponent,
     EnumValuesPipe,
-    TitleCasePipe
+    TitleCasePipe,
+    PluralisePipe
   ],
   imports: [
     CommonModule,
@@ -54,7 +56,8 @@ import { TitleCasePipe } from './title-case.pipe';
     TagsComponent,
     TaskFormComponent,
     EnumValuesPipe,
-    TitleCasePipe
+    TitleCasePipe,
+    PluralisePipe
   ],
   entryComponents: [EditNotesModalComponent]
 })

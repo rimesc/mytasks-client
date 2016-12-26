@@ -7,6 +7,7 @@ import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawe
 
 import { Project } from '../api/project';
 import { ProjectHeaderComponent } from './project-header.component';
+import { PluralisePipe } from '../shared/pluralise.pipe';
 
 describe('ProjectHeaderComponent', () => {
 
@@ -22,7 +23,7 @@ describe('ProjectHeaderComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ Angular2FontawesomeModule ],
-      declarations: [ ProjectHeaderComponent ],
+      declarations: [ ProjectHeaderComponent, PluralisePipe ],
     });
   });
 
@@ -57,7 +58,7 @@ describe('ProjectHeaderComponent', () => {
 
     project.tasks.open = 0;
     fixture.detectChanges();
-    expect(de.nativeElement.textContent).toEqual('0 open tasks');
+    expect(de.nativeElement.textContent).toEqual('no open tasks');
   });
 
 });
