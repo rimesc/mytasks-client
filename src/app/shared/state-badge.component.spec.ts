@@ -2,8 +2,6 @@ import { TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ComponentFixture } from '@angular/core/testing';
 
-import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
-
 import { State } from '../api/state';
 import { TitleCasePipe } from './title-case.pipe';
 import { StateBadgeComponent } from './state-badge.component';
@@ -15,7 +13,6 @@ describe('StateBadgeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ Angular2FontawesomeModule ],
       declarations: [ StateBadgeComponent, TitleCasePipe ],
     });
   });
