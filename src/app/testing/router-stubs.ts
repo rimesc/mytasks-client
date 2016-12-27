@@ -28,6 +28,17 @@ export class ActivatedRouteStub {
   }
 }
 
+@Injectable()
+export class RouterStub {
+
+  lastNavigatedTo: any[];
+
+  navigate(commands: any[]) {
+    this.lastNavigatedTo = commands;
+  }
+
+}
+
 // See https://angular.io/docs/ts/latest/guide/testing.html#router-link-stub
 @Directive({
   selector: '[routerLink]',
