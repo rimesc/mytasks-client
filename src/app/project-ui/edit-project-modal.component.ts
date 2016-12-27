@@ -3,21 +3,22 @@ import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ProjectForm } from '../api/project-form';
+import { ModalContent } from '../shared/modal-content';
 
 @Component({
   selector: 'my-edit-project-modal',
   templateUrl: './edit-project-modal.component.html'
 })
-export class EditProjectModalComponent {
-  project: ProjectForm;
-
-  constructor(public activeModal: NgbActiveModal) { }
-
-  submit(project: ProjectForm): void {
-    this.activeModal.close(project);
+export class EditProjectModalComponent extends ModalContent<ProjectForm> {
+  constructor(activeModal: NgbActiveModal) {
+    super(activeModal);
   }
 
-  cancel(): void {
-    this.activeModal.dismiss();
+  set project(project: ProjectForm) {
+    this.form = project;
+  }
+
+  get project() {
+    return this.form;
   }
 }

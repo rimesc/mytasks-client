@@ -1,10 +1,8 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-import { NewTaskModalComponent } from './new-task-modal.component';
-
+import { ModalService } from '../shared/modal.service';
 import { TaskForm } from '../api/task-form';
+import { NewTaskModalComponent } from './new-task-modal.component';
 
 @Component({
   selector: 'my-new-task-button',
@@ -15,14 +13,10 @@ export class NewTaskButtonComponent {
   @Output()
   submit = new EventEmitter<TaskForm>();
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modals: ModalService) { }
 
   openModal(): void {
-    this.modalService.open(NewTaskModalComponent).result
-      .then(task => this.submit.emit(task))
-      .catch(() => {
-        // cancelled
-      });
+    this.modals.open<TaskForm>(NewTaskModalComponent).then(task => this.submit.emit(task)).catch(() => {});
   }
 
 }

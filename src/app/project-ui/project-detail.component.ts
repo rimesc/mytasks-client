@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { OnInit } from '@angular/core';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import { ModalService } from '../shared/modal.service';
 import { DeleteProjectModalComponent } from './delete-project-modal.component';
 import { EditProjectModalComponent } from './edit-project-modal.component';
 
@@ -26,7 +25,7 @@ export class ProjectDetailComponent implements OnInit {
 
   constructor(private projectService: ProjectService,
               private taskService: TaskService,
-              private modalService: NgbModal,
+              private modals: ModalService,
               private router: Router,
               private route: ActivatedRoute) { }
 
@@ -48,19 +47,18 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   editProject(): void {
-    let ref = this.modalService.open(EditProjectModalComponent);
-    (ref.componentInstance as EditProjectModalComponent).project = { name: this.project.name, description: this.project.description };
-    ref.result.then((project: ProjectForm) => {
-      this.project.name = project.name;
-      this.project.description = project.description;
-      this.updateProject(project);
-    }, () => {});
+    this.modals.open(EditProjectModalComponent, { name: this.project.name, description: this.project.description })
+      .then((project: ProjectForm) => {
+        Object.assign(this.project, project);
+        this.updateProject(project);
+      })
+      .catch(() => { });
   }
 
   deleteProject(): void {
-    let ref = this.modalService.open(DeleteProjectModalComponent);
-    (ref.componentInstance as DeleteProjectModalComponent).projectName = this.project.name;
-    ref.result.then(() => this.projectService.deleteProject(this.project.id)).then(() => this.router.navigate(['projects']), () => {});
+    this.modals.open(DeleteProjectModalComponent)
+      .then(() => this.projectService.deleteProject(this.project.id)).then(() => this.router.navigate(['projects']))
+      .catch(() => {});
   }
 
   updateNotes(markdown: string): void {
@@ -68,7 +66,6 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   createTask(task: TaskForm): void {
-    console.log(task);
     this.taskService.createTask(this.project.id, task).then(() => this.getProject());
   }
 

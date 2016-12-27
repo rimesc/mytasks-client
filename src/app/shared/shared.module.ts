@@ -19,6 +19,7 @@ import { TaskFormComponent } from './task-form.component';
 import { EnumValuesPipe } from './enum-values.pipe';
 import { TitleCasePipe } from './title-case.pipe';
 import { PluralisePipe } from './pluralise.pipe';
+import { ModalService } from './modal.service';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { PluralisePipe } from './pluralise.pipe';
     TitleCasePipe,
     PluralisePipe
   ],
+  providers: [ ModalService ],
   imports: [
     CommonModule,
     FormsModule,
