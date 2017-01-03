@@ -2,14 +2,11 @@
 	<div class="modal-body">
 		<!-- <my-messages messages="errors"></my-messages> -->
 		<div class="form-group">
-			<label for="summary" class="control-label">
+			<label id="taskSummaryLabel" for="summary" class="control-label">
 				Summary
 				<span [hidden]="summaryField.valid || !summaryField.touched" role="alert" class="text-danger">
-					<!--
-	    			<span [hidden]="summaryField.hasError('required')">(please enter a summary of the task)</span>
-	    			<span [hidden]="summaryField.hasError('maxlength')">(may be no more than 255 characters long)</span>
-				-->
-    			</span>
+          (please enter a summary of the task)
+				</span>
 			</label>
 			<input [(ngModel)]="task.summary" class="form-control" type="text" autofocus required maxlength="255" id="taskSummary" name="summary" placeholder="My new task" #summaryField="ngModel">
 		</div>
