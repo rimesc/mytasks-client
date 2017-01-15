@@ -1,66 +1,74 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+
+// angular modules
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// external modules
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { MomentModule } from 'angular2-moment';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TagInputModule } from 'ng2-tag-input';
 
-import { ApiModule } from '../api/api.module';
+// feature modules
+import { MarkdownModule } from '../markdown/markdown.module';
 
+// components
 import { MessagesComponent } from './messages.component';
 import { StateBadgeComponent } from './state-badge.component';
-import { MarkdownComponent } from './markdown.component';
-import { EditNotesModalComponent } from './edit-notes-modal.component';
 import { TagsComponent } from './tags.component';
 import { TaskFormComponent } from './task-form.component';
+
+// pipes
 import { EnumValuesPipe } from './enum-values.pipe';
 import { TitleCasePipe } from './title-case.pipe';
 import { PluralisePipe } from './pluralise.pipe';
-import { ModalService } from './modal.service';
 
 @NgModule({
-  declarations: [
-    MessagesComponent,
-    StateBadgeComponent,
-    MarkdownComponent,
-    EditNotesModalComponent,
-    TagsComponent,
-    TaskFormComponent,
-    EnumValuesPipe,
-    TitleCasePipe,
-    PluralisePipe
-  ],
-  providers: [ ModalService ],
   imports: [
+    // angular modules
     CommonModule,
     FormsModule,
     RouterModule,
+    // external modules
+    Angular2FontawesomeModule,
+    MarkdownModule,
     MomentModule,
     NgbModule,
-    Angular2FontawesomeModule,
-    MomentModule,
     TagInputModule,
-    ApiModule
+    // feature modules
+    MarkdownModule
   ],
-  exports: [
-    FormsModule,
-    NgbModule,
-    Angular2FontawesomeModule,
-    MomentModule,
-    ApiModule,
+  declarations: [
+    // components
     MessagesComponent,
     StateBadgeComponent,
-    MarkdownComponent,
-    EditNotesModalComponent,
     TagsComponent,
     TaskFormComponent,
+    // pipes
     EnumValuesPipe,
     TitleCasePipe,
     PluralisePipe
   ],
-  entryComponents: [EditNotesModalComponent]
+  exports: [
+    // angular modules
+    CommonModule,
+    FormsModule,
+    NgbModule,
+    // external modules
+    Angular2FontawesomeModule,
+    MarkdownModule,
+    MomentModule,
+    // components
+    MessagesComponent,
+    StateBadgeComponent,
+    TagsComponent,
+    TaskFormComponent,
+    // pipes
+    EnumValuesPipe,
+    TitleCasePipe,
+    PluralisePipe
+  ]
 })
 export class SharedModule { }

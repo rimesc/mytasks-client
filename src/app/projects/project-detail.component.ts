@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { OnInit } from '@angular/core';
 
-import { ModalService } from '../shared/modal.service';
+import { ModalService } from '../core/modal.service';
 import { DeleteProjectModalComponent } from './delete-project-modal.component';
 import { EditProjectModalComponent } from './edit-project-modal.component';
 

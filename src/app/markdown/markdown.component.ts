@@ -3,7 +3,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Notes } from '../api/notes';
-import { EditNotesModalComponent } from '../shared/edit-notes-modal.component';
+import { EditNotesModalComponent } from './edit-notes-modal.component';
 
 @Component({
   selector: 'my-markdown-view',

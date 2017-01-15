@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ProjectForm } from '../api/project-form';
-import { ModalContent } from '../shared/modal-content';
+import { ModalContent } from '../core/modal-content';
 
 @Component({
   selector: 'my-edit-project-modal',

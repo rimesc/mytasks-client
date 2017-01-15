@@ -7,7 +7,7 @@ import { Project } from '../api/project';
 import { ProjectForm } from '../api/project-form';
 import { ProjectService } from '../services/project.service';
 import { ProjectListComponent } from './project-list.component';
-import { ModalService } from '../shared/modal.service';
+import { ModalService } from '../core/modal.service';
 
 import { RouterLinkStubDirective } from '../testing/router-stubs';
 import { ModalServiceStub } from '../testing/modal-stubs';

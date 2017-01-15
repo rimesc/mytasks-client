@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
-import { ModalService } from '../shared/modal.service';
+import { ModalService } from '../core/modal.service';
 import { TaskForm } from '../api/task-form';
 import { NewTaskModalComponent } from './new-task-modal.component';
 

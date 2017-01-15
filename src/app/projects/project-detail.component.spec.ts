@@ -11,7 +11,7 @@ import { Priority } from '../api/priority';
 import { ProjectService } from '../services/project.service';
 import { TaskService } from '../services/task.service';
 import { ProjectDetailComponent } from './project-detail.component';
-import { ModalService } from '../shared/modal.service';
+import { ModalService } from '../core/modal.service';
 
 import { ActivatedRouteStub, RouterStub } from '../testing/router-stubs';
 import { ModalServiceStub } from '../testing/modal-stubs';
