@@ -2,6 +2,7 @@ import { Injectable, Inject }    from '@angular/core';
 import { Headers } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 
 import { API_BASE } from './service-constants';
@@ -18,17 +19,15 @@ export class TaskService extends ServiceUtil {
     super(api + 'tasks/');
   }
 
-  getTasks(projectId: number): Promise<Task[]> {
+  getTasks(projectId: number): Observable<Task[]> {
     return this.http.get(this.url('', { project: projectId }))
-               .toPromise()
-               .then(response => JSON.parse(response.text(), revive))
+               .map(response => JSON.parse(response.text(), revive))
                .catch(this.handleError);
   }
 
-  getFilteredTasks(projectId: number, states: State[]): Promise<Task[]> {
+  getFilteredTasks(projectId: number, states: State[]): Observable<Task[]> {
     return this.http.get(this.url('', { project: projectId, state: states.map(s => State[s]) }))
-               .toPromise()
-               .then(response => JSON.parse(response.text(), revive))
+               .map(response => JSON.parse(response.text(), revive))
                .catch(this.handleError);
   }
 

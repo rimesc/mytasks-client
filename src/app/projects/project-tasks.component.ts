@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
+import { Error } from '../api/error';
+import { Message } from '../shared/message';
 import { Project } from '../api/project';
 import { Task } from '../api/task';
 import { TaskForm } from '../api/task-form';
-import { State } from '../api/state';
 import { ProjectService } from '../services/project.service';
 import { TaskService } from '../services/task.service';
+import { TaskFilter, DEFAULT, OPEN, CLOSED, ALL } from '../shared/task-filter';
 
 @Component({
   selector: 'my-project-tasks',
@@ -17,53 +19,32 @@ import { TaskService } from '../services/task.service';
 export class ProjectTasksComponent implements OnInit {
   project: Project;
   tasks: Task[];
-  filters: Filter[] = [
-    {id: 'OPEN', label: 'Open tasks', states: [State.TO_DO, State.IN_PROGRESS, State.ON_HOLD]},
-    {id: 'CLOSED', label: 'Closed tasks', states: [State.DONE]},
-    {id: 'ALL', label: 'All tasks', states: []}
-  ];
-  activeFilter: Filter = this.filters[0];
+  messages: Message[] = [];
+  filters: TaskFilter[] = [ OPEN, CLOSED, ALL ];
+  activeFilter: TaskFilter = DEFAULT;
 
   constructor(private projectService: ProjectService,
               private taskService: TaskService,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getProject();
-    this.getTasks();
+    this.route.data.subscribe(
+      (data: { project: Project, tasks: Task[] }) => {
+        this.project = data.project;
+        this.tasks = data.tasks;
+      },
+      (error: Error) => this.messages.push({ code: error.code, detail: error.message, severity: 'danger'})
+    );
   }
 
-  getProject(): void {
-    this.route.parent.params.forEach((params: Params) => {
-      let id = +params['id'];
-      this.projectService.getProject(id).then(project => this.project = project);
-    });
-  }
-
-  getTasks(): void {
-    this.route.parent.params.forEach((params: Params) => {
-      let id = +params['id'];
-      if (this.activeFilter.states.length > 0) {
-        this.taskService.getFilteredTasks(id, this.activeFilter.states).then(tasks => this.tasks = tasks);
-      } else {
-        this.taskService.getTasks(id).then(tasks => this.tasks = tasks);
-      }
-    });
-  }
-
-  activateFilter(filter: Filter): void {
+  activateFilter(filter: TaskFilter): void {
     this.activeFilter = filter;
-    this.getTasks();
+    this.taskService.getFilteredTasks(this.project.id, this.activeFilter.states).subscribe(tasks => this.tasks = tasks);
   }
 
   createTask(task: TaskForm): void {
-    this.taskService.createTask(this.project.id, task).then(() => this.getTasks());
+    this.taskService.createTask(this.project.id, task).then(this.tasks.push);
   }
 
 }
 
-class Filter {
-  id: string;
-  label: string;
-  states: State[];
-}

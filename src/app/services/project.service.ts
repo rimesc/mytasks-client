@@ -2,7 +2,10 @@ import { Injectable, Inject }    from '@angular/core';
 import { Headers } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 
 import { API_BASE } from './service-constants';
 import { ServiceUtil } from './service-util';
@@ -24,11 +27,10 @@ export class ProjectService extends ServiceUtil {
                .catch(this.handleError);
   }
 
-  getProject(id: number): Promise<Project> {
+  getProject(id: number): Observable<Project> {
     return this.http.get(this.url(id))
-               .toPromise()
-               .then(response => response.json() as Project )
-               .catch(this.handleError);
+      .map(response => response.json() as Project)
+      .catch(this.handleError);
   }
 
   createProject(project: ProjectForm): Promise<Project> {
