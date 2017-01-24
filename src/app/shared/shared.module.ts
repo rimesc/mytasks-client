@@ -16,6 +16,7 @@ import { MarkdownModule } from '../markdown/markdown.module';
 
 // components
 import { MessagesComponent } from './messages.component';
+import { PriorityBadgeComponent } from './priority-badge.component';
 import { StateBadgeComponent } from './state-badge.component';
 import { TagsComponent } from './tags.component';
 import { TaskFormComponent } from './task-form.component';
@@ -43,6 +44,7 @@ import { PluralisePipe } from './pluralise.pipe';
   declarations: [
     // components
     MessagesComponent,
+    PriorityBadgeComponent,
     StateBadgeComponent,
     TagsComponent,
     TaskFormComponent,
@@ -62,6 +64,7 @@ import { PluralisePipe } from './pluralise.pipe';
     MomentModule,
     // components
     MessagesComponent,
+    PriorityBadgeComponent,
     StateBadgeComponent,
     TagsComponent,
     TaskFormComponent,

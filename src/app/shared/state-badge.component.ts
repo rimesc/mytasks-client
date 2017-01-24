@@ -4,9 +4,7 @@ import { State } from '../api/state';
 
 @Component({
   selector: 'my-state-badge',
-  template: `
-    <span class="tag tag-{{context()}}">{{states[state] | titlecase}}</span>
-  `,
+  template: '<span class="tag tag-{{context()}}">{{states[state] | titlecase}}</span>',
   styles: []
 })
 export class StateBadgeComponent {

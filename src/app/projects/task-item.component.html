@@ -14,6 +14,6 @@
   </div>
 </div>
 <div class="pull-right">
-  <span class="text-muted"><fa name="warning"></fa> <span class="priority">{{priorities[task.priority] | titlecase}}</span></span>
+  <my-priority-badge [priority]="task.priority"></my-priority-badge>
 </div>
 <div style="clear: both"></div>

@@ -33,3 +33,18 @@ span.divider {
 .project-header {
 	margin-bottom: $spacer-y;
 }
+
+ul.badges {
+	list-style: none;
+	padding: 0px;
+	display: inline-block;
+}
+
+ul.badges > li {
+	display: inline-block;
+	padding: 0px 10px;
+}
+
+ul.badges > li:FIRST-CHILD {
+	padding-left: 0px;
+}

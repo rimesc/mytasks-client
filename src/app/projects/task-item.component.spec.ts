@@ -12,6 +12,7 @@ import { State } from '../api/state';
 import { Task } from '../api/task';
 import { TaskItemComponent } from './task-item.component';
 import { TagsComponent } from '../shared/tags.component';
+import { PriorityBadgeComponent } from '../shared/priority-badge.component';
 import { StateBadgeComponent } from '../shared/state-badge.component';
 import { TitleCasePipe } from '../shared/title-case.pipe';
 
@@ -33,7 +34,14 @@ describe('TaskItemComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ Angular2FontawesomeModule, MomentModule ],
-      declarations: [ TaskItemComponent, TagsComponent, StateBadgeComponent, TitleCasePipe, RouterLinkStubDirective ],
+      declarations: [
+        TaskItemComponent,
+        TagsComponent,
+        PriorityBadgeComponent,
+        StateBadgeComponent,
+        TitleCasePipe,
+        RouterLinkStubDirective
+      ],
     });
   });
 
@@ -59,12 +67,12 @@ describe('TaskItemComponent', () => {
   });
 
   it('should display the task priority', () => {
-    let span: Element = fixture.debugElement.query(By.css('.priority')).nativeElement;
+    let span: Element = fixture.debugElement.query(By.directive(PriorityBadgeComponent)).nativeElement;
     expect(span.textContent.trim()).toEqual('Normal');
   });
 
   it('should display the task state', () => {
-    let span: Element = fixture.debugElement.query(By.css('.tag')).nativeElement;
+    let span: Element = fixture.debugElement.query(By.directive(StateBadgeComponent)).nativeElement;
     expect(span.textContent.trim()).toEqual('To Do');
   });
 
