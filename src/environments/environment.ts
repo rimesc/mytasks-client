@@ -7,6 +7,6 @@ export const environment = {
   production: false,
   apiBase: 'http://localhost:8080/api/',
   authClient: '_fill_in_client_id_here_',
-  authDomain: '_fill_in_auth_domain_here_'
+  authDomain: '_fill_in_auth_domain_here_',
   authCallback: 'http://localhost:4200'
 };
