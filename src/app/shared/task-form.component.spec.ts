@@ -249,7 +249,7 @@ class Page {
   addPageElements() {
     this.summaryInput = this.fixture.debugElement.query(By.css('input#taskSummary')).nativeElement;
     this.summaryLabel = this.fixture.debugElement.query(By.css('label#taskSummaryLabel'));
-    this.tagInput = new TagInput(this.fixture.debugElement.query(By.directive(TagInputComponent)));
+    this.tagInput = new TagInput(this.fixture.debugElement.query(By.css('tag-input')));
     this.prioritySelect = this.fixture.debugElement.query(By.css('select#taskPriority')).nativeElement;
     this.priorityOptions = this.fixture.debugElement.queryAll(By.css('select#taskPriority>option')).map(e => e.nativeElement);
     this.buttons = {
