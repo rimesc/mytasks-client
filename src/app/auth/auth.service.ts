@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import {Router } from '@angular/router';
 import { tokenNotExpired } from 'angular2-jwt';
 import Auth0Lock from 'auth0-lock';
+import 'rxjs/add/operator/take';
 
 import { CLIENT_ID, DOMAIN, CALLBACK } from './auth-constants';
 
@@ -21,14 +22,12 @@ export class AuthService {
     @Inject(CALLBACK) private callback: string) {
 
     this.lock = new Auth0Lock(client, domain, { auth: { redirectUrl: callback, responseType: 'token'}});
-    this.lock.on('authenticated', result => this.onSuccess(result));
-    this.lock.on('authorization_error', this.onFailure);
-    this.lock.on('unrecoverable_error', this.onFailure);
     this.lock.on('hide', this.onCancel);
+    this.handleRedirectWithHash();
   }
 
   public login(returnUrl: string) {
-    console.log('Will redirect to ' + returnUrl);
+    console.log(`Logging in. Will redirect to ${returnUrl}.`);
     this.setReturnUrl(returnUrl);
     this.lock.show();
   };
@@ -37,6 +36,21 @@ export class AuthService {
     localStorage.removeItem('id_token');
     localStorage.removeItem('profile');
   };
+
+  // See https://github.com/auth0/lock/pull/790#issuecomment-274267707
+  private handleRedirectWithHash() {
+    this.router.events.take(1).subscribe(event => {
+      if (/access_token/.test(event.url) || /error/.test(event.url)) {
+        console.log('Resuming authentication after redirect.');
+        this.lock.resumeAuth(window.location.hash, (error, authResult) => {
+          if (error) {
+            this.onFailure(error);
+          }
+          this.onSuccess(authResult);
+        });
+      }
+    });
+  }
 
   public authenticated(): boolean {
     const authenticated = tokenNotExpired();
@@ -96,6 +110,7 @@ export class AuthService {
 
   private redirect() {
     const url = localStorage.getItem(RETURN_URL);
+    console.log(`Redirecting to ${url}`);
     localStorage.removeItem(RETURN_URL);
     this.router.navigate([url ? url : '/']);
   }
