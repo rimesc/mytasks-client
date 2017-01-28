@@ -6,6 +6,7 @@ import { RouterLinkStubDirective } from '../testing/router-stubs';
 
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { MomentModule } from 'angular2-moment';
+import * as moment from 'moment/moment';
 
 import { Priority } from '../api/priority';
 import { State } from '../api/state';
@@ -76,20 +77,29 @@ describe('TaskItemComponent', () => {
     expect(span.textContent.trim()).toEqual('To Do');
   });
 
-  it('should display the task created date for new tasks', () => {
-    let span: Element = fixture.debugElement.query(By.css('.modification-time')).nativeElement;
-    expect(span.textContent.trim()).toStartWith('Created');
-    // we don't know exactly when it was created, but it should be have been within a few seconds
-    expect(span.textContent.trim()).toEndWith('seconds ago');
-  });
+  describe('task created/modified date', () => {
 
-  it('should display the task updated date for modified tasks', () => {
-    task.updated = new Date();
-    fixture.detectChanges();
-    let span: Element = fixture.debugElement.query(By.css('.modification-time')).nativeElement;
-    expect(span.textContent.trim()).toStartWith('Last modified');
-    // we don't know exactly when it was created, but it should be have been within a few seconds
-    expect(span.textContent.trim()).toEndWith('seconds ago');
+    afterEach(() => {
+      // this is necessary to reset the timeout that the amTimeAgo pipe sets to a resonable length
+      task.created = new Date();
+      task.updated = undefined;
+      fixture.detectChanges();
+    });
+
+    it('should be displayed for new tasks', () => {
+      task.created = moment().subtract(3, 'days').toDate();
+      fixture.detectChanges();
+      let span: Element = fixture.debugElement.query(By.css('.modification-time')).nativeElement;
+      expect(span.textContent.trim()).toEqual('Created 3 days ago');
+    });
+
+    it('should displayed for modified tasks', () => {
+      task.updated = moment().subtract(7, 'hours').toDate();
+      fixture.detectChanges();
+      let span: Element = fixture.debugElement.query(By.css('.modification-time')).nativeElement;
+      expect(span.textContent.trim()).toEqual('Updated 7 hours ago');
+    });
+
   });
 
 });

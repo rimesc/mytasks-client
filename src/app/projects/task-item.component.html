@@ -10,7 +10,10 @@
   </div>
   <div style="display: inline-block; padding-bottom: 0; margin-left: 15px">
     <fa class="text-muted" name="clock-o"></fa>
-    <span class="text-muted modification-time">{{isModified() ? 'Last modified' : 'Created'}} {{task.updated | amTimeAgo}}</span>
+    <span class="text-muted modification-time">
+      <span *ngIf="!isModified()">Created {{task.created | amTimeAgo}}</span>
+      <span *ngIf="isModified()">Updated {{task.updated | amTimeAgo}}</span>
+    </span>
   </div>
 </div>
 <div class="pull-right">
