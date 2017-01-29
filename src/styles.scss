@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+	/* Move down content because we have a fixed navbar that is 54px tall */
+	padding-top: 54px;
+}
+
+.main {
+	margin: 20px 0px; /*-15px*/
+}
+
+.page-header .btn-toolbar {
+	margin: 2px 0;
+}

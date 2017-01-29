@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { AuthService } from './auth/auth.service';
 
 @Component({
-  selector: 'nav-bar',
+  selector: 'my-nav-bar',
   templateUrl: './nav-bar.component.html',
-  styleUrls: []
+  styleUrls: [ './nav-bar.component.css' ]
 })
 export class NavBarComponent {
   showAdminOptions = true;
+  constructor(private auth: AuthService, private router: Router) { }
 
-  logout(): void {
-    console.log("Log out");
+  login() {
+    this.auth.login(this.router.routerState.snapshot.url);
   }
 }

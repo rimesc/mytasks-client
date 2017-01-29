@@ -1,25 +1,45 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+
+// angular modules
+import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 
-import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
+// feature modules
+import { AppRoutingModule }   from './app-routing.module';
+import { AuthModule } from './auth/auth.module';
+import { CoreModule } from './core/core.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { ProjectsModule } from './projects/projects.module';
+import { ServicesModule } from './services/services.module';
+import { SharedModule } from './shared/shared.module';
+import { TasksModule } from './tasks/tasks.module';
 
+// components
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar.component';
 
 @NgModule({
+  imports: [
+    // angular modules
+    BrowserModule,
+    HttpModule,
+    // feature modules
+    AppRoutingModule,
+    AuthModule,
+    CoreModule,
+    DashboardModule,
+    ProjectsModule,
+    ServicesModule,
+    SharedModule,
+    TasksModule
+  ],
   declarations: [
+    // components
     AppComponent,
     NavBarComponent
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    Angular2FontawesomeModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
