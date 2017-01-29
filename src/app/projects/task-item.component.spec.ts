@@ -73,8 +73,9 @@ describe('TaskItemComponent', () => {
   });
 
   it('should display the task state', () => {
-    let span: Element = fixture.debugElement.query(By.directive(StateBadgeComponent)).nativeElement;
-    expect(span.textContent.trim()).toEqual('To Do');
+    let span = fixture.debugElement.query(By.directive(StateBadgeComponent));
+    let icon: Element = span.query(By.css('.fa')).nativeElement;
+    expect(icon.classList[1]).toEqual('fa-clock-o');
   });
 
   describe('task created/modified date', () => {

@@ -4,7 +4,7 @@ import { Priority } from '../api/priority';
 
 @Component({
   selector: 'my-priority-badge',
-  template: '<span class="tag tag-{{context()}}"><fa name="warning"></fa>{{priorities[priority] | titlecase}}</span>',
+  template: '<span class="text-{{context()}}"><fa name="warning"></fa>{{priorities[priority] | titlecase}}</span>',
   styles: []
 })
 export class PriorityBadgeComponent {
