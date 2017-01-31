@@ -1,3 +1,5 @@
+import * as moment from 'moment/moment';
+
 import { Project } from './project';
 import { Priority } from './priority';
 import { State } from './state';
@@ -24,7 +26,7 @@ export function revive(key: string, value: any): any {
       return State[value as string];
     case 'created':
     case 'updated':
-      return new Date(value as string);
+      return moment(value as string).toDate();
     default:
       return value;
   }

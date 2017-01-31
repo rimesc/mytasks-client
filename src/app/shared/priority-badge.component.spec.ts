@@ -30,33 +30,36 @@ describe('PriorityBadgeComponent', () => {
   it('should display LOW priority', () => {
     component.priority = Priority.LOW;
     fixture.detectChanges();
-    let span: Element = fixture.debugElement.query(By.css('.tag')).nativeElement;
-    expect(span.classList.length).toEqual(2);
-    expect(span.classList[1]).toEqual('tag-success');
+    let span: Element = fixture.debugElement.query(By.css('span')).nativeElement;
+    expect(span.classList.length).toEqual(1);
+    expect(span.classList[0]).toEqual('text-success');
     expect(span.textContent.trim()).toEqual('Low');
   });
 
   it('should display NORMAL priority', () => {
     component.priority = Priority.NORMAL;
     fixture.detectChanges();
-    let span: Element = fixture.debugElement.query(By.css('.tag')).nativeElement;
-    expect(span.classList[1]).toEqual('tag-info');
+    let span: Element = fixture.debugElement.query(By.css('span')).nativeElement;
+    expect(span.classList.length).toEqual(1);
+    expect(span.classList[0]).toEqual('text-info');
     expect(span.textContent.trim()).toEqual('Normal');
   });
 
   it('should display HIGH priority', () => {
     component.priority = Priority.HIGH;
     fixture.detectChanges();
-    let span: Element = fixture.debugElement.query(By.css('.tag')).nativeElement;
-    expect(span.classList[1]).toEqual('tag-warning');
+    let span: Element = fixture.debugElement.query(By.css('span')).nativeElement;
+    expect(span.classList.length).toEqual(1);
+    expect(span.classList[0]).toEqual('text-warning');
     expect(span.textContent.trim()).toEqual('High');
   });
 
   it('should display CRITICAL priority', () => {
     component.priority = Priority.CRITICAL;
     fixture.detectChanges();
-    let span: Element = fixture.debugElement.query(By.css('.tag')).nativeElement;
-    expect(span.classList[1]).toEqual('tag-danger');
+    let span: Element = fixture.debugElement.query(By.css('span')).nativeElement;
+    expect(span.classList.length).toEqual(1);
+    expect(span.classList[0]).toEqual('text-danger');
     expect(span.textContent.trim()).toEqual('Critical');
   });
 
