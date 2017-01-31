@@ -9,6 +9,7 @@ import { AppRoutingModule }   from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { LogoutModule } from './logout/logout.module';
 import { ProjectsModule } from './projects/projects.module';
 import { ServicesModule } from './services/services.module';
 import { SharedModule } from './shared/shared.module';
@@ -28,6 +29,7 @@ import { NavBarComponent } from './nav-bar.component';
     AuthModule,
     CoreModule,
     DashboardModule,
+    LogoutModule,
     ProjectsModule,
     ServicesModule,
     SharedModule,
