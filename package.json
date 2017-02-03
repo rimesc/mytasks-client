@@ -1,6 +1,6 @@
 {
   "name": "my-tasks-client",
-  "version": "0.0.0",
+  "version": "0.2.0-SNAPSHOT",
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
@@ -20,24 +20,23 @@
     "@angular/platform-browser": "~2.1.0",
     "@angular/platform-browser-dynamic": "~2.1.0",
     "@angular/router": "~3.1.0",
-    "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.9",
-    "@types/auth0-lock": "^10.0.21",
+    "@ng-bootstrap/ng-bootstrap": "1.0.0-alpha.9",
+    "@types/auth0-lock": "^10.9.0",
     "@types/pluralize": "0.0.27",
-    "angular-in-memory-web-api": "~0.1.5",
     "angular2-fontawesome": "^0.8.0",
     "angular2-jwt": "^0.1.26",
     "angular2-moment": "^1.0.0-beta.6",
-    "auth0-lock": "^10.7.2",
-    "bootstrap": "^4.0.0-alpha.5",
+    "auth0-lock": "^10.10.2",
+    "bootstrap": "4.0.0-alpha.5",
     "change-case": "^3.0.0",
     "core-js": "^2.4.1",
     "enum-values": "^1.0.1",
     "font-awesome": "4.7.0",
-    "ng2-tag-input": "^0.4.4",
+    "ng2-tag-input": "0.4.4",
     "pluralize": "^3.1.0",
     "rxjs": "5.0.0-beta.12",
     "ts-helpers": "^1.1.1",
-    "zone.js": "^0.6.23"
+    "zone.js": "0.6.23"
   },
   "devDependencies": {
     "@types/jasmine": "^2.2.30",

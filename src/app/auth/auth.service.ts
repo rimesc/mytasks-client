@@ -2,8 +2,9 @@ import { Injectable, Inject } from '@angular/core';
 import {Router } from '@angular/router';
 import { tokenNotExpired } from 'angular2-jwt';
 import Auth0Lock from 'auth0-lock';
+import 'rxjs/add/operator/take';
 
-import { CLIENT_ID, DOMAIN, CALLBACK } from './auth-constants';
+import { CLIENT_ID, DOMAIN, CALLBACK, LOGOUT } from './auth-constants';
 
 const ID_TOKEN = 'id_token';
 const RETURN_URL = 'return_url';
@@ -20,23 +21,38 @@ export class AuthService {
     @Inject(DOMAIN) private domain: string,
     @Inject(CALLBACK) private callback: string) {
 
-    this.lock = new Auth0Lock(client, domain, { auth: { redirectUrl: callback, responseType: 'token'}});
-    this.lock.on('authenticated', result => this.onSuccess(result));
-    this.lock.on('authorization_error', this.onFailure);
-    this.lock.on('unrecoverable_error', this.onFailure);
+    this.lock = new Auth0Lock(client, domain, { auth: { redirectUrl: callback, responseType: 'token'}, closable: false });
     this.lock.on('hide', this.onCancel);
+    this.handleRedirectWithHash();
   }
 
-  public login(returnUrl: string) {
-    console.log('Will redirect to ' + returnUrl);
+  public login(returnUrl: string, isLogout = false) {
+    console.log(`Logging in. Will redirect to ${returnUrl}.`);
     this.setReturnUrl(returnUrl);
-    this.lock.show();
+    let opts: Auth0LockShowOptions = isLogout ? { flashMessage: { type: 'success', text: 'Logged out' } } : {};
+    this.lock.show(opts);
   };
 
   public logout() {
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('profile');
+    localStorage.removeItem(ID_TOKEN);
+    localStorage.removeItem(USER_PROFILE);
+    this.router.navigate([LOGOUT]);
   };
+
+  // See https://github.com/auth0/lock/pull/790#issuecomment-274267707
+  private handleRedirectWithHash() {
+    this.router.events.take(1).subscribe(event => {
+      if (/access_token/.test(event.url) || /error/.test(event.url)) {
+        console.log('Resuming authentication after redirect.');
+        this.lock.resumeAuth(window.location.hash, (error, authResult) => {
+          if (error) {
+            this.onFailure(error);
+          }
+          this.onSuccess(authResult);
+        });
+      }
+    });
+  }
 
   public authenticated(): boolean {
     const authenticated = tokenNotExpired();
@@ -96,6 +112,7 @@ export class AuthService {
 
   private redirect() {
     const url = localStorage.getItem(RETURN_URL);
+    console.log(`Redirecting to ${url}`);
     localStorage.removeItem(RETURN_URL);
     this.router.navigate([url ? url : '/']);
   }

@@ -1,19 +1,23 @@
-<div class="task-summary list-group-item-heading">
-  <a routerLink="/tasks/{{task.id}}">
-    <span [class.line-through]="task.state == 'DONE'">{{task.summary}}</span>
-  </a>
+<div class="list-group-item-heading">
+    <span style="margin-right: 0.5rem">
+      <my-state-badge [state]="task.state" mode="minimal"></my-state-badge>
+    </span>
+    <a class="task-summary" routerLink="/tasks/{{task.id}}">{{task.summary}}</a>
+    <span class="pull-right">
+      <my-priority-badge [priority]="task.priority"></my-priority-badge>
+    </span>
 </div>
 <div class="pull-left">
-  <my-state-badge [state]="task.state"></my-state-badge>
-  <div style="display: inline-block; padding-bottom: 0; margin-left: 15px">
+  <ul class="item-details">
+  <li *ngIf="task.tags.length">
     <my-tags [tags]="task.tags"></my-tags>
-  </div>
-  <div style="display: inline-block; padding-bottom: 0; margin-left: 15px">
-    <fa class="text-muted" name="clock-o"></fa>
-    <span class="text-muted modification-time">{{isModified() ? 'Last modified' : 'Created'}} {{task.updated | amTimeAgo}}</span>
-  </div>
+  </li>
+  </ul>
 </div>
 <div class="pull-right">
-  <span class="text-muted"><fa name="warning"></fa> <span class="priority">{{priorities[task.priority] | titlecase}}</span></span>
+  <span class="text-muted modification-time"><small>
+    <span *ngIf="!isModified()">Created {{task.created | amTimeAgo}}</span>
+    <span *ngIf="isModified()">Updated {{task.updated | amTimeAgo}}</span>
+  </small></span>
 </div>
 <div style="clear: both"></div>

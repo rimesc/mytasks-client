@@ -16,14 +16,13 @@
 			</button>
 		</div>
 	</div>
-	<my-state-badge [state]="task.state"></my-state-badge>
+	<ul class="badges">
+		<li><my-state-badge [state]="task.state"></my-state-badge>
+		<li><my-priority-badge [priority]="task.priority"></my-priority-badge>
+	</ul>
 	<h1 class="page-header">{{task.summary}}</h1>
 	<div>
-		<span class="text-muted small-caps"><fa name="warning"></fa> {{priorities[task.priority] | titlecase}} priority</span>
-		<span *ngIf="task.tags && task.tags.length > 0">
-		<span class="divider">|</span>
-		<my-tags [tags]="task.tags"></my-tags>
-		</span>
+		<my-tags *ngIf="task.tags && task.tags.length > 0" [tags]="task.tags"></my-tags>
 	</div>
 	<div class="readme">
 		<h2><span>Notes</span></h2>
