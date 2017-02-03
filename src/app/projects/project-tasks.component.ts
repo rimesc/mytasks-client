@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Error } from '../api/error';
 import { Message } from '../shared/message';
 import { Project } from '../api/project';
 import { Task } from '../api/task';
 import { TaskForm } from '../api/task-form';
-import { ProjectService } from '../services/project.service';
 import { TaskService } from '../services/task.service';
-import { TaskFilter, DEFAULT, OPEN, CLOSED, ALL } from '../shared/task-filter';
+import { TaskFilters, DEFAULT_FILTER } from '../shared/task-filter';
 
 @Component({
   selector: 'my-project-tasks',
@@ -20,11 +19,13 @@ export class ProjectTasksComponent implements OnInit {
   project: Project;
   tasks: Task[];
   messages: Message[] = [];
-  filters: TaskFilter[] = [ OPEN, CLOSED, ALL ];
-  activeFilter: TaskFilter = DEFAULT;
 
-  constructor(private projectService: ProjectService,
-              private taskService: TaskService,
+  filters = TaskFilters;
+  filterKeys = Object.getOwnPropertyNames(TaskFilters);
+  activeFilter: string;
+
+  constructor(private taskService: TaskService,
+              private router: Router,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -35,11 +36,20 @@ export class ProjectTasksComponent implements OnInit {
       },
       (error: Error) => this.messages.push({ code: error.code, detail: error.message, severity: 'danger'})
     );
+    this.route.queryParams.map(params => params['filter'] || DEFAULT_FILTER).forEach(filter => this.setActiveFilter(filter));
   }
 
-  activateFilter(filter: TaskFilter): void {
+  setActiveFilter(filter: string): void {
+    if (!!this.activeFilter) {
+      // the resolver will take care of the initial load
+      this.taskService.getFilteredTasks(this.project.id, TaskFilters[filter].states).subscribe(tasks => this.tasks = tasks);
+    }
     this.activeFilter = filter;
-    this.taskService.getFilteredTasks(this.project.id, this.activeFilter.states).subscribe(tasks => this.tasks = tasks);
+  }
+
+  applyFilter(filter: string): void {
+    let queryParams = filter === DEFAULT_FILTER ? {} : {filter: filter};
+    this.router.navigate(['.'], {relativeTo: this.route, queryParams: queryParams});
   }
 
   createTask(task: TaskForm): void {

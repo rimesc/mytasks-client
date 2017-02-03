@@ -2,8 +2,8 @@
 <div *ngIf="project">
   <div class="btn-toolbar">
     <div class="btn-group" data-toggle="buttons">
-      <label *ngFor="let filter of filters" class="btn btn-outline-primary" [class.active]="filter === activeFilter">
-        <input type="radio" name="options" id="{{filter.id}}" autocomplete="off" [checked]="filter === activeFilter" (click)="activateFilter(filter)">{{filter.label}}
+      <label *ngFor="let key of filterKeys" class="btn btn-outline-primary" [class.active]="key === activeFilter">
+        <input type="radio" name="options" id="{{key}}" autocomplete="off" [checked]="key === activeFilter" (click)="applyFilter(key)">{{filters[key].label}}
       </label>
     </div>
     <div class="navbar-form  pull-right">
