@@ -7,24 +7,26 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Injectable()
 export class ActivatedRouteStub {
 
-  // ActivatedRoute.params is Observable
-  private subject = new BehaviorSubject(this.testParams);
-  params = this.subject.asObservable();
+  private paramsSubject = new BehaviorSubject({});
+  private dataSubject = new BehaviorSubject({});
 
-  // Test parameters
-  private _testParams: {};
-  get testParams() {
-    return this._testParams;
-  }
+  params = this.paramsSubject.asObservable();
+  data = this.dataSubject.asObservable();
 
   set testParams(params: {}) {
-    this._testParams = params;
-    this.subject.next(params);
+    this.paramsSubject.next(params);
   }
 
-  // ActivatedRoute.snapshot.params
+  set testData(data: {}) {
+    this.dataSubject.next(data);
+  }
+
+  set testError(error: {}) {
+    this.dataSubject.error(error);
+  }
+
   get snapshot() {
-    return { params: this.testParams };
+    return { params: this.paramsSubject.getValue(), data: this.dataSubject.getValue() };
   }
 }
 

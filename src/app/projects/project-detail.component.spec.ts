@@ -19,11 +19,12 @@ import { ModalServiceStub } from '../testing/modal-stubs';
 describe('ProjectDetailComponent', () => {
   let project: Project = {
     id: 1, name: 'My sample project', description: 'This is my sample project.',
+    tasks: { total: 3, open: 2, closed: 1},
     notes: { raw: 'Lorem *ipsum* dolor sit amet.', html: '<p>Lorem <em>ipsum</em> dolor sit amet.</p>' }
   };
 
   let routerStub = new RouterStub();
-  let activatedRouteStub = new ActivatedRouteStub();
+  let activatedRouteStub;
   let modalServiceStub;
   let fakeProjectService;
   let fakeTaskService;
@@ -33,6 +34,7 @@ describe('ProjectDetailComponent', () => {
 
   beforeEach(() => {
     modalServiceStub = new ModalServiceStub();
+    activatedRouteStub = new ActivatedRouteStub();
     fakeProjectService = {
       getProject: jasmine.createSpy('getProject').and.callFake(
         (id: number) => Promise.resolve(true).then(() => Object.assign({}, project))
@@ -66,14 +68,12 @@ describe('ProjectDetailComponent', () => {
   describe('when navigating to an existing project', () => {
 
     beforeEach(async(() => {
-      activatedRouteStub.testParams = { id: 1 };
+      activatedRouteStub.testData = { project: Object.assign({}, project) };
       TestBed.compileComponents().then(createComponent);
     }));
 
     it('should load the project', () => {
       expect(page.project).toEqual(project);
-      expect(page.getProjectSpy.calls.count()).toEqual(1);
-      expect(page.getProjectSpy.calls.mostRecent().args).toEqual([1]);
     });
 
     it('should have no error messages', () => {
@@ -97,10 +97,7 @@ describe('ProjectDetailComponent', () => {
   describe('when navigating to a non-existent project', () => {
 
     beforeEach(async(() => {
-      activatedRouteStub.testParams = { id: 1 };
-      fakeProjectService.getProject.and.callFake(
-        (id: number) => Promise.reject({ code: 'Not Found', message: 'The requested project could not be found.' })
-      );
+      activatedRouteStub.testError = { code: 'Not Found', message: 'The requested project could not be found.' };
       TestBed.compileComponents().then(createComponent);
     }));
 
@@ -121,30 +118,10 @@ describe('ProjectDetailComponent', () => {
 
   });
 
-  describe('when navigating to a different project', () => {
-
-    beforeEach(async(() => {
-      activatedRouteStub.testParams = { id: 1 };
-      TestBed.compileComponents().then(createComponent);
-    }));
-
-    it('should load the correct project', fakeAsync( () => {
-      activatedRouteStub.testParams = { id: 2 };
-      tick();
-      expect(page.getProjectSpy.calls.count()).toEqual(2);
-      expect(page.getProjectSpy.calls.mostRecent().args).toEqual([2]);
-      activatedRouteStub.testParams = { id: 3 };
-      tick();
-      expect(page.getProjectSpy.calls.count()).toEqual(3);
-      expect(page.getProjectSpy.calls.mostRecent().args).toEqual([3]);
-    }));
-
-  });
-
   describe('when the edit button is clicked', () => {
 
     beforeEach(async(() => {
-      activatedRouteStub.testParams = { id: 1 };
+      activatedRouteStub.testData = { project: Object.assign({}, project) };
       TestBed.compileComponents().then(createComponent);
     }));
 
@@ -176,7 +153,12 @@ describe('ProjectDetailComponent', () => {
 
     describe('when the dialog is dismissed', () => {
 
+      beforeEach(async(() => {
+        page.modalService.userInput = undefined;
+      }));
+
       it('should do nothing', fakeAsync(() => {
+        expect(page.project.name).toEqual('My sample project');
         page.toolbar.triggerEventHandler('edit', null);
         tick();
         expect(page.updateProjectSpy.calls.count()).toEqual(0);
@@ -191,7 +173,7 @@ describe('ProjectDetailComponent', () => {
   describe('when the delete button is clicked', () => {
 
     beforeEach(async(() => {
-      activatedRouteStub.testParams = { id: 1 };
+      activatedRouteStub.testData = { project: Object.assign({}, project) };
       TestBed.compileComponents().then(createComponent);
     }));
 
@@ -234,20 +216,21 @@ describe('ProjectDetailComponent', () => {
     let userInput: TaskForm = { summary: 'My new task', priority: Priority.HIGH, tags: ['foo', 'bar']};
 
     beforeEach(async(() => {
-      activatedRouteStub.testParams = { id: 1 };
+      activatedRouteStub.testData = { project: Object.assign({}, project) };
       TestBed.compileComponents().then(createComponent);
     }));
 
     // in this case, the toolbar is responsible for creating the modal dialog and passing
     // back the user input
-    it('should create a new task and reload the project', fakeAsync(() => {
-      expect(page.getProjectSpy.calls.count()).toEqual(1);
+    it('should create a new task and update the project', fakeAsync(() => {
+      expect(page.project.tasks.open).toEqual(2);
+      expect(page.project.tasks.total).toEqual(3);
       page.toolbar.triggerEventHandler('newTask', userInput);
       tick();
       expect(page.createTaskSpy.calls.count()).toEqual(1);
       expect(page.createTaskSpy.calls.mostRecent().args).toEqual([1, userInput]);
-      expect(page.getProjectSpy.calls.count()).toEqual(2);
-      expect(page.getProjectSpy.calls.mostRecent().args).toEqual([1]);
+      expect(page.project.tasks.open).toEqual(3);
+      expect(page.project.tasks.total).toEqual(4);
     }));
 
   });

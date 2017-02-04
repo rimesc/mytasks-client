@@ -84,7 +84,7 @@ describe('TaskService', () => {
           "href" : "/api/tasks/2"
         }
       ]`;
-      service.getTasks(1).then(tasks => {
+      service.getTasks(1).toPromise().then(tasks => {
         expect(actualRequest.url).toEqual('http://www.example.com/api/tasks/?project=1');
         expect(actualRequest.method).toEqual(RequestMethod.Get);
         expect(tasks.length).toEqual(2);
