@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TaskComponent } from './task.component';
 import { TaskListComponent } from './task-list.component';
 import { TaskDetailComponent } from './task-detail.component';
+import { TaskResolver } from './task-resolver.service';
 
 const routes: Routes = [
   {
@@ -11,19 +12,29 @@ const routes: Routes = [
     component: TaskListComponent
   },
   {
-    path: ':id',
+    path: ':taskId',
     component: TaskComponent,
     children: [
       {
         path: '',
-        component: TaskDetailComponent
+        component: TaskDetailComponent,
+        resolve: {
+          task: TaskResolver
+        }
       }
     ]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forChild(routes)
+  ],
+  providers: [
+    TaskResolver
+  ],
+  exports: [
+    RouterModule
+  ]
 })
 export class TasksRoutingModule {}

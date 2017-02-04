@@ -30,16 +30,12 @@ export class ProjectDetailComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getProject();
-  }
-
-  getProject(): void {
-    this.route.params.forEach((params: Params) => {
-      let id = +params['id'];
-      this.projectService.getProject(id)
-        .then(project => this.project = project)
-        .catch((error: Error) => this.messages.push({ code: error.code, detail: error.message, severity: 'danger'}));
-    });
+    this.route.data.subscribe(
+      (data: { project: Project }) => {
+        this.project = data.project;
+      },
+      (error: Error) => this.messages.push({ code: error.code, detail: error.message, severity: 'danger'})
+    );
   }
 
   updateProject(form: ProjectForm): void {
@@ -66,7 +62,10 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   createTask(task: TaskForm): void {
-    this.taskService.createTask(this.project.id, task).then(() => this.getProject());
+    this.taskService.createTask(this.project.id, task).then(() => {
+      this.project.tasks.total += 1;
+      this.project.tasks.open += 1;
+    });
   }
 
 }

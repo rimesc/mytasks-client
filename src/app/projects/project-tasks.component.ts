@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
+import { Error } from '../api/error';
+import { Message } from '../shared/message';
 import { Project } from '../api/project';
 import { Task } from '../api/task';
 import { TaskForm } from '../api/task-form';
-import { State } from '../api/state';
-import { ProjectService } from '../services/project.service';
 import { TaskService } from '../services/task.service';
+import { TaskFilters, DEFAULT_FILTER } from '../shared/task-filter';
 
 @Component({
   selector: 'my-project-tasks',
@@ -17,53 +18,43 @@ import { TaskService } from '../services/task.service';
 export class ProjectTasksComponent implements OnInit {
   project: Project;
   tasks: Task[];
-  filters: Filter[] = [
-    {id: 'OPEN', label: 'Open tasks', states: [State.TO_DO, State.IN_PROGRESS, State.ON_HOLD]},
-    {id: 'CLOSED', label: 'Closed tasks', states: [State.DONE]},
-    {id: 'ALL', label: 'All tasks', states: []}
-  ];
-  activeFilter: Filter = this.filters[0];
+  messages: Message[] = [];
 
-  constructor(private projectService: ProjectService,
-              private taskService: TaskService,
+  filters = TaskFilters;
+  filterKeys = Object.getOwnPropertyNames(TaskFilters);
+  activeFilter: string;
+
+  constructor(private taskService: TaskService,
+              private router: Router,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getProject();
-    this.getTasks();
+    this.route.data.subscribe(
+      (data: { project: Project, tasks: Task[] }) => {
+        this.project = data.project;
+        this.tasks = data.tasks;
+      },
+      (error: Error) => this.messages.push({ code: error.code, detail: error.message, severity: 'danger'})
+    );
+    this.route.queryParams.map(params => params['filter'] || DEFAULT_FILTER).forEach(filter => this.setActiveFilter(filter));
   }
 
-  getProject(): void {
-    this.route.parent.params.forEach((params: Params) => {
-      let id = +params['id'];
-      this.projectService.getProject(id).then(project => this.project = project);
-    });
-  }
-
-  getTasks(): void {
-    this.route.parent.params.forEach((params: Params) => {
-      let id = +params['id'];
-      if (this.activeFilter.states.length > 0) {
-        this.taskService.getFilteredTasks(id, this.activeFilter.states).then(tasks => this.tasks = tasks);
-      } else {
-        this.taskService.getTasks(id).then(tasks => this.tasks = tasks);
-      }
-    });
-  }
-
-  activateFilter(filter: Filter): void {
+  setActiveFilter(filter: string): void {
+    if (!!this.activeFilter) {
+      // the resolver will take care of the initial load
+      this.taskService.getFilteredTasks(this.project.id, TaskFilters[filter].states).subscribe(tasks => this.tasks = tasks);
+    }
     this.activeFilter = filter;
-    this.getTasks();
+  }
+
+  applyFilter(filter: string): void {
+    let queryParams = filter === DEFAULT_FILTER ? {} : {filter: filter};
+    this.router.navigate(['.'], {relativeTo: this.route, queryParams: queryParams});
   }
 
   createTask(task: TaskForm): void {
-    this.taskService.createTask(this.project.id, task).then(() => this.getTasks());
+    this.taskService.createTask(this.project.id, task).then(this.tasks.push);
   }
 
 }
 
-class Filter {
-  id: string;
-  label: string;
-  states: State[];
-}

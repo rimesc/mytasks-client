@@ -1,6 +1,7 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 
@@ -21,7 +22,10 @@ describe('ProjectHeaderComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ Angular2FontawesomeModule ],
+      imports: [
+        Angular2FontawesomeModule,
+        RouterTestingModule.withRoutes([])
+      ],
       declarations: [ ProjectHeaderComponent, PluralisePipe ],
     });
   });
