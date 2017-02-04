@@ -13,7 +13,6 @@ import { Task } from '../api/task';
 import { TaskForm } from '../api/task-form';
 import { Priority } from '../api/priority';
 import { State } from '../api/state';
-import { ProjectService } from '../services/project.service';
 import { TaskService } from '../services/task.service';
 
 // TODO move these onto the API
@@ -34,8 +33,7 @@ export class TaskDetailComponent implements OnInit {
   priorities = Priority;
   messages: Message[] = [];
 
-  constructor(private projectService: ProjectService,
-              private taskService: TaskService,
+  constructor(private taskService: TaskService,
               private modalService: NgbModal,
               private router: Router,
               private route: ActivatedRoute) { }
@@ -45,14 +43,12 @@ export class TaskDetailComponent implements OnInit {
   }
 
   getTask(): void {
-    this.route.params.forEach((params: Params) => {
-      let id = +params['id'];
-      this.taskService.getTask(id)
-        .then(task => {
-          this.task = task;
-        })
-        .catch((error: Error) => this.messages.push({ code: error.code, detail: error.message, severity: 'danger'}));
-    });
+    this.route.data.subscribe(
+      (data: { task: Task }) => {
+        this.task = data.task;
+      },
+      (error: Error) => this.messages.push({ code: error.code, detail: error.message, severity: 'danger'})
+    );
   }
 
   updateTask(form: TaskForm): void {

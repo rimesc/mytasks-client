@@ -31,10 +31,9 @@ export class TaskService extends ServiceUtil {
                .catch(this.handleError);
   }
 
-  getTask(id: number): Promise<Task> {
+  getTask(id: number): Observable<Task> {
     return this.http.get(this.url(id))
-               .toPromise()
-               .then(response => JSON.parse(response.text(), revive))
+               .map(response => JSON.parse(response.text(), revive))
                .catch(this.handleError);
   }
 
