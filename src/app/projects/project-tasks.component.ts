@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Error } from '../api/error';
 import { Message } from '../shared/message';
 import { Project } from '../api/project';
-import { Task } from '../api/task';
+import { Task, compareByLastModified } from '../api/task';
 import { TaskForm } from '../api/task-form';
 import { TaskService } from '../services/task.service';
 import { TaskFilters, DEFAULT_FILTER } from '../shared/task-filter';
@@ -17,7 +17,7 @@ import { TaskFilters, DEFAULT_FILTER } from '../shared/task-filter';
 })
 export class ProjectTasksComponent implements OnInit {
   project: Project;
-  tasks: Task[];
+  _tasks: Task[];
   messages: Message[] = [];
 
   filters = TaskFilters;
@@ -39,6 +39,14 @@ export class ProjectTasksComponent implements OnInit {
     this.route.queryParams.map(params => params['filter'] || DEFAULT_FILTER).forEach(filter => this.setActiveFilter(filter));
   }
 
+  set tasks(tasks: Task[]) {
+    this._tasks = tasks.sort(compareByLastModified);
+  }
+
+  get tasks() {
+    return this._tasks;
+  }
+
   setActiveFilter(filter: string): void {
     if (!!this.activeFilter) {
       // the resolver will take care of the initial load
@@ -53,7 +61,7 @@ export class ProjectTasksComponent implements OnInit {
   }
 
   createTask(task: TaskForm): void {
-    this.taskService.createTask(this.project.id, task).then(this.tasks.push);
+    this.taskService.createTask(this.project.id, task).then(this._tasks.push);
   }
 
 }
