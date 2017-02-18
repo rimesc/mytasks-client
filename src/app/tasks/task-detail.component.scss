@@ -1,4 +1,6 @@
+@import '../../../node_modules/bootstrap/scss/_mixins.scss';
 @import '../../../node_modules/bootstrap/scss/_variables.scss';
+@import '../../../node_modules/bootstrap/scss/utilities/_borders.scss';
 @import '../../../node_modules/bootstrap/scss/utilities/_spacing.scss';
 
 div.readme {
@@ -23,9 +25,9 @@ h2 span {
 $img-size: 2.5rem !default;
 
 .project-header img {
+	@extend .rounded-circle;
 	width: $img-size;
 	height: $img-size;
-	border-radius: 50%;
 	border: $border-width solid $gray-light;
 	background-color: $body-bg;
 }
