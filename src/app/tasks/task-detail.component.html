@@ -1,17 +1,20 @@
 <my-messages [messages]="messages"></my-messages>
 <div *ngIf="task">
 	<div class="project-header">
+		<span class="pull-left">
+		  <img src="assets/scheduled_tasks.png"/>
+		</span>
 		<a routerLink="/projects/{{task.project.id}}">{{task.project.name}}</a>
 	</div>
 	<div class="btn-toolbar pull-right">
 		<div class="btn-group" role="group">
-			<button type="submit" class="btn btn-secondary" *ngFor="let transition of availableTransitions()" (click)="performTransition(transition)">{{transition.label}}</button>
+			<button type="submit" class="btn btn-outline-primary" *ngFor="let transition of availableTransitions()" (click)="performTransition(transition)">{{transition.label}}</button>
 		</div>
 		<div class="btn-group" role="group">
-			<button class="btn btn-secondary" (click)="editTask()">
+			<button class="btn btn-outline-primary" (click)="editTask()">
 				<fa name="edit"></fa>
 			</button>
-			<button class="btn btn-secondary" (click)="deleteTask()">
+			<button class="btn btn-outline-primary" (click)="deleteTask()">
 				<fa name="trash"></fa>
 			</button>
 		</div>

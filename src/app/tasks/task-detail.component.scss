@@ -1,4 +1,5 @@
 @import '../../../node_modules/bootstrap/scss/_variables.scss';
+@import '../../../node_modules/bootstrap/scss/utilities/_spacing.scss';
 
 div.readme {
 	margin-top: 50px;
@@ -10,7 +11,7 @@ h2 {
 	font-weight: 400;
 	text-transform: uppercase;
 	color: $gray-light;
-	border-bottom: 1px solid $gray-lighter;
+	border-bottom: $border-width solid $gray-lighter;
 	line-height: 0.1em;
 	margin: 10px 0 20px;
 } 
@@ -18,6 +19,25 @@ h2 {
 h2 span {
 	background: $body-bg;
 	padding-right: 7px;
+}
+$img-size: 2.5rem !default;
+
+.project-header img {
+	width: $img-size;
+	height: $img-size;
+	border-radius: 50%;
+	border: $border-width solid $gray-light;
+	background-color: $body-bg;
+}
+
+.project-header span {
+	background-color: white;
+	margin: 0.1rem $spacer-x*0.5 0.1rem 0;
+}
+
+.project-header a {
+	padding-top: 0.5rem;
+	display: inline-block;
 }
 
 span.small-caps {
@@ -31,7 +51,8 @@ span.divider {
 }
 
 .project-header {
-	margin-bottom: $spacer-y;
+	@extend .mb-2;
+	border-bottom: 1px solid $gray-lighter;
 }
 
 ul.badges {
