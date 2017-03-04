@@ -8,17 +8,17 @@ const routes: Routes = [
   {
     path: 'dashboard',
     canActivate: [AuthGuard],
-    loadChildren: 'app/dashboard/dashboard.module#DashboardModule'
+    loadChildren: './dashboard/dashboard.module#DashboardModule'
   },
   {
     path: 'projects',
     canActivate: [AuthGuard],
-    loadChildren: 'app/projects/projects.module#ProjectsModule'
+    loadChildren: './projects/projects.module#ProjectsModule'
   },
   {
     path: 'tasks',
     canActivate: [AuthGuard],
-    loadChildren: 'app/tasks/tasks.module#TasksModule'
+    loadChildren: './tasks/tasks.module#TasksModule'
   },
   {
     path: 'logout',

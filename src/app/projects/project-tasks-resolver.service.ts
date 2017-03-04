@@ -9,7 +9,7 @@ import { TaskFilters, DEFAULT_FILTER } from '../shared/task-filter';
 import { routeParam } from '../util/routing-util';
 
 @Injectable()
-export class ProjectTasksResolver implements Resolve<Task> {
+export class ProjectTasksResolver implements Resolve<Task[]> {
 
   constructor(private taskService: TaskService, private router: Router) {}
 
