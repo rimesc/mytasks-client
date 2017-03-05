@@ -66,7 +66,7 @@ export class TaskDetailComponent implements OnInit {
   editTask(): void {
     let ref = this.modalService.open(EditTaskModalComponent);
     (ref.componentInstance as EditTaskModalComponent).task = {
-      summary: this.task.summary, priority: this.task.priority, tags: this.task.tags
+      summary: this.task.summary, priority: this.task.priority, tags: this.task.tags.slice(0)
     };
     ref.result.then((task: TaskForm) => {
       this.task.summary = task.summary;
