@@ -22,6 +22,8 @@ export class TaskFormComponent {
 
   priorities = Priority;
 
+  allTags = []; // TODO load tags from API
+
   @Output()
   submit = new EventEmitter<TaskForm>();
 
@@ -32,11 +34,4 @@ export class TaskFormComponent {
     this.submit.emit(this.task);
   }
 
-  addTag(tag: Tag) {
-    this.task.tags.push(tag.value);
-  }
-
-  removeTag(tag: Tag) {
-    this.task.tags.splice(this.task.tags.indexOf(tag.value));
-  }
 }

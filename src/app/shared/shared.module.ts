@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { MomentModule } from 'angular2-moment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TagInputModule } from 'ng2-tag-input';
+import { RlTagInputModule } from 'angular2-tag-input';
 
 // feature modules
 import { MarkdownModule } from '../markdown/markdown.module';
@@ -37,7 +37,7 @@ import { PluralisePipe } from './pluralise.pipe';
     MarkdownModule,
     MomentModule,
     NgbModule,
-    TagInputModule,
+    RlTagInputModule,
     // feature modules
     MarkdownModule
   ],

@@ -17,7 +17,7 @@
 		<div class="form-group">
 			<label for="tags" class="control-label">Tags</label>
 			<div class="form-control tag-input">
-				<tag-input [ngModel]="task.tags" (onAdd)="addTag($event)" (onRemove)="removeTag($event)" name="tags" placeholder="Add another tag..." secondaryPlaceholder="Add a tag..." theme="minimal"></tag-input>
+				<rl-tag-input [(ngModel)]="task.tags" placeholder="Add a tag..." name="tags" [addOnBlur]="false" [autocomplete]="true" [autocompleteItems]="allTags" [autocompleteMustMatch]="false"></rl-tag-input>
 			</div>
 		</div>
 		<div class="form-group">
