@@ -202,8 +202,8 @@ class ListItem {
 
   constructor(public debugElement: DebugElement) {
     this.headingText = (debugElement.query(By.css('h5')).nativeElement as Element).textContent.trim();
-    this.contentText = (debugElement.query(By.css('p.list-group-item-text')).nativeElement as Element).textContent.trim();
-    this.badgeText = (debugElement.query(By.css('span.tag-pill')).nativeElement as Element).textContent.trim();
+    this.contentText = (debugElement.query(By.css('li>p')).nativeElement as Element).textContent.trim();
+    this.badgeText = (debugElement.query(By.css('span.badge-pill')).nativeElement as Element).textContent.trim();
     this.link = debugElement.query(By.css('h5 a'));
   }
 

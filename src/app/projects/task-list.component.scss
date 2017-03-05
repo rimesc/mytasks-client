@@ -1,0 +1,27 @@
+@import '../../../node_modules/font-awesome/scss/font-awesome.scss';
+
+ul.inline-list {
+	list-style: none;
+	padding: 0px;
+}
+
+ul.inline-list > li {
+	display: inline-block;
+	padding: 0px 10px;
+}
+
+ul.inline-list > li:FIRST-CHILD {
+	padding-left: 0px;
+}
+
+.line-through {
+	text-decoration: line-through;
+}
+
+ul.tags {
+	@extend ul.inline-list;
+}
+
+ul.item-details {
+	@extend ul.inline-list;
+}

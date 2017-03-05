@@ -17,7 +17,7 @@ import { ProjectHeaderComponent } from './project-header.component';
 import { ProjectListComponent } from './project-list.component';
 import { ProjectTasksComponent } from './project-tasks.component';
 import { ProjectToolbarComponent } from './project-toolbar.component';
-import { TaskItemComponent } from './task-item.component';
+import { TaskListComponent } from './task-list.component';
 
 @NgModule({
   imports: [
@@ -39,7 +39,7 @@ import { TaskItemComponent } from './task-item.component';
     ProjectListComponent,
     ProjectToolbarComponent,
     ProjectTasksComponent,
-    TaskItemComponent
+    TaskListComponent
   ],
   entryComponents: [
     // modal dialogs

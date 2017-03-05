@@ -1,24 +1,17 @@
 <my-messages [messages]="messages"></my-messages>
 <div *ngIf="project">
   <div class="btn-toolbar">
-    <div class="btn-group" data-toggle="buttons">
+    <div class="btn-group mr-auto" data-toggle="buttons">
       <label *ngFor="let key of filterKeys" class="btn btn-outline-primary" [class.active]="key === activeFilter">
         <input type="radio" name="options" id="{{key}}" autocomplete="off" [checked]="key === activeFilter" (click)="applyFilter(key)">{{filters[key].label}}
       </label>
     </div>
-    <div class="navbar-form  pull-right">
-			<my-new-task-button (submit)="createTask($event)"></my-new-task-button>
+    <div class="navbar-form ml-auto">
+      <my-new-task-button (submit)="createTask($event)"></my-new-task-button>
     </div>
   </div>
 
-  <div style="clear: both"></div>
+  <div class="clearfix"></div>
 
-  <ul class="list-group task-list">
-    <li *ngFor="let task of tasks" class="list-group-item">
-      <my-task-item [task]="task"></my-task-item>
-    </li>
-    <li *ngIf="tasks && tasks.length === 0" class="list-group-item list-group-placeholder">
-      No tasks to show.
-    </li>
-  </ul>
+  <my-task-list [tasks]="tasks"></my-task-list>
 </div>

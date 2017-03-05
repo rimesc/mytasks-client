@@ -44,7 +44,7 @@ export class StateBadgeComponent implements OnChanges {
         this.classes = ['text-' + (colour || 'muted')];
         break;
       case 'normal':
-        this.classes = ['tag', 'tag-' + (colour || 'default')];
+        this.classes = ['badge', 'badge-' + (colour || 'default')];
         break;
     }
   }
