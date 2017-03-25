@@ -3,10 +3,14 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `angular-cli.json`.
 
+// The file 'secret.ts' contains encrypted auth0 credentials. To use your own credentials,
+// delete this import and enter your credentials below.
+import { secret } from './secret';
+
 export const environment = {
   production: false,
-  apiBase: 'http://localhost:8080/api/',
-  authClient: '_fill_in_client_id_here_',
-  authDomain: '_fill_in_auth_domain_here_',
-  authCallback: 'http://localhost:4200'
+  authClient: secret.authClient,
+  authDomain: secret.authDomain,
+  authCallback: 'http://localhost:4200/login',
+  apiBase: 'http://localhost:8080/api/'
 };

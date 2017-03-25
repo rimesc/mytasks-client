@@ -1,7 +1,11 @@
+// The file 'secret.ts' contains encrypted auth0 credentials. To use your own credentials,
+// delete this import and enter your credentials below.
+import { secret } from './secret';
+
 export const environment = {
   production: true,
-  apiBase: '_fill_in_api_url_here_',
-  authClient: '_fill_in_client_id_here_',
-  authDomain: '_fill_in_auth_domain_here_',
-  authCallback: '_fill_in_callback_url_here_'
+  authClient: secret.authClient,
+  authDomain: secret.authDomain,
+  authCallback: secret.authCallback,
+  apiBase: secret.apiBase
 };
