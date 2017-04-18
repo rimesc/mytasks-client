@@ -4,24 +4,16 @@
 @import '../../../node_modules/bootstrap/scss/utilities/_spacing.scss';
 
 div.readme {
-	margin-top: 50px;
+	margin-top: 1.5rem;
 }
 
 h2 {
 	width: 100%;
 	font-size: $font-size-h6;
 	font-weight: 400;
-	text-transform: uppercase;
 	color: $gray-light;
-	border-bottom: $border-width solid $gray-lighter;
-	line-height: 0.1em;
-	margin: 10px 0 20px;
 } 
 
-h2 span {
-	background: $body-bg;
-	padding-right: 7px;
-}
 $img-size: 2.5rem !default;
 
 .project-header img {
@@ -59,15 +51,12 @@ span.divider {
 
 ul.badges {
 	list-style: none;
-	padding: 0px;
+	padding: 0;
 	display: inline-block;
+	margin: 0rem;
 }
 
 ul.badges > li {
 	display: inline-block;
-	padding: 0px 10px;
-}
-
-ul.badges > li:FIRST-CHILD {
-	padding-left: 0px;
+	padding-right: 0.75rem;
 }

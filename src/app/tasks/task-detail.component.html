@@ -7,29 +7,31 @@
 		<a routerLink="/projects/{{task.project.id}}">{{task.project.name}}</a>
 		<div class="clearfix"></div>
 	</div>
-	<div class="btn-toolbar pull-right">
-		<div class="btn-group mr-2" role="group">
-			<button type="submit" class="btn btn-outline-primary" *ngFor="let transition of availableTransitions()" (click)="performTransition(transition)">{{transition.label}}</button>
-		</div>
-		<div class="btn-group" role="group">
-			<button class="btn btn-outline-primary" (click)="editTask()">
-				<fa name="edit"></fa>
-			</button>
-			<button class="btn btn-outline-primary" (click)="deleteTask()">
-				<fa name="trash"></fa>
-			</button>
-		</div>
-	</div>
-	<ul class="badges">
-		<li><my-state-badge [state]="task.state"></my-state-badge>
-		<li><my-priority-badge [priority]="task.priority"></my-priority-badge>
-	</ul>
 	<h1 class="page-header">{{task.summary}}</h1>
-	<div>
-		<my-tags *ngIf="task.tags && task.tags.length > 0" [tags]="task.tags"></my-tags>
+	<div class="row">
+		<div class="col d-flex align-items-start my-2">
+			<my-task-badges [task]="task"></my-task-badges>
+		</div>
+		<div class="col-12 col-md-auto d-flex align-items-start my-2">
+			<div class="btn-toolbar">
+				<div class="btn-group mr-2" role="group">
+					<button type="submit" class="btn btn-sm btn-primary" *ngFor="let transition of availableTransitions()" (click)="performTransition(transition)">{{transition.label}}</button>
+				</div>
+				<div class="btn-group" role="group">
+					<button class="btn btn-sm btn-outline-primary" (click)="editTask()">
+						<fa name="edit"></fa> Edit
+					</button>
+					<button class="btn btn-sm btn-outline-primary" (click)="deleteTask()">
+						<fa name="trash"></fa> Delete
+					</button>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="readme">
-		<h2><span>Notes</span></h2>
-		<my-markdown-view [notes]="task.notes" (update)="updateNotes($event)"></my-markdown-view>
+	<div class="readme card">
+		<h2 class="card-header">Description</h2>
+		<div class="card-block">
+			<my-markdown-view [notes]="task.notes" (update)="updateNotes($event)"></my-markdown-view>
+		</div>
 	</div>
 </div>

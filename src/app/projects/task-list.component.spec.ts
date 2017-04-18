@@ -12,9 +12,11 @@ import { Priority } from '../api/priority';
 import { State } from '../api/state';
 import { Task } from '../api/task';
 import { TaskListComponent } from './task-list.component';
-import { TagsComponent } from '../shared/tags.component';
+import { TaskBadgesComponent } from '../shared/task-badges.component';
 import { PriorityBadgeComponent } from '../shared/priority-badge.component';
 import { StateBadgeComponent } from '../shared/state-badge.component';
+import { TagComponent } from '../shared/tag.component';
+import { BadgeComponent } from '../shared/badge.component';
 import { TitleCasePipe } from '../shared/title-case.pipe';
 
 describe('TaskListComponent', () => {
@@ -42,9 +44,11 @@ describe('TaskListComponent', () => {
       imports: [ Angular2FontawesomeModule, MomentModule ],
       declarations: [
         TaskListComponent,
-        TagsComponent,
+        TaskBadgesComponent,
         PriorityBadgeComponent,
         StateBadgeComponent,
+        TagComponent,
+        BadgeComponent,
         TitleCasePipe,
         RouterLinkStubDirective
       ],

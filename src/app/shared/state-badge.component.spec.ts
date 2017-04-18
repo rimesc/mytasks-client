@@ -8,6 +8,7 @@ import { Angular2FontawesomeModule } from 'angular2-fontawesome';
 import { State } from '../api/state';
 import { TitleCasePipe } from './title-case.pipe';
 import { StateBadgeComponent } from './state-badge.component';
+import { BadgeComponent } from "./badge.component";
 
 // Setting the properties via a host component is necessary to trigger a call to ngOnChanges.
 @Component({
@@ -27,7 +28,7 @@ describe('StateBadgeComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ Angular2FontawesomeModule ],
-      declarations: [ HostComponent, StateBadgeComponent, TitleCasePipe ],
+      declarations: [ HostComponent, StateBadgeComponent, BadgeComponent, TitleCasePipe ],
     });
   });
 
@@ -38,109 +39,49 @@ describe('StateBadgeComponent', () => {
     });
   }));
 
-  describe('in normal mode', () => {
-
-    it('should display the TO_DO state', () => {
-      component.state = State.TO_DO;
-      fixture.detectChanges();
-      let span: Element = fixture.debugElement.query(By.css('.badge')).nativeElement;
-      expect(span.classList.length).toEqual(2);
-      expect(span.classList[1]).toEqual('badge-primary');
-      expect(span.textContent.trim()).toEqual('To Do');
-      let icon: Element = fixture.debugElement.query(By.css('.fa')).nativeElement;
-      expect(icon.classList[1]).toEqual('fa-clock-o');
-      expect(icon.classList.length).toEqual(2);
-    });
-
-    it('should display the IN_PROGRESS state', () => {
-      component.state = State.IN_PROGRESS;
-      fixture.detectChanges();
-      let span: Element = fixture.debugElement.query(By.css('.badge')).nativeElement;
-      expect(span.classList[1]).toEqual('badge-success');
-      expect(span.textContent.trim()).toEqual('In Progress');
-      let icon: Element = fixture.debugElement.query(By.css('.fa')).nativeElement;
-      expect(icon.classList[1]).toEqual('fa-play-circle-o');
-      expect(icon.classList.length).toEqual(2);
-    });
-
-    it('should display the ON_HOLD state', () => {
-      component.state = State.ON_HOLD;
-      fixture.detectChanges();
-      let span: Element = fixture.debugElement.query(By.css('.badge')).nativeElement;
-      expect(span.classList[1]).toEqual('badge-warning');
-      expect(span.textContent.trim()).toEqual('On Hold');
-      let icon: Element = fixture.debugElement.query(By.css('.fa')).nativeElement;
-      expect(icon.classList[1]).toEqual('fa-pause-circle-o');
-      expect(icon.classList.length).toEqual(2);
-    });
-
-    it('should display the DONE state', () => {
-      component.state = State.DONE;
-      fixture.detectChanges();
-      let span: Element = fixture.debugElement.query(By.css('.badge')).nativeElement;
-      expect(span.classList[1]).toEqual('badge-danger');
-      expect(span.textContent.trim()).toEqual('Done');
-      let icon: Element = fixture.debugElement.query(By.css('.fa')).nativeElement;
-      expect(icon.classList[1]).toEqual('fa-check-circle-o');
-      expect(icon.classList.length).toEqual(2);
-    });
-
+  it('should display the TO_DO state', () => {
+    component.state = State.TO_DO;
+    fixture.detectChanges();
+    let span: Element = fixture.debugElement.query(By.css('.badge')).nativeElement;
+    expect(span.classList.length).toEqual(2);
+    expect(span.classList[1]).toEqual('badge-primary');
+    expect(span.textContent.trim()).toEqual('To Do');
+    let icon: Element = fixture.debugElement.query(By.css('.fa')).nativeElement;
+    expect(icon.classList[1]).toEqual('fa-clock-o');
+    expect(icon.classList.length).toEqual(2);
   });
 
-  describe('in minimal mode', () => {
+  it('should display the IN_PROGRESS state', () => {
+    component.state = State.IN_PROGRESS;
+    fixture.detectChanges();
+    let span: Element = fixture.debugElement.query(By.css('.badge')).nativeElement;
+    expect(span.classList[1]).toEqual('badge-success');
+    expect(span.textContent.trim()).toEqual('In Progress');
+    let icon: Element = fixture.debugElement.query(By.css('.fa')).nativeElement;
+    expect(icon.classList[1]).toEqual('fa-play-circle-o');
+    expect(icon.classList.length).toEqual(2);
+  });
 
-    beforeEach(() => {
-      component.mode = 'minimal';
-    });
+  it('should display the ON_HOLD state', () => {
+    component.state = State.ON_HOLD;
+    fixture.detectChanges();
+    let span: Element = fixture.debugElement.query(By.css('.badge')).nativeElement;
+    expect(span.classList[1]).toEqual('badge-warning');
+    expect(span.textContent.trim()).toEqual('On Hold');
+    let icon: Element = fixture.debugElement.query(By.css('.fa')).nativeElement;
+    expect(icon.classList[1]).toEqual('fa-pause-circle-o');
+    expect(icon.classList.length).toEqual(2);
+  });
 
-    it('should display the TO_DO state', () => {
-      component.state = State.TO_DO;
-      fixture.detectChanges();
-      let span: Element = fixture.debugElement.query(By.css('span')).nativeElement;
-      expect(span.classList[0]).toEqual('text-primary');
-      expect(span.classList.length).toEqual(1);
-      expect(span.textContent.trim()).toBeEmptyString();
-      let icon: Element = fixture.debugElement.query(By.css('.fa')).nativeElement;
-      expect(icon.classList[1]).toEqual('fa-clock-o');
-      expect(icon.classList.length).toEqual(2);
-    });
-
-    it('should display the IN_PROGRESS state', () => {
-      component.state = State.IN_PROGRESS;
-      fixture.detectChanges();
-      let span: Element = fixture.debugElement.query(By.css('span')).nativeElement;
-      expect(span.classList[0]).toEqual('text-success');
-      expect(span.classList.length).toEqual(1);
-      expect(span.textContent.trim()).toBeEmptyString();
-      let icon: Element = fixture.debugElement.query(By.css('.fa')).nativeElement;
-      expect(icon.classList[1]).toEqual('fa-play-circle-o');
-      expect(icon.classList.length).toEqual(2);
-    });
-
-    it('should display the ON_HOLD state', () => {
-      component.state = State.ON_HOLD;
-      fixture.detectChanges();
-      let span: Element = fixture.debugElement.query(By.css('span')).nativeElement;
-      expect(span.classList[0]).toEqual('text-warning');
-      expect(span.classList.length).toEqual(1);
-      expect(span.textContent.trim()).toBeEmptyString();
-      let icon: Element = fixture.debugElement.query(By.css('.fa')).nativeElement;
-      expect(icon.classList[1]).toEqual('fa-pause-circle-o');
-      expect(icon.classList.length).toEqual(2);
-    });
-
-    it('should display the DONE state', () => {
-      component.state = State.DONE;
-      fixture.detectChanges();
-      let span: Element = fixture.debugElement.query(By.css('span')).nativeElement;
-      expect(span.classList[0]).toEqual('text-danger');
-      expect(span.classList.length).toEqual(1);
-      expect(span.textContent.trim()).toBeEmptyString();
-      let icon: Element = fixture.debugElement.query(By.css('.fa')).nativeElement;
-      expect(icon.classList[1]).toEqual('fa-check-circle-o');
-      expect(icon.classList.length).toEqual(2);
-    });
-
+  it('should display the DONE state', () => {
+    component.state = State.DONE;
+    fixture.detectChanges();
+    let span: Element = fixture.debugElement.query(By.css('.badge')).nativeElement;
+    expect(span.classList[1]).toEqual('badge-danger');
+    expect(span.textContent.trim()).toEqual('Done');
+    let icon: Element = fixture.debugElement.query(By.css('.fa')).nativeElement;
+    expect(icon.classList[1]).toEqual('fa-check-circle-o');
+    expect(icon.classList.length).toEqual(2);
   });
 
 });

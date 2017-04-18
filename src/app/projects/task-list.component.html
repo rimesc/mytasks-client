@@ -2,25 +2,11 @@
   <li *ngFor="let task of tasks" class="list-group-item flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
       <div>
-        <span style="margin-right: 0.5rem">
-          <my-state-badge [state]="task.state" mode="minimal"></my-state-badge>
-        </span>
         <a class="task-summary" routerLink="/tasks/{{task.id}}">{{task.summary}}</a>
-      </div>
-      <div>
-        <span>
-          <my-priority-badge [priority]="task.priority"></my-priority-badge>
-        </span>
       </div>
     </div>
     <div class="d-flex w-100 justify-content-between">
-      <div>
-        <ul class="item-details">
-        <li *ngIf="task.tags.length">
-          <my-tags [tags]="task.tags"></my-tags>
-        </li>
-        </ul>
-      </div>
+			<my-task-badges [task]="task"></my-task-badges>
       <div>
         <span class="text-muted modification-time"><small>
           <span *ngIf="!isModified(task)">Created {{task.created | amTimeAgo}}</span>

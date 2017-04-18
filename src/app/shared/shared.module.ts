@@ -16,9 +16,11 @@ import { MarkdownModule } from '../markdown/markdown.module';
 
 // components
 import { MessagesComponent } from './messages.component';
+import { BadgeComponent } from './badge.component';
 import { PriorityBadgeComponent } from './priority-badge.component';
 import { StateBadgeComponent } from './state-badge.component';
-import { TagsComponent } from './tags.component';
+import { TagComponent } from './tag.component';
+import { TaskBadgesComponent } from './task-badges.component';
 import { TaskFormComponent } from './task-form.component';
 
 // pipes
@@ -44,9 +46,11 @@ import { PluralisePipe } from './pluralise.pipe';
   declarations: [
     // components
     MessagesComponent,
+    BadgeComponent,
     PriorityBadgeComponent,
     StateBadgeComponent,
-    TagsComponent,
+    TagComponent,
+    TaskBadgesComponent,
     TaskFormComponent,
     // pipes
     EnumValuesPipe,
@@ -64,9 +68,11 @@ import { PluralisePipe } from './pluralise.pipe';
     MomentModule,
     // components
     MessagesComponent,
+    BadgeComponent,
     PriorityBadgeComponent,
     StateBadgeComponent,
-    TagsComponent,
+    TagComponent,
+    TaskBadgesComponent,
     TaskFormComponent,
     // pipes
     EnumValuesPipe,
