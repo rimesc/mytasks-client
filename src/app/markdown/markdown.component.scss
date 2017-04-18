@@ -4,37 +4,8 @@
 	text-align: justify;
 }
 
-.markdown h1 {
-	font-size: 28px;
-}
-
-.markdown h2 {
-	font-size: 21px;
-}
-
-.markdown h3 {
-	font-size: 18px;
-}
-
-.markdown h4 {
-	font-size: 16px;
-}
-
-.markdown h5 {
-	font-size: 12px;
-	font-weight: 800;
-	text-transform: uppercase;
-}
-
-.markdown h6 {
-	font-size: 12px;
-	font-weight: 800;
-	text-transform: uppercase;
-	color: #777;
-}
-
 .edit {
-	color: #000;
+	color: $black;
 	opacity: 0.2;
 	float: right;
 	padding: 0;
@@ -43,11 +14,42 @@
 }
 
 .edit:HOVER {
-	color: #000;
+	color: $black;
 	opacity: 1.0;
 }
 
 .placeholder {
 	margin-top: $spacer;
 	color: $text-muted;
+}
+
+// Markdown formatting - requires :host /deep/ because the inner HTML elements
+// don't have the magic scoping attributes (http://stackoverflow.com/questions/36265026/angular-2-innerhtml-styling).
+
+:host /deep/ h1 {
+	font-size: 2rem;
+	font-weight: 600;
+}
+
+:host /deep/ h2 {
+	font-size: 1.75rem;
+}
+
+:host /deep/ h3 {
+	font-size: 1.5rem;
+}
+
+:host /deep/ h4 {
+	font-size: 1.25rem;
+}
+
+:host /deep/ h5 {
+	font-size: 1rem;
+}
+
+:host /deep/ h6 {
+	font-size: 1rem;
+	font-weight: 500;
+	font-variant: small-caps;
+	color: $gray-light;
 }
