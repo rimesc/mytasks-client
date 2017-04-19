@@ -8,7 +8,7 @@ import { Angular2FontawesomeModule } from 'angular2-fontawesome';
 import { State } from '../api/state';
 import { TitleCasePipe } from './title-case.pipe';
 import { StateBadgeComponent } from './state-badge.component';
-import { BadgeComponent } from "./badge.component";
+import { BadgeComponent } from './badge.component';
 
 // Setting the properties via a host component is necessary to trigger a call to ngOnChanges.
 @Component({
