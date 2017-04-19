@@ -1,10 +1,16 @@
 <my-messages [messages]="messages"></my-messages>
 <div *ngIf="task">
 	<div class="project-header">
-		<span class="pull-left">
-		  <img src="assets/scheduled_tasks.png"/>
-		</span>
-		<a routerLink="/projects/{{task.project.id}}">{{task.project.name}}</a>
+		<div class="d-flex align-items-center">
+			<div class="project-icon-container">
+				<span class="project-icon">
+					<fa name="archive"></fa>
+				</span>
+			</div>
+			<span class="project-name">
+				<a routerLink="/projects/{{task.project.id}}"><strong>{{task.project.name}}</strong></a>
+			</span>
+		</div>
 		<div class="clearfix"></div>
 	</div>
 	<h1 class="page-header">{{task.summary}}</h1>

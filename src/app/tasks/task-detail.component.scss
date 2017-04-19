@@ -14,49 +14,27 @@ h2 {
 	color: $gray-light;
 } 
 
-$img-size: 2.5rem !default;
-
-.project-header img {
-	@extend .rounded-circle;
-	width: $img-size;
-	height: $img-size;
-	border: $border-width solid $gray-light;
-	background-color: $body-bg;
-}
-
-.project-header span {
-	background-color: white;
-	margin: 0.1rem $spacer-x*0.5 0.1rem 0;
-}
-
-.project-header a {
-	padding-top: 0.5rem;
-	display: inline-block;
-}
-
-span.small-caps {
-	text-transform: uppercase;
-	font-size: $font-size-sm;
-}
-
-span.divider {
-	color: $gray-lighter;
-	padding: 0 $spacer-x*0.5;
-}
+$img-size: 2rem !default;
 
 .project-header {
-	@extend .mb-2;
-	border-bottom: 1px solid $gray-lighter;
+	margin-bottom: .75rem;
 }
 
-ul.badges {
-	list-style: none;
-	padding: 0;
-	display: inline-block;
-	margin: 0rem;
+.project-icon-container {
+	@extend .rounded-circle;
+	background-color: $teal;
+	margin: 0.1rem $spacer-x*0.5 0.1rem 0;
+	color: $body-bg;
 }
 
-ul.badges > li {
+.project-icon {
 	display: inline-block;
-	padding-right: 0.75rem;
+	font-size: $img-size - 1rem;
+	line-height: 1;
+	margin: .5rem;
+}
+
+.project-name {
+	display: inline-block;
+	margin: .5rem 0rem;
 }
