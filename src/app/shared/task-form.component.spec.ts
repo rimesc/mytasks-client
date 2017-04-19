@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { EnumValues } from 'enum-values';
-import { TagInputComponent, TagInputModule } from 'ng2-tag-input-fix';
+import { RlTagInputModule } from 'angular2-tag-input';
 
 import { TaskForm } from '../api/task-form';
 import { Priority } from '../api/priority';
@@ -24,7 +24,7 @@ describe('TaskFormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule, TagInputModule ],
+      imports: [ FormsModule, RlTagInputModule ],
       schemas: [NO_ERRORS_SCHEMA],
       declarations: [ TaskFormComponent, TitleCasePipe, EnumValuesPipe ],
       providers: [ TaskFormComponent ]
@@ -253,7 +253,7 @@ class Page {
   addPageElements() {
     this.summaryInput = this.fixture.debugElement.query(By.css('input#taskSummary')).nativeElement;
     this.summaryLabel = this.fixture.debugElement.query(By.css('label#taskSummaryLabel'));
-    this.tagInput = new TagInput(this.fixture.debugElement.query(By.css('tag-input')));
+    this.tagInput = new TagInput(this.fixture.debugElement.query(By.css('rl-tag-input')));
     this.prioritySelect = this.fixture.debugElement.query(By.css('select#taskPriority')).nativeElement;
     this.priorityOptions = this.fixture.debugElement.queryAll(By.css('select#taskPriority>option')).map(e => e.nativeElement);
     this.buttons = {
