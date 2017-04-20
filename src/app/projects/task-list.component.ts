@@ -5,19 +5,21 @@ import { State } from '../api/state';
 import { Task } from '../api/task';
 
 @Component({
-  selector: 'my-task-item',
-  templateUrl: './task-item.component.html',
-  styleUrls: ['./task-item.component.scss']
+  selector: 'my-task-list',
+  templateUrl: './task-list.component.html',
+  styleUrls: ['./task-list.component.scss']
 })
-export class TaskItemComponent  {
+export class TaskListComponent {
+
   @Input()
-  task: Task;
+  tasks: Task[];
 
   states = State;
   priorities = Priority;
 
-  isModified(): boolean {
-    return !!this.task.updated;
+  isModified(task: Task): boolean {
+    return !!task.updated;
   }
 
 }
+

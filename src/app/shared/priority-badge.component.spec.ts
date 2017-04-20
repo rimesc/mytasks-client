@@ -7,6 +7,7 @@ import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawe
 import { Priority } from '../api/priority';
 import { TitleCasePipe } from './title-case.pipe';
 import { PriorityBadgeComponent } from './priority-badge.component';
+import { BadgeComponent } from './badge.component';
 
 describe('PriorityBadgeComponent', () => {
 
@@ -16,7 +17,7 @@ describe('PriorityBadgeComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ Angular2FontawesomeModule ],
-      declarations: [ PriorityBadgeComponent, TitleCasePipe ],
+      declarations: [ PriorityBadgeComponent, BadgeComponent, TitleCasePipe ],
     });
   });
 
@@ -31,8 +32,7 @@ describe('PriorityBadgeComponent', () => {
     component.priority = Priority.LOW;
     fixture.detectChanges();
     let span: Element = fixture.debugElement.query(By.css('span')).nativeElement;
-    expect(span.classList.length).toEqual(1);
-    expect(span.classList[0]).toEqual('text-success');
+    expect(span.classList).toContain('badge-success');
     expect(span.textContent.trim()).toEqual('Low');
   });
 
@@ -40,8 +40,7 @@ describe('PriorityBadgeComponent', () => {
     component.priority = Priority.NORMAL;
     fixture.detectChanges();
     let span: Element = fixture.debugElement.query(By.css('span')).nativeElement;
-    expect(span.classList.length).toEqual(1);
-    expect(span.classList[0]).toEqual('text-info');
+    expect(span.classList).toContain('badge-info');
     expect(span.textContent.trim()).toEqual('Normal');
   });
 
@@ -49,8 +48,7 @@ describe('PriorityBadgeComponent', () => {
     component.priority = Priority.HIGH;
     fixture.detectChanges();
     let span: Element = fixture.debugElement.query(By.css('span')).nativeElement;
-    expect(span.classList.length).toEqual(1);
-    expect(span.classList[0]).toEqual('text-warning');
+    expect(span.classList).toContain('badge-warning');
     expect(span.textContent.trim()).toEqual('High');
   });
 
@@ -58,8 +56,7 @@ describe('PriorityBadgeComponent', () => {
     component.priority = Priority.CRITICAL;
     fixture.detectChanges();
     let span: Element = fixture.debugElement.query(By.css('span')).nativeElement;
-    expect(span.classList.length).toEqual(1);
-    expect(span.classList[0]).toEqual('text-danger');
+    expect(span.classList).toContain('badge-danger');
     expect(span.textContent.trim()).toEqual('Critical');
   });
 

@@ -9,16 +9,18 @@ import { RouterModule } from '@angular/router';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { MomentModule } from 'angular2-moment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TagInputModule } from 'ng2-tag-input';
+import { RlTagInputModule } from 'angular2-tag-input';
 
 // feature modules
 import { MarkdownModule } from '../markdown/markdown.module';
 
 // components
 import { MessagesComponent } from './messages.component';
+import { BadgeComponent } from './badge.component';
 import { PriorityBadgeComponent } from './priority-badge.component';
 import { StateBadgeComponent } from './state-badge.component';
-import { TagsComponent } from './tags.component';
+import { TagComponent } from './tag.component';
+import { TaskBadgesComponent } from './task-badges.component';
 import { TaskFormComponent } from './task-form.component';
 
 // pipes
@@ -37,16 +39,18 @@ import { PluralisePipe } from './pluralise.pipe';
     MarkdownModule,
     MomentModule,
     NgbModule,
-    TagInputModule,
+    RlTagInputModule,
     // feature modules
     MarkdownModule
   ],
   declarations: [
     // components
     MessagesComponent,
+    BadgeComponent,
     PriorityBadgeComponent,
     StateBadgeComponent,
-    TagsComponent,
+    TagComponent,
+    TaskBadgesComponent,
     TaskFormComponent,
     // pipes
     EnumValuesPipe,
@@ -64,9 +68,11 @@ import { PluralisePipe } from './pluralise.pipe';
     MomentModule,
     // components
     MessagesComponent,
+    BadgeComponent,
     PriorityBadgeComponent,
     StateBadgeComponent,
-    TagsComponent,
+    TagComponent,
+    TaskBadgesComponent,
     TaskFormComponent,
     // pipes
     EnumValuesPipe,
