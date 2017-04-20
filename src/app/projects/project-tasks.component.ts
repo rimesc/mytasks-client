@@ -61,7 +61,7 @@ export class ProjectTasksComponent implements OnInit {
   }
 
   createTask(task: TaskForm): void {
-    this.taskService.createTask(this.project.id, task).then(this._tasks.push);
+    this.taskService.createTask(this.project.id, task).then(t => this._tasks.push(t));
   }
 
 }
