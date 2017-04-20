@@ -10,6 +10,7 @@ import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawe
 
 // components
 import { MarkdownComponent } from './markdown.component';
+import { MarkdownCardComponent } from './markdown-card.component';
 import { EditNotesModalComponent } from './edit-notes-modal.component';
 
 @NgModule({
@@ -24,11 +25,13 @@ import { EditNotesModalComponent } from './edit-notes-modal.component';
   declarations: [
     // components
     EditNotesModalComponent,
-    MarkdownComponent
+    MarkdownComponent,
+    MarkdownCardComponent
   ],
   exports: [
     // components
-    MarkdownComponent
+    MarkdownComponent,
+    MarkdownCardComponent
   ],
   entryComponents: [
     // modal dialogs

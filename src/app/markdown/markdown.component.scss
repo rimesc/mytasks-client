@@ -4,25 +4,6 @@
 	text-align: justify;
 }
 
-.edit {
-	color: $black;
-	opacity: 0.2;
-	float: right;
-	padding: 0;
-	border: 0;
-	background: none;
-}
-
-.edit:HOVER {
-	color: $black;
-	opacity: 1.0;
-}
-
-.placeholder {
-	margin-top: $spacer;
-	color: $text-muted;
-}
-
 // Markdown formatting - requires :host /deep/ because the inner HTML elements
 // don't have the magic scoping attributes (http://stackoverflow.com/questions/36265026/angular-2-innerhtml-styling).
 

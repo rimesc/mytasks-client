@@ -34,10 +34,5 @@
 			</div>
 		</div>
 	</div>
-	<div class="readme card">
-		<h2 class="card-header">Description</h2>
-		<div class="card-block">
-			<my-markdown-view [notes]="task.notes" (update)="updateNotes($event)"></my-markdown-view>
-		</div>
-	</div>
+	<my-markdown-card title="Description" editable="true" [notes]="task.notes" (update)="updateNotes($event)"></my-markdown-card>
 </div>
