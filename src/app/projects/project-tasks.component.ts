@@ -44,7 +44,7 @@ export class ProjectTasksComponent implements OnInit {
   }
 
   get tasks() {
-    return this._tasks;
+    return this._tasks.slice().reverse();
   }
 
   setActiveFilter(filter: string): void {

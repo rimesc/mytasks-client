@@ -33,5 +33,5 @@ export function revive(key: string, value: any): any {
 }
 
 export function compareByLastModified(a: Task, b: Task): number {
-  return (b.updated || b.created).getTime() - (a.updated || a.created).getTime();
+  return (a.updated || a.created).getTime() - (b.updated || b.created).getTime();
 }
