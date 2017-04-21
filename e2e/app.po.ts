@@ -1,13 +1,5 @@
-import { browser, element, by } from 'protractor';
-import { login } from './login';
+import { AnyPage } from './any.po';
 
-export class MyTasksClientPage {
-  navigateTo() {
-    browser.get('/');
-    login();
-  }
-
-  getPageTitle() {
-    return element(by.css('my-app-root h1')).getText();
-  }
+export class MyTasksClientPage extends AnyPage {
+  path = '/';
 }

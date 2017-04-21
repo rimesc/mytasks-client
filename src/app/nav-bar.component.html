@@ -5,7 +5,7 @@
   </button>
   <a class="navbar-brand" routerLink="/">myTasks</a>
   <div class="collapse navbar-collapse">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav mr-auto pages-nav">
       <li class="nav-item">
         <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
       </li>
@@ -19,7 +19,7 @@
     <form class="form-inline my-2 my-lg-0">
       <input type="text" class="form-control mr-sm-2" placeholder="Search...">
     </form>
-    <ul class="navbar-nav">
+    <ul class="navbar-nav tools-nav">
       <li class="nav-item">
         <a class="nav-link" *ngIf="showAdminOptions" title="Settings" href="/admin"><fa name="cog"></fa></a>
       </li>
