@@ -1,11 +1,13 @@
 import { browser, element, by } from 'protractor';
+import { login } from './login';
 
 export class MyTasksClientPage {
   navigateTo() {
-    return browser.get('/');
+    browser.get('/');
+    login();
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  getPageTitle() {
+    return element(by.css('my-app-root h1')).getText();
   }
 }

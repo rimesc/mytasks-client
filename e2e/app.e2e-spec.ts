@@ -1,14 +1,14 @@
 import { MyTasksClientPage } from './app.po';
 
-describe('my-tasks-client App', function() {
+describe('myTasks client', function() {
   let page: MyTasksClientPage;
 
   beforeEach(() => {
     page = new MyTasksClientPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should initially display dashboard', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    expect(page.getPageTitle()).toEqual('Dashboard');
   });
 });
