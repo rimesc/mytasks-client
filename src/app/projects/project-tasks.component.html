@@ -1,5 +1,6 @@
 <my-messages [messages]="messages"></my-messages>
 <div *ngIf="project">
+	<my-mini-project-header [project]="project"></my-mini-project-header>
   <div class="btn-toolbar">
     <div class="btn-group mr-auto" data-toggle="buttons">
       <label *ngFor="let key of filterKeys" class="btn btn-outline-primary" [class.active]="key === activeFilter">

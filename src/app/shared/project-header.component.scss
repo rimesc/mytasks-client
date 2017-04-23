@@ -1,0 +1,29 @@
+@import '../../../node_modules/bootstrap/scss/_mixins.scss';
+@import '../../../node_modules/bootstrap/scss/_variables.scss';
+@import '../../../node_modules/bootstrap/scss/utilities/_borders.scss';
+@import '../../../node_modules/bootstrap/scss/utilities/_spacing.scss';
+
+$img-size: 2rem !default;
+
+.project-header {
+	margin-bottom: .75rem;
+}
+
+.project-icon-container {
+	@extend .rounded-circle;
+	background-color: $teal;
+	margin: 0.1rem $spacer-x*0.5 0.1rem 0;
+	color: $body-bg;
+}
+
+.project-icon {
+	display: inline-block;
+	font-size: $img-size - 1rem;
+	line-height: 1;
+	margin: .5rem;
+}
+
+.project-name {
+	display: inline-block;
+	margin: .5rem 0rem;
+}

@@ -22,6 +22,7 @@ import { StateBadgeComponent } from './state-badge.component';
 import { TagComponent } from './tag.component';
 import { TaskBadgesComponent } from './task-badges.component';
 import { TaskFormComponent } from './task-form.component';
+import { ProjectHeaderComponent } from './project-header.component';
 
 // pipes
 import { EnumValuesPipe } from './enum-values.pipe';
@@ -52,6 +53,7 @@ import { PluralisePipe } from './pluralise.pipe';
     TagComponent,
     TaskBadgesComponent,
     TaskFormComponent,
+    ProjectHeaderComponent,
     // pipes
     EnumValuesPipe,
     TitleCasePipe,
@@ -74,6 +76,7 @@ import { PluralisePipe } from './pluralise.pipe';
     TagComponent,
     TaskBadgesComponent,
     TaskFormComponent,
+    ProjectHeaderComponent,
     // pipes
     EnumValuesPipe,
     TitleCasePipe,

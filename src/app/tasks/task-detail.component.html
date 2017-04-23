@@ -1,18 +1,6 @@
 <my-messages [messages]="messages"></my-messages>
 <div *ngIf="task">
-	<div class="project-header">
-		<div class="d-flex align-items-center">
-			<div class="project-icon-container">
-				<span class="project-icon">
-					<fa name="archive"></fa>
-				</span>
-			</div>
-			<span class="project-name">
-				<a routerLink="/projects/{{task.project.id}}"><strong>{{task.project.name}}</strong></a>
-			</span>
-		</div>
-		<div class="clearfix"></div>
-	</div>
+	<my-mini-project-header [project]="task.project"></my-mini-project-header>
 	<h1 class="page-header">{{task.summary}}</h1>
 	<div class="row">
 		<div class="col d-flex align-items-start my-2">
