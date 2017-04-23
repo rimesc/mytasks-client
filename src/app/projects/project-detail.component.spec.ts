@@ -277,7 +277,7 @@ class Page {
     this.messages = this.fixture.debugElement.query(By.css('my-messages'));
     this.header = this.fixture.debugElement.query(By.css('my-project-header'));
     this.toolbar = this.fixture.debugElement.query(By.css('my-project-toolbar'));
-    this.notes = this.fixture.debugElement.query(By.css('my-markdown-view'));
+    this.notes = this.fixture.debugElement.query(By.css('my-markdown-card'));
   }
 
   get project() {

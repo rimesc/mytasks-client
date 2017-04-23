@@ -2,8 +2,5 @@
 <div *ngIf="project">
   <my-project-toolbar (edit)="editProject()" (delete)="deleteProject()" (newTask)="createTask($event)"></my-project-toolbar>
   <my-project-header [project]="project"></my-project-header>
-	<div class="readme">
-		<h2><span>Notes</span></h2>
-		<my-markdown-view [notes]="project.notes" (update)="updateNotes($event)"></my-markdown-view>
-	</div>
+	<my-markdown-card editable="true" [notes]="project.notes" (update)="updateNotes($event)"></my-markdown-card>
 </div>
