@@ -1,13 +1,14 @@
 import { browser, element, by } from 'protractor';
-import { login } from './login';
+import { LoginOverlay } from './login-overlay.po';
 
 export class AnyPage {
   path: string;
   navbar: Navbar = new Navbar();
+  login: LoginOverlay = new LoginOverlay();
 
   navigateTo() {
     browser.get(this.path);
-    login();
+    this.login.loginIfNeeded();
   }
 
   getPageTitle() {
