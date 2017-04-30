@@ -27,8 +27,8 @@ export class LoginOverlay {
 class LoginForm {
 
   private loginForm = element(by.css('.auth0-lock-content'));
-  private emailInput = element(by.name('email'));
-  private passwordInput = element(by.name('password'));
+  private emailInput = element(by.css('.auth0-lock-input-email input'));
+  private passwordInput = element(by.css('.auth0-lock-input-password input'));
   private submitButton = element(by.css('.auth0-lock-submit'));
   private lastLogin = element(by.css('.auth0-lock-last-login-pane .auth0-lock-social-button'));
   private messageSpan = element(by.css('.auth0-global-message span'));
