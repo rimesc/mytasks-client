@@ -10,7 +10,7 @@ describe('myTasks client', function() {
 
   it('should initially display dashboard', () => {
     page.navigateTo();
-    expect(page.navbar.getActiveLink()).toEqual('Dashboard');
+    expect(page.navbar.activePage).toEqual('Dashboard');
     expect(page.getPageTitle()).toEqual('Dashboard');
   });
 
@@ -18,19 +18,26 @@ describe('myTasks client', function() {
 
     it('should list the top-level pages', () => {
       page.navigateTo();
-      expect(page.navbar.getLinks()).toEqual(['Dashboard', 'Projects', 'Tasks']);
+      expect(page.navbar.pages).toEqual(['Dashboard', 'Projects', 'Tasks']);
     });
 
     it('should link to the projects page', () => {
       page.navigateTo();
-      page.navbar.followLink('Projects');
+      page.navbar.goToPage('Projects');
       browser.wait(ExpectedConditions.urlIs('http://localhost:4200/projects'));
     });
 
     it('should link to the tasks page', () => {
       page.navigateTo();
-      page.navbar.followLink('Tasks');
+      page.navbar.goToPage('Tasks');
       browser.wait(ExpectedConditions.urlIs('http://localhost:4200/tasks'));
+    });
+
+    it('should allow the user to log out', () => {
+      page.navigateTo();
+      page.navbar.logOut().then(() => {
+        expect(page.login.loggedOut());
+      });
     });
 
   });

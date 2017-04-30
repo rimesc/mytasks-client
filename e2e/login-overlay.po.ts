@@ -14,6 +14,10 @@ export class LoginOverlay {
     });
   }
 
+  loggedOut() {
+    this.form.message().then(message => expect(message).toEqual('LOGGED OUT'));
+  }
+
   private needsLogin() {
     return this.overlay.isPresent();
   }
@@ -27,11 +31,17 @@ class LoginForm {
   private passwordInput = element(by.name('password'));
   private submitButton = element(by.css('.auth0-lock-submit'));
   private altLink = element(by.css('.auth0-lock-alternative-link'));
+  private messageSpan = element(by.css('.auth0-global-message span'));
 
   login() {
     browser.wait(ExpectedConditions.visibilityOf(this.loginForm));
     // if there is no password field, assume the last login has been remembered and click the alternative link 
     return this.isPasswordRequired().then(required => required ? this.enterCredentials() : this.altLink.click());
+  }
+
+  message() {
+    browser.wait(ExpectedConditions.visibilityOf(this.loginForm));
+    return this.messageSpan.getText();
   }
 
   private isPasswordRequired() {
