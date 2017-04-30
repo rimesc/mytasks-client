@@ -30,13 +30,13 @@ class LoginForm {
   private emailInput = element(by.name('email'));
   private passwordInput = element(by.name('password'));
   private submitButton = element(by.css('.auth0-lock-submit'));
-  private altLink = element(by.css('.auth0-lock-alternative-link'));
+  private lastLogin = element(by.css('.auth0-lock-last-login-pane .auth0-lock-social-button'));
   private messageSpan = element(by.css('.auth0-global-message span'));
 
   login() {
     browser.wait(ExpectedConditions.visibilityOf(this.loginForm));
     // if there is no password field, assume the last login has been remembered and click the alternative link 
-    return this.isPasswordRequired().then(required => required ? this.enterCredentials() : this.altLink.click());
+    return this.isPasswordRequired().then(required => required ? this.enterCredentials() : this.lastLogin.click());
   }
 
   message() {

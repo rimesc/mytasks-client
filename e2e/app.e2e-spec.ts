@@ -1,4 +1,4 @@
-import { browser, element, by, ExpectedConditions } from 'protractor';
+import { browser, ExpectedConditions } from 'protractor';
 import { MyTasksClientPage } from './app.po';
 
 describe('myTasks client', function() {
