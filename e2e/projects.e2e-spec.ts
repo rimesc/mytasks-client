@@ -100,10 +100,12 @@ describe('the projects page', function() {
       page.newProjectButton.click();
       newProjectModal.waitUntilOpen();
       expect(newProjectModal.canSubmit).toBeFalse();
+      expect(newProjectModal.hasFieldError).toBeFalse(); // the error message is suppressed until the field is edited
       newProjectModal.enterName('Foo').then(() => {
         expect(newProjectModal.canSubmit).toBeTrue();
       });
       newProjectModal.clear().then(() => {
+        expect(newProjectModal.hasFieldError).toBeTrue();
         expect(newProjectModal.canSubmit).toBeFalse();
       });
     });

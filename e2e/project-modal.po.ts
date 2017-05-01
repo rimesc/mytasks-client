@@ -9,6 +9,7 @@ function clear(field: ElementFinder) {
 export class ProjectModal {
 
   private content = element(by.css('.modal-content'));
+  private nameLabel = this.content.element(by.css('.control-label .text-danger'));
   private nameInput = this.content.element(by.name('name'));
   private descriptionInput = this.content.element(by.name('description'));
   private submitButton = this.content.element(by.css('.btn-primary'));
@@ -25,6 +26,10 @@ export class ProjectModal {
   enterName(name: string) {
     browser.wait(ExpectedConditions.visibilityOf(this.nameInput));
     return this.nameInput.sendKeys(name);
+  }
+
+  get hasFieldError() {
+    return this.nameLabel.isDisplayed();
   }
 
   enterDescription(description: string) {
