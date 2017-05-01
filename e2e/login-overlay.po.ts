@@ -27,11 +27,11 @@ export class LoginOverlay {
 class LoginForm {
 
   private loginForm = element(by.css('.auth0-lock-content'));
-  private emailInput = element(by.css('.auth0-lock-input-email input'));
-  private passwordInput = element(by.css('.auth0-lock-input-password input'));
-  private submitButton = element(by.css('.auth0-lock-submit'));
+  private emailInput = this.loginForm.element(by.css('.auth0-lock-input-email input'));
+  private passwordInput = this.loginForm.element(by.css('.auth0-lock-input-password input'));
   private lastLogin = element(by.css('.auth0-lock-last-login-pane .auth0-lock-social-button'));
   private messageSpan = element(by.css('.auth0-global-message span'));
+  private submitButton = element(by.css('.auth0-lock-submit'));
 
   login() {
     browser.wait(ExpectedConditions.visibilityOf(this.loginForm));
