@@ -14,7 +14,7 @@ export class AnyPage {
     this.login.loginIfNeeded();
   }
 
-  getPageTitle() {
+  get pageTitle() {
     return element(by.css('my-app-root h1')).getText();
   }
 

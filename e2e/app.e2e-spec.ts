@@ -11,7 +11,7 @@ describe('myTasks client', function() {
   it('should initially display dashboard', () => {
     page.navigateTo();
     expect(page.navbar.activePage).toEqual('Dashboard');
-    expect(page.getPageTitle()).toEqual('Dashboard');
+    expect(page.pageTitle).toEqual('Dashboard');
   });
 
   describe('the main navbar', () => {

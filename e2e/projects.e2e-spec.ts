@@ -20,7 +20,7 @@ describe('the projects page', function() {
 
   it('should be titled "Projects"', () => {
     page.navigateTo();
-    expect(page.getPageTitle()).toEqual('Projects');
+    expect(page.pageTitle).toEqual('Projects');
   });
 
   it('should display a list of projects', () => {
