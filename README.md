@@ -23,7 +23,9 @@ Before running the tests make sure you are serving the app via `ng serve`. You a
 
 ## Authentication
 
-This project integrates with [Auth0](https://auth0.com) to do user authentication. To use it as is, you'll need sign up for a (free) account and set up a client. For development, the allowed callback URLs should include `http://localhost:4200/login`.
+This project integrates with [Auth0](https://auth0.com) to do user authentication.
+
+To use the application as is, you'll need sign up for a (free) Auth0 account and set up a client. For development, the allowed callback URLs should include `http://localhost:4200/login`.
 
 Replace `src/environments/secret.ts` with a file containing your client details in the following form:
 
@@ -34,7 +36,7 @@ Replace `src/environments/secret.ts` with a file containing your client details 
       authCallback: 'YOUR_AUTH_CALLBACK'
     };
 
-The `apiBase` and `authCallback` fields are only needed by production builds. In development they're defaulted to `http://localhost:8080/api/` and `http://localhost:4200/login` respectively.
+The `apiBase` and `authCallback` fields are only needed by production builds. In development, defaults of `http://localhost:8080/api/` and `http://localhost:4200/login` respectively are used.
 
 To run the end-to-end tests, you will also need to replace `e2e/credentials.ts` with a file containing some valid user credentials as follows:
 
