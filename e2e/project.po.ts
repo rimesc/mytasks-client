@@ -1,8 +1,17 @@
-import { element, by, ElementFinder } from 'protractor';
+import { element, by } from 'protractor';
 
 import { AnyPage } from './any.po';
+import { DeleteModal } from './delete-modal.po';
+import { NotesModal } from './notes-modal.po';
+import { ProjectModal } from './project-modal.po';
+import { TaskModal } from './task-modal.po';
 
 export class ProjectPage extends AnyPage {
+
+  editProjectModal = new ProjectModal();
+  deleteProjectModal = new DeleteModal();
+  newTaskModal = new TaskModal();
+  editNotesModal = new NotesModal();
 
   constructor(id: number) {
     super();
@@ -22,7 +31,19 @@ export class ProjectPage extends AnyPage {
   }
 
   get newTaskButton() {
-    return element(by.css('.project-header button.btn-primary'));
+    return element(by.css('.project-toolbar button.btn-primary'));
+  }
+
+  get editProjectButton() {
+    return element(by.css('.project-toolbar')).element(by.partialButtonText('Edit'));
+  }
+
+  get deleteProjectButton() {
+    return element(by.css('.project-toolbar')).element(by.partialButtonText('Delete'));
+  }
+
+  get editNotesButton() {
+    return element(by.css('.btn.edit'));
   }
 
 }

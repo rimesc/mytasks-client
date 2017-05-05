@@ -1,9 +1,11 @@
 import { element, by, ElementFinder } from 'protractor';
 
 import { AnyPage } from './any.po';
+import { ProjectModal } from './project-modal.po';
 
 export class ProjectsPage extends AnyPage {
   path = '/projects';
+  newProjectModal = new ProjectModal();
 
   get items() {
     return this.findAll(by.css('.list-group-item'), e => new ProjectItem(e));

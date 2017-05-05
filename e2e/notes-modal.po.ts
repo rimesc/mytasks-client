@@ -3,15 +3,14 @@ import { by } from 'protractor';
 import { Modal } from './modal.po';
 import { TextInput } from './form-util';
 
-export class ProjectModal extends Modal {
+export class NotesModal extends Modal {
 
-  nameInput = new TextInput('name');
-  descriptionInput = new TextInput('description');
+  markdownInput = new TextInput('markdown');
   private submitButton = this.footer.element(by.css('.btn-primary'));
   private cancelButton = this.footer.element(by.css('.btn-secondary'));
 
   clear() {
-    return this.nameInput.clear().then(() => this.descriptionInput.clear());
+    return this.markdownInput.clear();
   }
 
   get canSubmit() {

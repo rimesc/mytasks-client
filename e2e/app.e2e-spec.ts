@@ -1,40 +1,41 @@
 import { browser, ExpectedConditions } from 'protractor';
 import { MyTasksClientPage } from './app.po';
 
-describe('myTasks client', function() {
+describe('MyTasks client', () => {
   let page: MyTasksClientPage;
 
-  beforeEach(() => {
+  beforeAll(() => {
     page = new MyTasksClientPage();
+    page.navigateTo();
   });
 
-  it('should initially display dashboard', () => {
-    page.navigateTo();
-    expect(page.navbar.activePage).toEqual('Dashboard');
-    expect(page.pageTitle).toEqual('Dashboard');
+  it('redirects to the dashboard', () => {
+    browser.wait(ExpectedConditions.urlIs('http://localhost:4200/dashboard'));
   });
 
   describe('the main navbar', () => {
 
-    it('should list the top-level pages', () => {
-      page.navigateTo();
+    it('lists the top-level pages', () => {
       expect(page.navbar.pages).toEqual(['Dashboard', 'Projects', 'Tasks']);
     });
 
-    it('should link to the projects page', () => {
-      page.navigateTo();
+    it('links to the projects page', () => {
       page.navbar.goToPage('Projects');
       browser.wait(ExpectedConditions.urlIs('http://localhost:4200/projects'));
     });
 
-    it('should link to the tasks page', () => {
-      page.navigateTo();
+    it('links to the tasks page', () => {
       page.navbar.goToPage('Tasks');
       browser.wait(ExpectedConditions.urlIs('http://localhost:4200/tasks'));
     });
 
-    it('should allow the user to log out', () => {
-      page.navigateTo();
+    it('links to the dashboard', () => {
+      browser.get('/projects');  // go to a different page first
+      page.navbar.goToPage('Dashboard');
+      browser.wait(ExpectedConditions.urlIs('http://localhost:4200/dashboard'));
+    });
+
+    it('allows the user to log out', () => {
       page.navbar.logOut().then(() => {
         expect(page.login.loggedOut());
       });

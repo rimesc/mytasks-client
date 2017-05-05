@@ -1,17 +1,22 @@
 import { by } from 'protractor';
 
 import { Modal } from './modal.po';
-import { TextInput } from './form-util';
+import { TextInput, Select } from './form-util';
 
-export class ProjectModal extends Modal {
+export class TaskModal extends Modal {
 
-  nameInput = new TextInput('name');
-  descriptionInput = new TextInput('description');
+  summaryInput = new TextInput('summary');
+  prioritySelect = new Select('priority');
+  // private tagsInput = this.body.element(by.name('tag-input'));
   private submitButton = this.footer.element(by.css('.btn-primary'));
   private cancelButton = this.footer.element(by.css('.btn-secondary'));
 
+  selectPriority(priority: string) {
+    return this.prioritySelect.choose(priority);
+  }
+
   clear() {
-    return this.nameInput.clear().then(() => this.descriptionInput.clear());
+    return this.summaryInput.clear();
   }
 
   get canSubmit() {

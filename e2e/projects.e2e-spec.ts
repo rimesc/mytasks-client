@@ -1,58 +1,49 @@
-import { browser, ExpectedConditions, promise } from 'protractor';
-import { post } from 'request';
+import { browser, ExpectedConditions } from 'protractor';
 
 import { ProjectsPage } from './projects.po';
-import { ProjectModal } from './project-modal.po';
+import { resetData } from './api-util';
 
-describe('the projects page', function() {
+describe('the projects page', () => {
   let page: ProjectsPage;
-  let newProjectModal: ProjectModal;
 
   beforeEach(() => {
     page = new ProjectsPage();
-    newProjectModal = new ProjectModal();
+    page.navigateTo();
   });
 
-  it('should be the active page', () => {
-    page.navigateTo();
+  it('is the active page', () => {
     expect(page.navbar.activePage).toEqual('Projects');
   });
 
-  it('should be titled "Projects"', () => {
-    page.navigateTo();
+  it('is titled "Projects"', () => {
     expect(page.pageTitle).toEqual('Projects');
   });
 
-  it('should display a list of projects', () => {
-    page.navigateTo();
+  it('displays a list of all the projects', () => {
     expect(page.items).toBeArrayOfSize(3);
   });
 
   describe('each project item', () => {
 
-    it('should display the project name', () => {
-      page.navigateTo();
+    it('displays the project name', () => {
       expect(page.item(0).then(item => item.name)).toEqual('My first project');
       expect(page.item(1).then(item => item.name)).toEqual('My second project');
       expect(page.item(2).then(item => item.name)).toEqual('My third project');
     });
 
-    it('should link to the project detail page', () => {
-      page.navigateTo();
+    it('links to the project detail page', () => {
       expect(page.item(0).then(item => item.link)).toEqual('http://localhost:4200/projects/1');
       expect(page.item(1).then(item => item.link)).toEqual('http://localhost:4200/projects/2');
       expect(page.item(2).then(item => item.link)).toEqual('http://localhost:4200/projects/3');
     });
 
-    it('should display the project description', () => {
-      page.navigateTo();
+    it('displays the project description', () => {
       expect(page.item(0).then(item => item.description)).toStartWith('This is my first sample project.');
       expect(page.item(1).then(item => item.description)).toStartWith('This is my second sample project.');
       expect(page.item(2).then(item => item.description)).toStartWith('This is my third sample project.');
     });
 
-    it('should display the number of incomplete tasks', () => {
-      page.navigateTo();
+    it('displays the number of incomplete tasks', () => {
       expect(page.item(0).then(item => item.openTasks)).toEqual(2);
       expect(page.item(1).then(item => item.openTasks)).toEqual(2);
       expect(page.item(2).then(item => item.openTasks)).toEqual(0);
@@ -60,8 +51,7 @@ describe('the projects page', function() {
 
     describe('clicking on the project name', () => {
 
-      it('should navigate to the project detail page', () => {
-        page.navigateTo();
+      it('navigates to the project detail page', () => {
         page.item(0).then(item => item.go());
         browser.wait(ExpectedConditions.urlIs('http://localhost:4200/projects/1'));
       });
@@ -72,10 +62,10 @@ describe('the projects page', function() {
 
   describe('the new project button', () => {
 
-    it('should open the new project modal', () => {
-      page.navigateTo();
+    it('opens the new project modal when clicked', () => {
       page.newProjectButton.click();
-      newProjectModal.waitUntilOpen();
+      page.newProjectModal.waitUntilOpen();
+      expect(page.newProjectModal.title).toEqual('New Project');
     });
 
   });
@@ -83,48 +73,36 @@ describe('the projects page', function() {
   describe('the new project modal', () => {
 
     afterEach(() => {
-      let defer = promise.defer();
-      post('http://localhost:8080/api/dev/reset', (error, response, body) => {
-        if (error) {
-          defer.reject(error);
-        } else if (response.statusCode !== 200) {
-          defer.reject('Failed to reset data: POST returned status ' + response.statusCode);
-        } else {
-          defer.fulfill();
-        }
+      resetData();
+    });
+
+    it('requires a name', () => {
+      page.newProjectButton.click();
+      page.newProjectModal.waitUntilOpen();
+      expect(page.newProjectModal.canSubmit).toBeFalse();
+      expect(page.newProjectModal.nameInput.hasError).toBeFalse(); // the error message is suppressed until the field is edited
+      page.newProjectModal.nameInput.enter('Foo').then(() => {
+        expect(page.newProjectModal.canSubmit).toBeTrue();
+      });
+      page.newProjectModal.clear().then(() => {
+        expect(page.newProjectModal.nameInput.hasError).toBeTrue();
+        expect(page.newProjectModal.canSubmit).toBeFalse();
       });
     });
 
-    it('should require a name', () => {
-      page.navigateTo();
+    it('does not create a new project when cancelled', () => {
       page.newProjectButton.click();
-      newProjectModal.waitUntilOpen();
-      expect(newProjectModal.canSubmit).toBeFalse();
-      expect(newProjectModal.hasFieldError).toBeFalse(); // the error message is suppressed until the field is edited
-      newProjectModal.enterName('Foo').then(() => {
-        expect(newProjectModal.canSubmit).toBeTrue();
-      });
-      newProjectModal.clear().then(() => {
-        expect(newProjectModal.hasFieldError).toBeTrue();
-        expect(newProjectModal.canSubmit).toBeFalse();
-      });
-    });
-
-    it('should not create a new project on cancel', () => {
-      page.navigateTo();
-      page.newProjectButton.click();
-      newProjectModal.waitUntilOpen();
-      newProjectModal.enterName('My new project');
-      newProjectModal.cancel();
+      page.newProjectModal.waitUntilOpen();
+      page.newProjectModal.nameInput.enter('My new project');
+      page.newProjectModal.cancel();
       expect(page.items).toBeArrayOfSize(3);
     });
 
-    it('should create a new project and insert it at the end of the list on submit', () => {
-      page.navigateTo();
+    it('creates a new project when submitted', () => {
       page.newProjectButton.click();
-      newProjectModal.waitUntilOpen();
-      newProjectModal.enterName('My new project');
-      newProjectModal.submit();
+      page.newProjectModal.waitUntilOpen();
+      page.newProjectModal.nameInput.enter('My new project');
+      page.newProjectModal.submit();
       expect(page.items).toBeArrayOfSize(4);
       expect(page.item(3).then(item => item.name)).toEqual('My new project');
     });
