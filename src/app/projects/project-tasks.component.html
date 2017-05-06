@@ -1,18 +1,27 @@
 <my-messages [messages]="messages"></my-messages>
 <div *ngIf="project">
-	<my-mini-project-header [project]="project"></my-mini-project-header>
-  <div class="btn-toolbar">
-    <div class="btn-group mr-auto" data-toggle="buttons">
-      <label *ngFor="let key of filterKeys" class="btn btn-outline-primary" [class.active]="key === activeFilter">
-        <input type="radio" name="options" id="{{key}}" autocomplete="off" [checked]="key === activeFilter" (click)="applyFilter(key)">{{filters[key].label}}
-      </label>
+  <div class="d-flex justify-content-center btn-toolbar">
+    <div class="mr-auto">
+    	<my-mini-project-header [project]="project"></my-mini-project-header>
     </div>
-    <div class="navbar-form ml-auto">
+    <div class="d-flex ml-auto align-items-center navbar-form">
       <my-new-task-button (submit)="createTask($event)"></my-new-task-button>
     </div>
   </div>
-
-  <div class="clearfix"></div>
-
-  <my-task-list [tasks]="tasks"></my-task-list>
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col d-flex align-items-start">
+          <ul class="nav nav-pills">
+            <li class="nav-item" *ngFor="let key of filterKeys">
+              <a class="nav-link btn-sm" [routerLink]="['.']" [queryParams]="{ filter: key }" routerLinkActive="active">{{filters[key].label}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-block">
+      <my-task-list [tasks]="tasks"></my-task-list>
+    </div>
+  </div>
 </div>

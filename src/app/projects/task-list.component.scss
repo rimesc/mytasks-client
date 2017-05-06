@@ -1,4 +1,4 @@
-@import '../../../node_modules/font-awesome/scss/font-awesome.scss';
+@import '../../../node_modules/bootstrap/scss/_variables.scss';
 
 ul.inline-list {
 	list-style: none;
@@ -12,6 +12,11 @@ ul.inline-list > li {
 
 ul.inline-list > li:FIRST-CHILD {
 	padding-left: 0px;
+}
+
+.list-group-item {
+	padding-top: $spacer-y*0.5;
+	padding-bottom: $spacer-y*0.5;
 }
 
 .line-through {

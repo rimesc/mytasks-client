@@ -55,11 +55,6 @@ export class ProjectTasksComponent implements OnInit {
     this.activeFilter = filter;
   }
 
-  applyFilter(filter: string): void {
-    let queryParams = filter === DEFAULT_FILTER ? {} : {filter: filter};
-    this.router.navigate(['.'], {relativeTo: this.route, queryParams: queryParams});
-  }
-
   createTask(task: TaskForm): void {
     this.taskService.createTask(this.project.id, task).then(t => this._tasks.push(t));
   }
