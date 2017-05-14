@@ -4,8 +4,8 @@ import { ComponentFixture } from '@angular/core/testing';
 
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 
-import { Priority } from '../api/priority';
-import { TitleCasePipe } from './title-case.pipe';
+import { Priority } from '../../api/priority';
+import { TitleCasePipe } from '../pipes/title-case.pipe';
 import { PriorityBadgeComponent } from './priority-badge.component';
 import { BadgeComponent } from './badge.component';
 

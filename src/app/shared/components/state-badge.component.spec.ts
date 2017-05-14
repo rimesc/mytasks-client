@@ -5,8 +5,8 @@ import { ComponentFixture } from '@angular/core/testing';
 
 import { Angular2FontawesomeModule } from 'angular2-fontawesome';
 
-import { State } from '../api/state';
-import { TitleCasePipe } from './title-case.pipe';
+import { State } from '../../api/state';
+import { TitleCasePipe } from '../pipes/title-case.pipe';
 import { StateBadgeComponent } from './state-badge.component';
 import { BadgeComponent } from './badge.component';
 

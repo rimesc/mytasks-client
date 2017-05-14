@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { State } from '../api/state';
+import { State } from '../../api/state';
 
 @Component({
   selector: 'my-state-badge',

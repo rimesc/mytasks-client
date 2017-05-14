@@ -3,7 +3,7 @@ import { OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Error } from '../../api/error';
-import { Message } from '../../shared/message';
+import { Message } from '../../shared/components/message';
 import { Project } from '../../api/project';
 import { Task, compareByLastModified } from '../../api/task';
 import { TaskForm } from '../../api/task-form';

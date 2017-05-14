@@ -7,11 +7,11 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { EnumValues } from 'enum-values';
 import { RlTagInputModule } from 'angular2-tag-input';
 
-import { TaskForm } from '../api/task-form';
-import { Priority } from '../api/priority';
+import { TaskForm } from '../../api/task-form';
+import { Priority } from '../../api/priority';
 import { TaskFormComponent } from './task-form.component';
-import { TitleCasePipe } from '../shared/title-case.pipe';
-import { EnumValuesPipe } from '../shared/enum-values.pipe';
+import { TitleCasePipe } from '../pipes/title-case.pipe';
+import { EnumValuesPipe } from '../pipes/enum-values.pipe';
 
 // temporarily disabled until I find a satisfactory tagging widget
 describe('TaskFormComponent', () => {

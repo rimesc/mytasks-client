@@ -11,7 +11,7 @@ import { Priority } from '../../api/priority';
 import { ProjectService } from '../../services/project.service';
 import { TaskService } from '../../services/task.service';
 import { ProjectDetailComponent } from './project-detail.component';
-import { PluralisePipe } from '../../shared/pluralise.pipe';
+import { PluralisePipe } from '../../shared/pipes/pluralise.pipe';
 import { ModalService } from '../../core/modal.service';
 
 import { ActivatedRouteStub, RouterStub } from '../../testing/router-stubs';

@@ -15,19 +15,19 @@ import { RlTagInputModule } from 'angular2-tag-input';
 import { MarkdownModule } from '../markdown/markdown.module';
 
 // components
-import { MessagesComponent } from './messages.component';
-import { BadgeComponent } from './badge.component';
-import { PriorityBadgeComponent } from './priority-badge.component';
-import { StateBadgeComponent } from './state-badge.component';
-import { TagComponent } from './tag.component';
-import { TaskBadgesComponent } from './task-badges.component';
-import { TaskFormComponent } from './task-form.component';
-import { ProjectHeaderComponent } from './project-header.component';
+import { MessagesComponent } from './components/messages.component';
+import { BadgeComponent } from './components/badge.component';
+import { PriorityBadgeComponent } from './components/priority-badge.component';
+import { StateBadgeComponent } from './components/state-badge.component';
+import { TagComponent } from './components/tag.component';
+import { TaskBadgesComponent } from './components/task-badges.component';
+import { TaskFormComponent } from './components/task-form.component';
+import { ProjectHeaderComponent } from './components/project-header.component';
 
 // pipes
-import { EnumValuesPipe } from './enum-values.pipe';
-import { TitleCasePipe } from './title-case.pipe';
-import { PluralisePipe } from './pluralise.pipe';
+import { EnumValuesPipe } from './pipes/enum-values.pipe';
+import { TitleCasePipe } from './pipes/title-case.pipe';
+import { PluralisePipe } from './pipes/pluralise.pipe';
 
 @NgModule({
   imports: [

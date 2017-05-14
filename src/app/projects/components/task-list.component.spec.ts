@@ -12,12 +12,12 @@ import { Priority } from '../../api/priority';
 import { State } from '../../api/state';
 import { Task } from '../../api/task';
 import { TaskListComponent } from './task-list.component';
-import { TaskBadgesComponent } from '../../shared/task-badges.component';
-import { PriorityBadgeComponent } from '../../shared/priority-badge.component';
-import { StateBadgeComponent } from '../../shared/state-badge.component';
-import { TagComponent } from '../../shared/tag.component';
-import { BadgeComponent } from '../../shared/badge.component';
-import { TitleCasePipe } from '../../shared/title-case.pipe';
+import { TaskBadgesComponent } from '../../shared/components/task-badges.component';
+import { PriorityBadgeComponent } from '../../shared/components/priority-badge.component';
+import { StateBadgeComponent } from '../../shared/components/state-badge.component';
+import { TagComponent } from '../../shared/components/tag.component';
+import { BadgeComponent } from '../../shared/components/badge.component';
+import { TitleCasePipe } from '../../shared/pipes/title-case.pipe';
 
 describe('TaskListComponent', () => {
 

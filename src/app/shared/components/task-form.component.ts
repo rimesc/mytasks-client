@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { Priority } from '../api/priority';
-import { TaskForm } from '../api/task-form';
+import { Priority } from '../../api/priority';
+import { TaskForm } from '../../api/task-form';
 
 class Tag {
   value: string;

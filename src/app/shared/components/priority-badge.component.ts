@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Priority } from '../api/priority';
+import { Priority } from '../../api/priority';
 
 @Component({
   selector: 'my-priority-badge',

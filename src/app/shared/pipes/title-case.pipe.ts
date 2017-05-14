@@ -1,4 +1,4 @@
-import { titleCase } from '../../../node_modules/change-case';
+import { titleCase } from '../../../../node_modules/change-case';
 
 import { Pipe, PipeTransform } from '@angular/core';
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { OnInit } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -8,7 +8,7 @@ import { EditTaskModalComponent } from '../modals/edit-task-modal.component';
 import { DeleteTaskModalComponent } from '../modals/delete-task-modal.component';
 
 import { Error } from '../../api/error';
-import { Message } from '../../shared/message';
+import { Message } from '../../shared/components/message';
 import { Task } from '../../api/task';
 import { TaskForm } from '../../api/task-form';
 import { Priority } from '../../api/priority';

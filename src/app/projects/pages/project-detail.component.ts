@@ -7,7 +7,7 @@ import { DeleteProjectModalComponent } from '../modals/delete-project-modal.comp
 import { EditProjectModalComponent } from '../modals/edit-project-modal.component';
 
 import { Error } from '../../api/error';
-import { Message } from '../../shared/message';
+import { Message } from '../../shared/components/message';
 import { Project } from '../../api/project';
 import { ProjectForm } from '../../api/project-form';
 import { TaskForm } from '../../api/task-form';
