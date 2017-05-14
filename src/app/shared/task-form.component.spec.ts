@@ -258,7 +258,7 @@ class Page {
     this.priorityOptions = this.fixture.debugElement.queryAll(By.css('select#taskPriority>option')).map(e => e.nativeElement);
     this.buttons = {
       save: this.fixture.debugElement.query(By.css('button.btn-primary')).nativeElement,
-      cancel: this.fixture.debugElement.query(By.css('button.btn-default')).nativeElement
+      cancel: this.fixture.debugElement.query(By.css('button.btn-secondary')).nativeElement
     };
   }
 
