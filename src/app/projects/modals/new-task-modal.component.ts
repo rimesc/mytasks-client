@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { ModalContent } from '../core/modal-content';
-import { TaskForm } from '../api/task-form';
+import { ModalContent } from '../../core/modal-content';
+import { TaskForm } from '../../api/task-form';
 
 @Component({
   selector: 'my-new-task-modal',

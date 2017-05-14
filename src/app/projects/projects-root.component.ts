@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'my-task',
+  selector: 'my-project',
   template: '<router-outlet></router-outlet>',
   styleUrls: []
 })
-export class TaskComponent {}
+export class ProjectsRootComponent {}

@@ -3,10 +3,10 @@ import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@a
 
 import { Observable } from 'rxjs/Observable';
 
-import { Task } from '../api/task';
-import { TaskService } from '../services/task.service';
-import { TaskFilters, DEFAULT_FILTER } from '../shared/task-filter';
-import { routeParam } from '../util/routing-util';
+import { Task } from '../../api/task';
+import { TaskService } from '../../services/task.service';
+import { TaskFilters, DEFAULT_FILTER } from '../../shared/task-filter';
+import { routeParam } from '../../util/routing-util';
 
 @Injectable()
 export class ProjectTasksResolver implements Resolve<Task[]> {

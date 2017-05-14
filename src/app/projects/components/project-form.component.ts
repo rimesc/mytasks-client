@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { ProjectForm } from '../api/project-form';
+import { ProjectForm } from '../../api/project-form';
 
 @Component({
   selector: 'my-project-form',

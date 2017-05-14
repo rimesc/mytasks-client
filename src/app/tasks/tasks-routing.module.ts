@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { TaskComponent } from './task.component';
-import { TaskListComponent } from './task-list.component';
-import { TaskDetailComponent } from './task-detail.component';
-import { TaskResolver } from './task-resolver.service';
+// pages
+import { TasksRootComponent } from './tasks-root.component';
+import { TaskListComponent } from './pages/task-list.component';
+import { TaskDetailComponent } from './pages/task-detail.component';
+
+// resolvers
+import { TaskResolver } from './resolvers/task-resolver.service';
 
 const routes: Routes = [
   {
@@ -13,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: ':taskId',
-    component: TaskComponent,
+    component: TasksRootComponent,
     children: [
       {
         path: '',

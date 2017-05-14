@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
-import { TaskForm } from '../api/task-form';
+import { TaskForm } from '../../api/task-form';
 
 @Component({
   selector: 'my-project-toolbar',

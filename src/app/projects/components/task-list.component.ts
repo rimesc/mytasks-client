@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 
-import { Priority } from '../api/priority';
-import { State } from '../api/state';
-import { Task } from '../api/task';
+import { Priority } from '../../api/priority';
+import { State } from '../../api/state';
+import { Task } from '../../api/task';
 
 @Component({
   selector: 'my-task-list',

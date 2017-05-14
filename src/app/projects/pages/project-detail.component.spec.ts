@@ -4,18 +4,18 @@ import { By } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-import { Project } from '../api/project';
-import { ProjectForm } from '../api/project-form';
-import { TaskForm } from '../api/task-form';
-import { Priority } from '../api/priority';
-import { ProjectService } from '../services/project.service';
-import { TaskService } from '../services/task.service';
+import { Project } from '../../api/project';
+import { ProjectForm } from '../../api/project-form';
+import { TaskForm } from '../../api/task-form';
+import { Priority } from '../../api/priority';
+import { ProjectService } from '../../services/project.service';
+import { TaskService } from '../../services/task.service';
 import { ProjectDetailComponent } from './project-detail.component';
-import { PluralisePipe } from '../shared/pluralise.pipe';
-import { ModalService } from '../core/modal.service';
+import { PluralisePipe } from '../../shared/pluralise.pipe';
+import { ModalService } from '../../core/modal.service';
 
-import { ActivatedRouteStub, RouterStub } from '../testing/router-stubs';
-import { ModalServiceStub } from '../testing/modal-stubs';
+import { ActivatedRouteStub, RouterStub } from '../../testing/router-stubs';
+import { ModalServiceStub } from '../../testing/modal-stubs';
 
 describe('ProjectDetailComponent', () => {
   let project: Project = {

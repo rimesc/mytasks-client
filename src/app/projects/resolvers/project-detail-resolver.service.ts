@@ -3,9 +3,9 @@ import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@a
 
 import { Observable } from 'rxjs/Observable';
 
-import { Project } from '../api/project';
-import { ProjectService } from '../services/project.service';
-import { routeParam } from '../util/routing-util';
+import { Project } from '../../api/project';
+import { ProjectService } from '../../services/project.service';
+import { routeParam } from '../../util/routing-util';
 
 @Injectable()
 export class ProjectDetailResolver implements Resolve<Project> {

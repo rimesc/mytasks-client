@@ -4,16 +4,16 @@ import { OnInit } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { EditTaskModalComponent } from './edit-task-modal.component';
-import { DeleteTaskModalComponent } from './delete-task-modal.component';
+import { EditTaskModalComponent } from '../modals/edit-task-modal.component';
+import { DeleteTaskModalComponent } from '../modals/delete-task-modal.component';
 
-import { Error } from '../api/error';
-import { Message } from '../shared/message';
-import { Task } from '../api/task';
-import { TaskForm } from '../api/task-form';
-import { Priority } from '../api/priority';
-import { State } from '../api/state';
-import { TaskService } from '../services/task.service';
+import { Error } from '../../api/error';
+import { Message } from '../../shared/message';
+import { Task } from '../../api/task';
+import { TaskForm } from '../../api/task-form';
+import { Priority } from '../../api/priority';
+import { State } from '../../api/state';
+import { TaskService } from '../../services/task.service';
 
 // TODO move these onto the API
 const transitions: Transition[] = [

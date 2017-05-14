@@ -4,19 +4,23 @@ import { NgModule } from '@angular/core';
 import { ProjectsRoutingModule } from './projects-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
+// pages
+import { ProjectsRootComponent } from './projects-root.component';
+import { ProjectDetailComponent } from './pages/project-detail.component';
+import { ProjectListComponent } from './pages/project-list.component';
+import { ProjectTasksComponent } from './pages/project-tasks.component';
+
 // components
-import { DeleteProjectModalComponent } from './delete-project-modal.component';
-import { EditProjectModalComponent } from './edit-project-modal.component';
-import { NewProjectModalComponent } from './new-project-modal.component';
-import { NewTaskButtonComponent } from './new-task-button.component';
-import { NewTaskModalComponent } from './new-task-modal.component';
-import { ProjectComponent } from './project.component';
-import { ProjectDetailComponent } from './project-detail.component';
-import { ProjectFormComponent } from './project-form.component';
-import { ProjectListComponent } from './project-list.component';
-import { ProjectTasksComponent } from './project-tasks.component';
-import { ProjectToolbarComponent } from './project-toolbar.component';
-import { TaskListComponent } from './task-list.component';
+import { NewTaskButtonComponent } from './components/new-task-button.component';
+import { ProjectFormComponent } from './components/project-form.component';
+import { ProjectToolbarComponent } from './components/project-toolbar.component';
+import { TaskListComponent } from './components/task-list.component';
+
+// modal dialogs
+import { DeleteProjectModalComponent } from './modals/delete-project-modal.component';
+import { EditProjectModalComponent } from './modals/edit-project-modal.component';
+import { NewProjectModalComponent } from './modals/new-project-modal.component';
+import { NewTaskModalComponent } from './modals/new-task-modal.component';
 
 @NgModule({
   imports: [
@@ -31,7 +35,7 @@ import { TaskListComponent } from './task-list.component';
     NewProjectModalComponent,
     NewTaskButtonComponent,
     NewTaskModalComponent,
-    ProjectComponent,
+    ProjectsRootComponent,
     ProjectDetailComponent,
     ProjectFormComponent,
     ProjectListComponent,

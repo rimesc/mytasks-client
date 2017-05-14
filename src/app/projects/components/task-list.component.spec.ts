@@ -2,22 +2,22 @@ import { TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
-import { RouterLinkStubDirective } from '../testing/router-stubs';
+import { RouterLinkStubDirective } from '../../testing/router-stubs';
 
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { MomentModule } from 'angular2-moment';
 import * as moment from 'moment/moment';
 
-import { Priority } from '../api/priority';
-import { State } from '../api/state';
-import { Task } from '../api/task';
+import { Priority } from '../../api/priority';
+import { State } from '../../api/state';
+import { Task } from '../../api/task';
 import { TaskListComponent } from './task-list.component';
-import { TaskBadgesComponent } from '../shared/task-badges.component';
-import { PriorityBadgeComponent } from '../shared/priority-badge.component';
-import { StateBadgeComponent } from '../shared/state-badge.component';
-import { TagComponent } from '../shared/tag.component';
-import { BadgeComponent } from '../shared/badge.component';
-import { TitleCasePipe } from '../shared/title-case.pipe';
+import { TaskBadgesComponent } from '../../shared/task-badges.component';
+import { PriorityBadgeComponent } from '../../shared/priority-badge.component';
+import { StateBadgeComponent } from '../../shared/state-badge.component';
+import { TagComponent } from '../../shared/tag.component';
+import { BadgeComponent } from '../../shared/badge.component';
+import { TitleCasePipe } from '../../shared/title-case.pipe';
 
 describe('TaskListComponent', () => {
 

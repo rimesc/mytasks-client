@@ -1,8 +1,8 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
-import { ModalService } from '../core/modal.service';
-import { TaskForm } from '../api/task-form';
-import { NewTaskModalComponent } from './new-task-modal.component';
+import { ModalService } from '../../core/modal.service';
+import { TaskForm } from '../../api/task-form';
+import { NewTaskModalComponent } from '../modals/new-task-modal.component';
 
 @Component({
   selector: 'my-new-task-button',

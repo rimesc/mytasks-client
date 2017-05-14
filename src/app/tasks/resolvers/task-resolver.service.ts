@@ -3,9 +3,9 @@ import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@a
 
 import { Observable } from 'rxjs/Observable';
 
-import { Task } from '../api/task';
-import { TaskService } from '../services/task.service';
-import { routeParam } from '../util/routing-util';
+import { Task } from '../../api/task';
+import { TaskService } from '../../services/task.service';
+import { routeParam } from '../../util/routing-util';
 
 @Injectable()
 export class TaskResolver implements Resolve<Task> {

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { TaskForm } from '../api/task-form';
+import { TaskForm } from '../../api/task-form';
 
 @Component({
   selector: 'my-edit-task-modal',

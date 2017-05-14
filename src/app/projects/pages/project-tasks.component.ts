@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { Error } from '../api/error';
-import { Message } from '../shared/message';
-import { Project } from '../api/project';
-import { Task, compareByLastModified } from '../api/task';
-import { TaskForm } from '../api/task-form';
-import { TaskService } from '../services/task.service';
-import { TaskFilters, DEFAULT_FILTER } from '../shared/task-filter';
+import { Error } from '../../api/error';
+import { Message } from '../../shared/message';
+import { Project } from '../../api/project';
+import { Task, compareByLastModified } from '../../api/task';
+import { TaskForm } from '../../api/task-form';
+import { TaskService } from '../../services/task.service';
+import { TaskFilters, DEFAULT_FILTER } from '../../shared/task-filter';
 
 @Component({
   selector: 'my-project-tasks',

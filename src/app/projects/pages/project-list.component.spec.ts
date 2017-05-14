@@ -3,14 +3,14 @@ import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-import { Project } from '../api/project';
-import { ProjectForm } from '../api/project-form';
-import { ProjectService } from '../services/project.service';
+import { Project } from '../../api/project';
+import { ProjectForm } from '../../api/project-form';
+import { ProjectService } from '../../services/project.service';
 import { ProjectListComponent } from './project-list.component';
-import { ModalService } from '../core/modal.service';
+import { ModalService } from '../../core/modal.service';
 
-import { RouterLinkStubDirective } from '../testing/router-stubs';
-import { ModalServiceStub } from '../testing/modal-stubs';
+import { RouterLinkStubDirective } from '../../testing/router-stubs';
+import { ModalServiceStub } from '../../testing/modal-stubs';
 
 describe('ProjectListComponent', () => {
   let projects: Project[] = [

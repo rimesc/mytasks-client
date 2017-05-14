@@ -2,17 +2,17 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { OnInit } from '@angular/core';
 
-import { ModalService } from '../core/modal.service';
-import { DeleteProjectModalComponent } from './delete-project-modal.component';
-import { EditProjectModalComponent } from './edit-project-modal.component';
+import { ModalService } from '../../core/modal.service';
+import { DeleteProjectModalComponent } from '../modals/delete-project-modal.component';
+import { EditProjectModalComponent } from '../modals/edit-project-modal.component';
 
-import { Error } from '../api/error';
-import { Message } from '../shared/message';
-import { Project } from '../api/project';
-import { ProjectForm } from '../api/project-form';
-import { TaskForm } from '../api/task-form';
-import { ProjectService } from '../services/project.service';
-import { TaskService } from '../services/task.service';
+import { Error } from '../../api/error';
+import { Message } from '../../shared/message';
+import { Project } from '../../api/project';
+import { ProjectForm } from '../../api/project-form';
+import { TaskForm } from '../../api/task-form';
+import { ProjectService } from '../../services/project.service';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'my-project-detail',

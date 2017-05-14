@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 
-import { ModalService } from '../core/modal.service';
-import { NewProjectModalComponent } from './new-project-modal.component';
-import { Project } from '../api/project';
-import { ProjectForm } from '../api/project-form';
-import { ProjectService } from '../services/project.service';
+import { ModalService } from '../../core/modal.service';
+import { NewProjectModalComponent } from '../modals/new-project-modal.component';
+import { Project } from '../../api/project';
+import { ProjectForm } from '../../api/project-form';
+import { ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'my-project-list',

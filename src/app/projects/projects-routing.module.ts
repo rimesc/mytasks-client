@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ProjectListComponent } from './project-list.component';
-import { ProjectComponent } from './project.component';
-import { ProjectDetailComponent } from './project-detail.component';
-import { ProjectTasksComponent } from './project-tasks.component';
+// pages
+import { ProjectsRootComponent } from './projects-root.component';
+import { ProjectListComponent } from './pages/project-list.component';
+import { ProjectDetailComponent } from './pages/project-detail.component';
+import { ProjectTasksComponent } from './pages/project-tasks.component';
 
-import { ProjectDetailResolver } from './project-detail-resolver.service';
-import { ProjectTasksResolver } from './project-tasks-resolver.service';
+// resolvers
+import { ProjectDetailResolver } from './resolvers/project-detail-resolver.service';
+import { ProjectTasksResolver } from './resolvers/project-tasks-resolver.service';
 
 const routes: Routes = [
   {
@@ -16,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: ':projectId',
-    component: ProjectComponent,
+    component: ProjectsRootComponent,
     children: [
       {
         path: '',
