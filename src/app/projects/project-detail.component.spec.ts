@@ -11,6 +11,7 @@ import { Priority } from '../api/priority';
 import { ProjectService } from '../services/project.service';
 import { TaskService } from '../services/task.service';
 import { ProjectDetailComponent } from './project-detail.component';
+import { PluralisePipe } from '../shared/pluralise.pipe';
 import { ModalService } from '../core/modal.service';
 
 import { ActivatedRouteStub, RouterStub } from '../testing/router-stubs';
@@ -53,7 +54,7 @@ describe('ProjectDetailComponent', () => {
     };
     TestBed.configureTestingModule({
       schemas: [NO_ERRORS_SCHEMA],
-      declarations: [ ProjectDetailComponent ],
+      declarations: [ ProjectDetailComponent, PluralisePipe  ],
       providers: [
         ProjectDetailComponent,
         { provide: ProjectService, useValue: fakeProjectService },
@@ -84,8 +85,16 @@ describe('ProjectDetailComponent', () => {
       expect(page.messages.properties['messages']).toBeEmptyArray();
     });
 
-    it('should display the project in the header', () => {
-      expect(page.header.properties['project']).toEqual(project);
+    it('should display the correct project name', () => {
+      expect(page.title.nativeElement.textContent).toEqual('My sample project');
+    });
+
+    it('should display the correct project description', () => {
+      expect(page.description.nativeElement.textContent).toEqual('This is my sample project.');
+    });
+
+    it('should display the correct number of open tasks', () => {
+      expect(page.openTasks.nativeElement.textContent).toEqual('2 open tasks');
     });
 
     it('should display the project notes', () => {
@@ -108,8 +117,8 @@ describe('ProjectDetailComponent', () => {
       expect(page.messages.properties['messages'][0].detail).toEqual('The requested project could not be found.');
     });
 
-    it('should not display a project header', inject([ProjectService], (service: ProjectService) => {
-      expect(page.header).toBeNull();
+    it('should not display a project title', inject([ProjectService], (service: ProjectService) => {
+      expect(page.title).toBeNull();
     }));
 
     it('should not display any project notes', () => {
@@ -259,7 +268,9 @@ class Page {
   createTaskSpy: jasmine.Spy;
 
   messages: DebugElement;
-  header: DebugElement;
+  title: DebugElement;
+  description: DebugElement;
+  openTasks: DebugElement;
   toolbar: DebugElement;
   notes: DebugElement;
 
@@ -275,7 +286,9 @@ class Page {
   addPageElements() {
     this.component = this.fixture.componentInstance;
     this.messages = this.fixture.debugElement.query(By.css('my-messages'));
-    this.header = this.fixture.debugElement.query(By.css('my-project-header'));
+    this.title = this.fixture.debugElement.query(By.css('h1'));
+    this.description = this.fixture.debugElement.query(By.css('.lead'));
+    this.openTasks = this.fixture.debugElement.query(By.css('.open-tasks'));
     this.toolbar = this.fixture.debugElement.query(By.css('my-project-toolbar'));
     this.notes = this.fixture.debugElement.query(By.css('my-markdown-card'));
   }

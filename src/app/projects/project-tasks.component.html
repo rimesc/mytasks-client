@@ -2,7 +2,7 @@
 <div *ngIf="project">
   <div class="d-flex justify-content-center btn-toolbar">
     <div class="mr-auto">
-    	<my-mini-project-header [project]="project"></my-mini-project-header>
+    	<my-project-header [project]="project"></my-project-header>
     </div>
     <div class="d-flex ml-auto align-items-center navbar-form">
       <my-new-task-button (submit)="createTask($event)"></my-new-task-button>
