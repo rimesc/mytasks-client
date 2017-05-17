@@ -7,11 +7,10 @@ import { FormsModule } from '@angular/forms';
 // external modules
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
+import { MarkdownModule } from 'angular2-markdown';
 
 // components
-import { MarkdownComponent } from './markdown.component';
 import { MarkdownCardComponent } from './markdown-card.component';
-import { EditNotesModalComponent } from './edit-notes-modal.component';
 
 @NgModule({
   imports: [
@@ -21,21 +20,15 @@ import { EditNotesModalComponent } from './edit-notes-modal.component';
     // external modules
     Angular2FontawesomeModule,
     NgbModule,
+    MarkdownModule.forRoot()
   ],
   declarations: [
     // components
-    EditNotesModalComponent,
-    MarkdownComponent,
     MarkdownCardComponent
   ],
   exports: [
     // components
-    MarkdownComponent,
     MarkdownCardComponent
-  ],
-  entryComponents: [
-    // modal dialogs
-    EditNotesModalComponent
   ]
 })
-export class MarkdownModule { }
+export class MarkdownNotesModule { }

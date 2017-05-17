@@ -12,7 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RlTagInputModule } from 'angular2-tag-input';
 
 // feature modules
-import { MarkdownModule } from '../markdown/markdown.module';
+import { MarkdownNotesModule } from '../markdown/markdown-notes.module';
 
 // components
 import { MessagesComponent } from './components/messages.component';
@@ -37,12 +37,12 @@ import { PluralisePipe } from './pipes/pluralise.pipe';
     RouterModule,
     // external modules
     Angular2FontawesomeModule,
-    MarkdownModule,
+    MarkdownNotesModule,
     MomentModule,
     NgbModule,
     RlTagInputModule,
     // feature modules
-    MarkdownModule
+    MarkdownNotesModule
   ],
   declarations: [
     // components
@@ -66,7 +66,7 @@ import { PluralisePipe } from './pipes/pluralise.pipe';
     NgbModule,
     // external modules
     Angular2FontawesomeModule,
-    MarkdownModule,
+    MarkdownNotesModule,
     MomentModule,
     // components
     MessagesComponent,

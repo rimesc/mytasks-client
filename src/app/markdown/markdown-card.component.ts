@@ -1,16 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-import { Notes } from '../api/notes';
-import { EditNotesModalComponent } from './edit-notes-modal.component';
-
 @Component({
   selector: 'my-markdown-card',
   templateUrl: './markdown-card.component.html',
   styleUrls: ['./markdown-card.component.scss']
 })
 export class MarkdownCardComponent {
+
   @Input()
   title: string = 'Notes';
 
@@ -18,22 +14,44 @@ export class MarkdownCardComponent {
   editable: boolean = false;
 
   @Input()
-  notes: Notes;
+  notes: string;
 
   @Output()
   update = new EventEmitter<string>();
 
-  constructor(private modalService: NgbModal) { }
+  draft: string;
 
-  edit(): void {
-    let ref = this.modalService.open(EditNotesModalComponent);
-    let markdown = this.notes ? this.notes.raw : '';
-    (ref.componentInstance as EditNotesModalComponent).markdown = markdown;
-    ref.result.then((text: string) => this.update.emit(text), () => {});
+  activeTab: Tab = 'edit';
+
+  get hasNotes(): boolean {
+    return this.notes && this.notes.length > 0;
   }
 
-  hasNotes(): boolean {
-    return this.notes && this.notes.raw.length > 0;
+  get editing() {
+    return this.draft !== undefined;
+  }
+
+  edit(): void {
+    if (this.editable) {
+      this.draft = this.notes;
+      this.activeTab = 'edit';
+    }
+  }
+
+  switchTab(tab: Tab): void {
+    this.activeTab = tab;
+  }
+
+  save(): void {
+    this.notes = this.draft;
+    this.draft = undefined;
+    this.update.emit(this.notes);
+  }
+
+  cancel(): void {
+    this.draft = undefined;
   }
 
 }
+
+type Tab = 'edit' | 'preview';

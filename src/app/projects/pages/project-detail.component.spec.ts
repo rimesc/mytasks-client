@@ -98,7 +98,7 @@ describe('ProjectDetailComponent', () => {
     });
 
     it('should display the project notes', () => {
-      expect(page.notes.properties['notes']).toEqual(project.notes);
+      expect(page.notes.properties['notes']).toEqual(project.notes.raw);
     });
 
   });

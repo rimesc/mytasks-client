@@ -22,5 +22,5 @@
 			</div>
 		</div>
 	</div>
-	<my-markdown-card title="Description" editable="true" [notes]="task.notes" (update)="updateNotes($event)"></my-markdown-card>
+	<my-markdown-card title="Description" editable="true" [notes]="task.notes.raw" (update)="updateNotes($event)"></my-markdown-card>
 </div>
