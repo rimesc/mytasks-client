@@ -174,10 +174,9 @@ describe('the project page', () => {
 
   describe('the edit notes button', () => {
 
-    it('opens the edit notes modal when clicked', () => {
+    it('switches to editing mode when clicked', () => {
       page.editNotesButton.click();
-      page.editNotesModal.waitUntilOpen();
-      expect(page.editNotesModal.title).toEqual('Edit Notes');
+      browser.wait(ExpectedConditions.visibilityOf(page.notesEditor.markdownInput.input));
     });
 
   });
@@ -190,18 +189,16 @@ describe('the project page', () => {
 
     it('does not modify the notes when cancelled', () => {
       page.editNotesButton.click();
-      page.editNotesModal.waitUntilOpen();
-      page.editNotesModal.markdownInput.enter('These notes have been edited.');
-      page.editNotesModal.cancel();
+      page.notesEditor.markdownInput.enter('These notes have been edited.');
+      page.notesEditor.cancel();
       expect(page.notes).toStartWith('Lorem ipsum');
       expect(page.notes).toEndWith('Cras tempor nunc');
     });
 
-    it('modifies the notes and updates the page when submitted', () => {
+    it('modifies the notes and updates the page when saved', () => {
       page.editNotesButton.click();
-      page.editNotesModal.waitUntilOpen();
-      page.editNotesModal.markdownInput.enter('These notes have been edited.');
-      page.editNotesModal.submit();
+      page.notesEditor.markdownInput.enter('These notes have been edited.');
+      page.notesEditor.save();
       expect(page.notes).toEqual('These notes have been edited.');
     });
 
