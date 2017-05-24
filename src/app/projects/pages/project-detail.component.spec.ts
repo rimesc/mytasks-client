@@ -290,7 +290,7 @@ class Page {
     this.description = this.fixture.debugElement.query(By.css('.lead'));
     this.openTasks = this.fixture.debugElement.query(By.css('.open-tasks'));
     this.toolbar = this.fixture.debugElement.query(By.css('my-project-toolbar'));
-    this.notes = this.fixture.debugElement.query(By.css('my-markdown-card'));
+    this.notes = this.fixture.debugElement.query(By.css('my-notes'));
   }
 
   get project() {

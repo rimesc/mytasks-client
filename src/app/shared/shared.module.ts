@@ -10,9 +10,7 @@ import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawe
 import { MomentModule } from 'angular2-moment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RlTagInputModule } from 'angular2-tag-input';
-
-// feature modules
-import { MarkdownNotesModule } from '../markdown/markdown-notes.module';
+import { MarkdownModule } from 'angular2-markdown';
 
 // components
 import { MessagesComponent } from './components/messages.component';
@@ -23,6 +21,7 @@ import { TagComponent } from './components/tag.component';
 import { TaskBadgesComponent } from './components/task-badges.component';
 import { TaskFormComponent } from './components/task-form.component';
 import { ProjectHeaderComponent } from './components/project-header.component';
+import { NotesComponent } from './components/notes.component';
 
 // pipes
 import { EnumValuesPipe } from './pipes/enum-values.pipe';
@@ -37,12 +36,10 @@ import { PluralisePipe } from './pipes/pluralise.pipe';
     RouterModule,
     // external modules
     Angular2FontawesomeModule,
-    MarkdownNotesModule,
     MomentModule,
     NgbModule,
     RlTagInputModule,
-    // feature modules
-    MarkdownNotesModule
+    MarkdownModule.forRoot()
   ],
   declarations: [
     // components
@@ -54,6 +51,7 @@ import { PluralisePipe } from './pipes/pluralise.pipe';
     TaskBadgesComponent,
     TaskFormComponent,
     ProjectHeaderComponent,
+    NotesComponent,
     // pipes
     EnumValuesPipe,
     TitleCasePipe,
@@ -63,10 +61,9 @@ import { PluralisePipe } from './pipes/pluralise.pipe';
     // angular modules
     CommonModule,
     FormsModule,
-    NgbModule,
     // external modules
+    NgbModule,
     Angular2FontawesomeModule,
-    MarkdownNotesModule,
     MomentModule,
     // components
     MessagesComponent,
@@ -77,6 +74,7 @@ import { PluralisePipe } from './pipes/pluralise.pipe';
     TaskBadgesComponent,
     TaskFormComponent,
     ProjectHeaderComponent,
+    NotesComponent,
     // pipes
     EnumValuesPipe,
     TitleCasePipe,

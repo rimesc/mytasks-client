@@ -1,11 +1,11 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'my-markdown-card',
-  templateUrl: './markdown-card.component.html',
-  styleUrls: ['./markdown-card.component.scss']
+  selector: 'my-notes',
+  templateUrl: './notes.component.html',
+  styleUrls: ['./notes.component.scss']
 })
-export class MarkdownCardComponent {
+export class NotesComponent {
 
   @Input()
   title: string = 'Notes';

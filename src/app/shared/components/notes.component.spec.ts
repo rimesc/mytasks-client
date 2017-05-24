@@ -6,22 +6,22 @@ import { FormsModule } from '@angular/forms';
 
 import { MarkdownModule } from 'angular2-markdown';
 
-import { click } from '../testing/component-utils';
-import { MarkdownCardComponent } from './markdown-card.component';
+import { click } from '../../testing/component-utils';
+import { NotesComponent } from './notes.component';
 
-describe('MarkdownCardComponent', () => {
+describe('NotesComponent', () => {
   const TITLE = 'My notes';
   const MARKDOWN = `# Lorem ipsum
   Lorem ipsum dolor sit amet, [consectetur adipiscing elit](http://www.example.com).
   `;
 
-  let fixture: ComponentFixture<MarkdownCardComponent>;
-  let component: MarkdownCardComponent;
+  let fixture: ComponentFixture<NotesComponent>;
+  let component: NotesComponent;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ MarkdownModule.forRoot(), FormsModule ],
-      declarations: [ MarkdownCardComponent ],
+      declarations: [ NotesComponent ],
       schemas: [NO_ERRORS_SCHEMA]
     });
   });
@@ -216,7 +216,7 @@ describe('MarkdownCardComponent', () => {
   });
 
   function createComponent() {
-    fixture = TestBed.createComponent(MarkdownCardComponent);
+    fixture = TestBed.createComponent(NotesComponent);
     component = fixture.componentInstance;
   }
 
@@ -227,7 +227,7 @@ class ViewingPage {
 
   title: DebugElement;
 
-  constructor(private fixture: ComponentFixture<MarkdownCardComponent>) { }
+  constructor(private fixture: ComponentFixture<NotesComponent>) { }
 
   addPageElements(): void {
     this.title = this.fixture.debugElement.query(By.css('h2')).nativeElement.textContent;
@@ -259,7 +259,7 @@ class EditingPage {
   saveButton: DebugElement;
   cancelButton: DebugElement;
 
-  constructor(private fixture: ComponentFixture<MarkdownCardComponent>) { }
+  constructor(private fixture: ComponentFixture<NotesComponent>) { }
 
   addPageElements(): void {
     this.tabs = this.fixture.debugElement.queryAll(By.css('.nav-link'));
