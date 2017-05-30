@@ -8,28 +8,14 @@ div.card {
 	margin-top: 1.5rem;
 }
 
-.card-header {
-	padding: 0;
+.card-header.editing {
+	// reduce the padding when displaying navigation tabs
+	padding-top: 0.625 * $spacer-y;
+	padding-bottom: 0.625 * $spacer-y;
 }
 
-.card-header-content {
-	padding: $card-spacer-y $card-spacer-x;
-}
-
-.card-header-content.editing {
-	padding-bottom: 0;
-	padding-top: 0.5 * $spacer-y;
-}
-
-.card-header .nav-tabs {
-	border-bottom: 0;
-}
-
-.card-header .buttons {
-	padding-bottom: 0.5rem;
-}
-
-.card-header .nav-tabs {
+.card-header-tabs {
+	// style the tabs as links, even though they don't navigate anywhere
 	span.nav-link {
 		color: $link-color;
 		text-decoration: $link-decoration;
@@ -38,7 +24,6 @@ div.card {
 			color: $link-hover-color;
 		}
 	}
-
 	span.nav-link.active {
     color: $nav-tabs-active-link-hover-color;
   }

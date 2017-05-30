@@ -20,24 +20,22 @@
 		</div>
 	</div>
 	<div *ngIf="editing">
-		<div class="card-header">
-			<div class="card-header-content editing" [hidden]="!editing">
-				<div class="d-flex justify-content-center">
-					<div class="mr-auto">
-						<ul class="nav nav-tabs">
-							<li class="nav-item">
-								<span class="nav-link" [class.active]="activeTab === 'edit'" role="tab" (click)="switchTab('edit')"><fa name="edit"></fa> Edit</span>
-							</li>
-							<li class="nav-item">
-								<span class="nav-link" [class.active]="activeTab === 'preview'" role="tab" (click)="switchTab('preview')"><fa name="eye"></fa> Preview</span>
-							</li>
-						</ul>
-					</div>
-					<div class="d-flex ml-auto align-items-center">
-						<div class="buttons">
-							<button type="button" class="btn btn-sm btn-primary" [disabled]="!editor.dirty" (click)="save()">Save</button>
-							<button type="button" class="btn btn-sm btn-secondary" (click)="cancel()">Cancel</button>
-						</div>
+		<div class="card-header editing">
+			<div class="d-flex justify-content-center">
+				<div class="mr-auto">
+					<ul class="nav nav-tabs card-header-tabs">
+						<li class="nav-item">
+							<span class="nav-link" [class.active]="activeTab === 'edit'" role="tab" (click)="switchTab('edit')"><fa name="edit"></fa> Edit</span>
+						</li>
+						<li class="nav-item">
+							<span class="nav-link" [class.active]="activeTab === 'preview'" role="tab" (click)="switchTab('preview')"><fa name="eye"></fa> Preview</span>
+						</li>
+					</ul>
+				</div>
+				<div class="d-flex ml-auto align-items-center">
+					<div class="buttons">
+						<button type="button" class="btn btn-sm btn-primary" [disabled]="!editor.dirty" (click)="save()">Save</button>
+						<button type="button" class="btn btn-sm btn-secondary" (click)="cancel()">Cancel</button>
 					</div>
 				</div>
 			</div>
