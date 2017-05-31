@@ -7,6 +7,9 @@ import { ProjectListComponent } from './pages/project-list.component';
 import { ProjectDetailComponent } from './pages/project-detail.component';
 import { ProjectTasksComponent } from './pages/project-tasks.component';
 
+// guards
+import { UnsavedChangesGuard } from '../core/unsaved-changes-guard.service';
+
 // resolvers
 import { ProjectDetailResolver } from './resolvers/project-detail-resolver.service';
 import { ProjectTasksResolver } from './resolvers/project-tasks-resolver.service';
@@ -23,6 +26,7 @@ const routes: Routes = [
       {
         path: '',
         component: ProjectDetailComponent,
+        canDeactivate: [UnsavedChangesGuard],
         resolve: {
           project: ProjectDetailResolver
         }

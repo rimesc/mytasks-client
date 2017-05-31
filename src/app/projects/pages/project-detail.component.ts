@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { OnInit } from '@angular/core';
 
 import { ModalService } from '../../core/modal.service';
+import { UnsavedChanges } from '../../core/unsaved-changes-guard.service';
 import { DeleteProjectModalComponent } from '../modals/delete-project-modal.component';
 import { EditProjectModalComponent } from '../modals/edit-project-modal.component';
+import { NotesComponent } from '../../shared/components/notes.component';
 
 import { Error } from '../../api/error';
 import { Message } from '../../shared/components/message';
@@ -19,7 +21,11 @@ import { TaskService } from '../../services/task.service';
   templateUrl: './project-detail.component.html',
   styleUrls: ['./project-detail.component.scss']
 })
-export class ProjectDetailComponent implements OnInit {
+export class ProjectDetailComponent implements OnInit, UnsavedChanges {
+
+  @ViewChild(NotesComponent)
+  private notesComponent: NotesComponent;
+
   project: Project;
   messages: Message[] = [];
 
@@ -36,6 +42,10 @@ export class ProjectDetailComponent implements OnInit {
       },
       (error: Error) => this.messages.push({ code: error.code, detail: error.message, severity: 'danger'})
     );
+  }
+
+  hasUnsavedChanges(): boolean {
+    return this.notesComponent.hasUnsavedChanges();
   }
 
   updateProject(form: ProjectForm): void {

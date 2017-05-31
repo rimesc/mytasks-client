@@ -1,11 +1,14 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { NgControl } from '@angular/forms';
+
+import { UnsavedChanges } from '../../core/unsaved-changes-guard.service';
 
 @Component({
   selector: 'my-notes',
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.scss']
 })
-export class NotesComponent {
+export class NotesComponent implements UnsavedChanges {
 
   @Input()
   title: string = 'Notes';
@@ -19,6 +22,9 @@ export class NotesComponent {
   @Output()
   update = new EventEmitter<string>();
 
+  @ViewChild('editor')
+  editor: NgControl;
+
   draft: string;
 
   activeTab: Tab = 'edit';
@@ -29,6 +35,10 @@ export class NotesComponent {
 
   get editing() {
     return this.draft !== undefined;
+  }
+
+  hasUnsavedChanges(): boolean {
+    return this.editing && this.editor.dirty;
   }
 
   edit(): void {
