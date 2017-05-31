@@ -23,6 +23,9 @@ import { TaskFormComponent } from './components/task-form.component';
 import { ProjectHeaderComponent } from './components/project-header.component';
 import { NotesComponent } from './components/notes.component';
 
+// modals
+import { DiscardChangesModalComponent } from './components/discard-changes-modal.component';
+
 // pipes
 import { EnumValuesPipe } from './pipes/enum-values.pipe';
 import { TitleCasePipe } from './pipes/title-case.pipe';
@@ -55,7 +58,12 @@ import { PluralisePipe } from './pipes/pluralise.pipe';
     // pipes
     EnumValuesPipe,
     TitleCasePipe,
-    PluralisePipe
+    PluralisePipe,
+    // modals
+    DiscardChangesModalComponent
+  ],
+  entryComponents: [
+    DiscardChangesModalComponent
   ],
   exports: [
     // angular modules
