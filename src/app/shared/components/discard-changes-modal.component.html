@@ -1,0 +1,11 @@
+<form (ngSubmit)="submit()">
+	<div class="modal-body">
+			Are you sure you want to discard all unsaved changes?
+	</div>
+	<div class="modal-footer">
+		<div>
+			<button type="submit" class="btn btn-sm btn-primary">Yes</button>
+			<button type="button" class="btn btn-sm btn-secondary" (click)="cancel()">No</button>
+		</div>
+	</div>
+</form>

@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { OnInit } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { CanDeactivateComponent } from '../../core/unsaved-changes-guard.service';
 import { EditTaskModalComponent } from '../modals/edit-task-modal.component';
 import { DeleteTaskModalComponent } from '../modals/delete-task-modal.component';
+import { NotesComponent } from '../../shared/components/notes.component';
 
 import { Error } from '../../api/error';
 import { Message } from '../../shared/components/message';
@@ -28,7 +30,11 @@ const transitions: Transition[] = [
   templateUrl: './task-detail.component.html',
   styleUrls: ['./task-detail.component.scss']
 })
-export class TaskDetailComponent implements OnInit {
+export class TaskDetailComponent implements OnInit, CanDeactivateComponent {
+
+  @ViewChild(NotesComponent)
+  private notesComponent: NotesComponent;
+
   task: Task;
   priorities = Priority;
   messages: Message[] = [];
@@ -40,6 +46,10 @@ export class TaskDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTask();
+  }
+
+  canDeactivate(): Promise<boolean> {
+    return this.notesComponent.tryCancel().then(() => true).catch(() => false);
   }
 
   getTask(): void {

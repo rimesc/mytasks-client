@@ -1,0 +1,54 @@
+<div class="card">
+	<div *ngIf="!editing">
+		<div class="card-header">
+			<div class="card-header-content d-flex justify-content-center">
+				<div class="d-flex mr-auto align-items-center">
+					<h2>{{title}}</h2>
+				</div>
+				<div *ngIf="editable" class="d-flex ml-auto align-items-center">
+					<a role="button" title="Edit" class="btn edit" (click)="edit()">
+						<fa name="edit"></fa>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="card-block">
+			<markdown *ngIf="hasNotes" [data]="notes"></markdown>
+			<div *ngIf="!hasNotes" class="placeholder">
+				No notes.
+			</div>
+		</div>
+	</div>
+	<div *ngIf="editing">
+		<div class="card-header editing">
+			<div class="d-flex justify-content-center">
+				<div class="mr-auto">
+					<ul class="nav nav-tabs card-header-tabs">
+						<li class="nav-item">
+							<span class="nav-link" [class.active]="activeTab === 'edit'" role="tab" (click)="switchTab('edit')"><fa name="edit"></fa> Edit</span>
+						</li>
+						<li class="nav-item">
+							<span class="nav-link" [class.active]="activeTab === 'preview'" role="tab" (click)="switchTab('preview')"><fa name="eye"></fa> Preview</span>
+						</li>
+					</ul>
+				</div>
+				<div class="d-flex ml-auto align-items-center">
+					<div class="buttons">
+						<button type="button" class="btn btn-sm btn-primary" [disabled]="!editor.dirty" (click)="save()">Save</button>
+						<button type="button" class="btn btn-sm btn-secondary" (click)="cancel()">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card-block">
+			<div class="tab-content">
+				<div class="tab-pane" [class.active]="activeTab === 'edit'" id="edit-tab-content">
+					<textarea [(ngModel)]="draft" rows="40" class="form-control" id="markdown" name="markdown" placeholder="Add some notes." #editor="ngModel"></textarea>
+				</div>
+				<div class="tab-pane" [class.active]="activeTab === 'preview'" id="preview-tab-content">
+					<markdown [data]="draft"></markdown>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

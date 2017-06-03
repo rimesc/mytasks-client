@@ -1,0 +1,95 @@
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import '../../../../node_modules/bootstrap/scss/_variables.scss';
+@import '../../../../node_modules/bootstrap/scss/_type.scss';
+@import '../../../../node_modules/bootstrap/scss/utilities/_borders.scss';
+@import '../../../../node_modules/bootstrap/scss/utilities/_spacing.scss';
+
+div.card {
+	margin-top: 1.5rem;
+}
+
+.card-header.editing {
+	// reduce the padding when displaying navigation tabs
+	padding-top: 0.625 * $spacer-y;
+}
+
+.card-header-tabs {
+	// style the tabs as links, even though they don't navigate anywhere
+	span.nav-link {
+		color: $link-color;
+		text-decoration: $link-decoration;
+		cursor: pointer;
+		@include hover-focus {
+			color: $link-hover-color;
+		}
+	}
+	span.nav-link.active {
+    color: $nav-tabs-active-link-hover-color;
+  }
+}
+
+.edit {
+	color: $black;
+	opacity: 0.2;
+	float: right;
+	padding: 0;
+	border: 0;
+	background: none;
+}
+
+.edit:HOVER {
+	color: $black;
+	opacity: 1.0;
+}
+
+h2 {
+	width: 100%;
+	font-size: $font-size-h6;
+	font-weight: 400;
+	color: $gray-light;
+	margin-bottom: 0rem;
+} 
+
+.placeholder {
+	color: $text-muted;
+	text-align: center;
+}
+
+// Markdown formatting - requires /deep/ because the inner HTML elements
+// don't have the magic scoping attributes (http://stackoverflow.com/questions/36265026/angular-2-innerhtml-styling).
+
+markdown /deep/ p {
+	text-align: justify;
+}
+
+markdown /deep/ h1 {
+	font-size: $font-size-h2;
+	font-weight: 600;
+}
+
+markdown /deep/ h2 {
+	font-size: $font-size-h3;
+}
+
+markdown /deep/ h3 {
+	font-size: $font-size-h4;
+}
+
+markdown /deep/ h4 {
+	font-size: $font-size-h5;
+}
+
+markdown /deep/ h5 {
+	font-size: $font-size-h6;
+}
+
+markdown /deep/ h6 {
+	font-size: $font-size-h6;
+	font-weight: 500;
+	font-variant: small-caps;
+	color: $gray-light;
+}
+
+markdown /deep/ blockquote {
+	@extend .blockquote;
+}

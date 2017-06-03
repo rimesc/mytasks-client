@@ -2,16 +2,18 @@ import { element, by } from 'protractor';
 
 import { AnyPage } from './any.po';
 import { DeleteModal } from './delete-modal.po';
-import { NotesModal } from './notes-modal.po';
+import { NotesEditor } from './notes-editor.po';
 import { ProjectModal } from './project-modal.po';
 import { TaskModal } from './task-modal.po';
+import { DiscardChangesModal } from './discard-changes-modal.po';
 
 export class ProjectPage extends AnyPage {
 
   editProjectModal = new ProjectModal();
   deleteProjectModal = new DeleteModal();
+  discardChangesModal = new DiscardChangesModal();
   newTaskModal = new TaskModal();
-  editNotesModal = new NotesModal();
+  notesEditor = new NotesEditor();
 
   constructor(id: number) {
     super();

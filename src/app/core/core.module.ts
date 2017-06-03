@@ -9,6 +9,7 @@ import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawe
 
 // services
 import { ModalService } from './modal.service';
+import { UnsavedChangesGuard } from './unsaved-changes-guard.service';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { ModalService } from './modal.service';
   declarations: [
   ],
   providers: [
-    ModalService
+    ModalService,
+    UnsavedChangesGuard
   ],
   exports: [
   ]

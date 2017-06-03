@@ -14,6 +14,11 @@ export class ModalServiceStub {
     return this.userInput ? Promise.resolve(this.userInput) : Promise.reject({});
   }
 
+  ask(content: any): Promise<void> {
+    this.contentName = content.name;
+    return this.userInput ? Promise.resolve() : Promise.reject({});
+  }
+
   set userInput(form: any) {
     this._userInput = form;
   }

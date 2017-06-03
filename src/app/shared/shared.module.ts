@@ -10,9 +10,7 @@ import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawe
 import { MomentModule } from 'angular2-moment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RlTagInputModule } from 'angular2-tag-input';
-
-// feature modules
-import { MarkdownModule } from '../markdown/markdown.module';
+import { MarkdownModule } from 'angular2-markdown';
 
 // components
 import { MessagesComponent } from './components/messages.component';
@@ -23,6 +21,10 @@ import { TagComponent } from './components/tag.component';
 import { TaskBadgesComponent } from './components/task-badges.component';
 import { TaskFormComponent } from './components/task-form.component';
 import { ProjectHeaderComponent } from './components/project-header.component';
+import { NotesComponent } from './components/notes.component';
+
+// modals
+import { DiscardChangesModalComponent } from './components/discard-changes-modal.component';
 
 // pipes
 import { EnumValuesPipe } from './pipes/enum-values.pipe';
@@ -37,12 +39,10 @@ import { PluralisePipe } from './pipes/pluralise.pipe';
     RouterModule,
     // external modules
     Angular2FontawesomeModule,
-    MarkdownModule,
     MomentModule,
     NgbModule,
     RlTagInputModule,
-    // feature modules
-    MarkdownModule
+    MarkdownModule.forRoot()
   ],
   declarations: [
     // components
@@ -54,19 +54,24 @@ import { PluralisePipe } from './pipes/pluralise.pipe';
     TaskBadgesComponent,
     TaskFormComponent,
     ProjectHeaderComponent,
+    NotesComponent,
     // pipes
     EnumValuesPipe,
     TitleCasePipe,
-    PluralisePipe
+    PluralisePipe,
+    // modals
+    DiscardChangesModalComponent
+  ],
+  entryComponents: [
+    DiscardChangesModalComponent
   ],
   exports: [
     // angular modules
     CommonModule,
     FormsModule,
-    NgbModule,
     // external modules
+    NgbModule,
     Angular2FontawesomeModule,
-    MarkdownModule,
     MomentModule,
     // components
     MessagesComponent,
@@ -77,6 +82,7 @@ import { PluralisePipe } from './pipes/pluralise.pipe';
     TaskBadgesComponent,
     TaskFormComponent,
     ProjectHeaderComponent,
+    NotesComponent,
     // pipes
     EnumValuesPipe,
     TitleCasePipe,
