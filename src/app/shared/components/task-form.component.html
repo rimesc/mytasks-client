@@ -1,0 +1,40 @@
+<form name="form" (ngSubmit)="doSubmit()" #theForm="ngForm">
+	<div class="modal-body">
+		<!-- <my-messages messages="errors"></my-messages> -->
+		<div class="form-group">
+			<label id="taskSummaryLabel" for="summary" class="control-label">
+				Summary
+				<span [hidden]="summaryField.valid || !summaryField.touched" role="alert" class="text-danger">
+          (please enter a summary of the task)
+				</span>
+			</label>
+			<input [(ngModel)]="task.summary" class="form-control" type="text" autofocus required maxlength="255" id="taskSummary" name="summary" placeholder="My new task" #summaryField="ngModel">
+		</div>
+		<!--<div class="form-group">
+			<label for="description" class="control-label">Description</label>
+			<textarea [(ngModel)]="task.description" rows="12" class="form-control" id="taskDescription" name="description" placeholder="A description of the task"></textarea>
+		</div>-->
+		<div class="form-group">
+			<label for="tags" class="control-label">Tags</label>
+			<div class="form-control tag-input">
+				<rl-tag-input [(ngModel)]="task.tags" placeholder="Add a tag..." name="tags" [addOnBlur]="false" [autocomplete]="true" [autocompleteItems]="allTags" [autocompleteMustMatch]="false"></rl-tag-input>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-4 col-sm-6 col-xs-12">
+					<label for="priority" class="control-label">Priority</label>
+					<select [(ngModel)]="task.priority" class="form-control" id="taskPriority" name="priority">
+						<option *ngFor="let p of priorities | values" [value]="p">{{priorities[p] | titlecase}}</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<div>
+			<button type="submit" class="btn btn-primary" [disabled]="!theForm.form.valid">{{action}}</button>
+			<button type="button" class="btn btn-secondary" (click)="cancel.emit()">Cancel</button>
+		</div>
+	</div>
+</form>

@@ -1,10 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ProjectListComponent } from './project-list.component';
-import { ProjectComponent } from './project.component';
-import { ProjectDetailComponent } from './project-detail.component';
-import { ProjectTasksComponent } from './project-tasks.component';
+// pages
+import { ProjectsRootComponent } from './projects-root.component';
+import { ProjectListComponent } from './pages/project-list.component';
+import { ProjectDetailComponent } from './pages/project-detail.component';
+import { ProjectTasksComponent } from './pages/project-tasks.component';
+
+// guards
+import { UnsavedChangesGuard } from '../core/unsaved-changes-guard.service';
+
+// resolvers
+import { ProjectDetailResolver } from './resolvers/project-detail-resolver.service';
+import { ProjectTasksResolver } from './resolvers/project-tasks-resolver.service';
 
 const routes: Routes = [
   {
@@ -12,23 +20,39 @@ const routes: Routes = [
     component: ProjectListComponent
   },
   {
-    path: ':id',
-    component: ProjectComponent,
+    path: ':projectId',
+    component: ProjectsRootComponent,
     children: [
       {
         path: '',
-        component: ProjectDetailComponent
+        component: ProjectDetailComponent,
+        canDeactivate: [UnsavedChangesGuard],
+        resolve: {
+          project: ProjectDetailResolver
+        }
       },
       {
         path: 'tasks',
-        component: ProjectTasksComponent
+        component: ProjectTasksComponent,
+        resolve: {
+          project: ProjectDetailResolver,
+          tasks: ProjectTasksResolver
+        }
       }
     ]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forChild(routes)
+  ],
+  providers: [
+    ProjectDetailResolver,
+    ProjectTasksResolver
+  ],
+  exports: [
+    RouterModule
+  ]
 })
 export class ProjectsRoutingModule {}

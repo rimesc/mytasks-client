@@ -1,0 +1,32 @@
+@import '../../../../node_modules/bootstrap/scss/_variables.scss';
+
+ul.inline-list {
+	list-style: none;
+	padding: 0px;
+}
+
+ul.inline-list > li {
+	display: inline-block;
+	padding: 0px 10px;
+}
+
+ul.inline-list > li:FIRST-CHILD {
+	padding-left: 0px;
+}
+
+.list-group-item {
+	padding-top: $spacer-y*0.5;
+	padding-bottom: $spacer-y*0.5;
+}
+
+.line-through {
+	text-decoration: line-through;
+}
+
+ul.tags {
+	@extend ul.inline-list;
+}
+
+ul.item-details {
+	@extend ul.inline-list;
+}

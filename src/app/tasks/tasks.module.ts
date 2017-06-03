@@ -4,19 +4,21 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { TasksRoutingModule } from './tasks-routing.module';
 
-// components
-import { DeleteTaskModalComponent } from './delete-task-modal.component';
-import { EditTaskModalComponent } from './edit-task-modal.component';
-import { TaskComponent } from './task.component';
-import { TaskDetailComponent } from './task-detail.component';
-import { TaskListComponent } from './task-list.component';
+// pages
+import { TasksRootComponent } from './tasks-root.component';
+import { TaskDetailComponent } from './pages/task-detail.component';
+import { TaskListComponent } from './pages/task-list.component';
+
+// modal dialogs
+import { DeleteTaskModalComponent } from './modals/delete-task-modal.component';
+import { EditTaskModalComponent } from './modals/edit-task-modal.component';
 
 @NgModule({
   declarations: [
     // components
     DeleteTaskModalComponent,
     EditTaskModalComponent,
-    TaskComponent,
+    TasksRootComponent,
     TaskDetailComponent,
     TaskListComponent
   ],

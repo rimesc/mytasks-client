@@ -3,7 +3,7 @@ import { Priority } from './priority';
 export class TaskForm {
   summary: string;
   priority: Priority = Priority.NORMAL;
-  tags: string[];
+  tags: string[] = [];
 }
 
 export function replace(key: string, value: any): any {

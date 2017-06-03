@@ -1,9 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { TaskComponent } from './task.component';
-import { TaskListComponent } from './task-list.component';
-import { TaskDetailComponent } from './task-detail.component';
+// pages
+import { TasksRootComponent } from './tasks-root.component';
+import { TaskListComponent } from './pages/task-list.component';
+import { TaskDetailComponent } from './pages/task-detail.component';
+
+// guards
+import { UnsavedChangesGuard } from '../core/unsaved-changes-guard.service';
+
+// resolvers
+import { TaskResolver } from './resolvers/task-resolver.service';
 
 const routes: Routes = [
   {
@@ -11,19 +18,30 @@ const routes: Routes = [
     component: TaskListComponent
   },
   {
-    path: ':id',
-    component: TaskComponent,
+    path: ':taskId',
+    component: TasksRootComponent,
     children: [
       {
         path: '',
-        component: TaskDetailComponent
+        component: TaskDetailComponent,
+        canDeactivate: [UnsavedChangesGuard],
+        resolve: {
+          task: TaskResolver
+        }
       }
     ]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forChild(routes)
+  ],
+  providers: [
+    TaskResolver
+  ],
+  exports: [
+    RouterModule
+  ]
 })
 export class TasksRoutingModule {}

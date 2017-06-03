@@ -1,0 +1,17 @@
+@import '../../../../node_modules/bootstrap/scss/_variables.scss';
+
+.project-header {
+	text-align: center;
+	clear: both;
+}
+
+.project-header ul {
+	list-style: none;
+	margin: 0px 0px 10px 0px;
+	padding: 0px;
+}
+
+.project-header ul>li{
+	display: inline-block;
+	margin: 0px 10px;
+}

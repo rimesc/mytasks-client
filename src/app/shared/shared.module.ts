@@ -9,22 +9,27 @@ import { RouterModule } from '@angular/router';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { MomentModule } from 'angular2-moment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TagInputModule } from 'ng2-tag-input';
-
-// feature modules
-import { MarkdownModule } from '../markdown/markdown.module';
+import { RlTagInputModule } from 'angular2-tag-input';
+import { MarkdownModule } from 'angular2-markdown';
 
 // components
-import { MessagesComponent } from './messages.component';
-import { PriorityBadgeComponent } from './priority-badge.component';
-import { StateBadgeComponent } from './state-badge.component';
-import { TagsComponent } from './tags.component';
-import { TaskFormComponent } from './task-form.component';
+import { MessagesComponent } from './components/messages.component';
+import { BadgeComponent } from './components/badge.component';
+import { PriorityBadgeComponent } from './components/priority-badge.component';
+import { StateBadgeComponent } from './components/state-badge.component';
+import { TagComponent } from './components/tag.component';
+import { TaskBadgesComponent } from './components/task-badges.component';
+import { TaskFormComponent } from './components/task-form.component';
+import { ProjectHeaderComponent } from './components/project-header.component';
+import { NotesComponent } from './components/notes.component';
+
+// modals
+import { DiscardChangesModalComponent } from './components/discard-changes-modal.component';
 
 // pipes
-import { EnumValuesPipe } from './enum-values.pipe';
-import { TitleCasePipe } from './title-case.pipe';
-import { PluralisePipe } from './pluralise.pipe';
+import { EnumValuesPipe } from './pipes/enum-values.pipe';
+import { TitleCasePipe } from './pipes/title-case.pipe';
+import { PluralisePipe } from './pipes/pluralise.pipe';
 
 @NgModule({
   imports: [
@@ -34,40 +39,50 @@ import { PluralisePipe } from './pluralise.pipe';
     RouterModule,
     // external modules
     Angular2FontawesomeModule,
-    MarkdownModule,
     MomentModule,
     NgbModule,
-    TagInputModule,
-    // feature modules
-    MarkdownModule
+    RlTagInputModule,
+    MarkdownModule.forRoot()
   ],
   declarations: [
     // components
     MessagesComponent,
+    BadgeComponent,
     PriorityBadgeComponent,
     StateBadgeComponent,
-    TagsComponent,
+    TagComponent,
+    TaskBadgesComponent,
     TaskFormComponent,
+    ProjectHeaderComponent,
+    NotesComponent,
     // pipes
     EnumValuesPipe,
     TitleCasePipe,
-    PluralisePipe
+    PluralisePipe,
+    // modals
+    DiscardChangesModalComponent
+  ],
+  entryComponents: [
+    DiscardChangesModalComponent
   ],
   exports: [
     // angular modules
     CommonModule,
     FormsModule,
-    NgbModule,
     // external modules
+    NgbModule,
     Angular2FontawesomeModule,
-    MarkdownModule,
     MomentModule,
     // components
     MessagesComponent,
+    BadgeComponent,
     PriorityBadgeComponent,
     StateBadgeComponent,
-    TagsComponent,
+    TagComponent,
+    TaskBadgesComponent,
     TaskFormComponent,
+    ProjectHeaderComponent,
+    NotesComponent,
     // pipes
     EnumValuesPipe,
     TitleCasePipe,

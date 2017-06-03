@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import '../node_modules/bootstrap/scss/_variables.scss';
 
 body {
 	/* Move down content because we have a fixed navbar that is 54px tall */
@@ -6,7 +7,7 @@ body {
 }
 
 .main {
-	margin: 20px 0px; /*-15px*/
+	margin: $spacer-y 0;
 }
 
 .page-header .btn-toolbar {

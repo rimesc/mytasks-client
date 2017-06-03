@@ -1,0 +1,25 @@
+<div class="page-header">
+  <div class="btn-toolbar float-right" role="toolbar">
+    <div class="btn-group">
+  	   <button class="btn btn-primary" (click)="create()"><fa name="plus"></fa> New Project</button>
+     </div>
+  </div>
+  <h1>Projects</h1>
+</div>
+<div style="clear: both"></div>
+<ul class="list-group project-list">
+	<li *ngFor="let project of projects" class="list-group-item flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+			<h5 class="mb-1"><a [routerLink]="linkTo(project.id)">{{project.name}}</a></h5>
+			<span>
+				<span class="badge badge-default badge-pill mb-1">{{project.tasks.open}}</span>
+			</span>
+    </div>
+		<p class="mb-1">
+			{{project.description}}
+		</p>
+	</li>
+	<li *ngIf="projects && projects.length == 0" class="list-group-item list-group-placeholder">
+		No projects to show.
+	</li>
+</ul>

@@ -1,0 +1,2 @@
+/src/environments/secret.ts filter=git-crypt diff=git-crypt
+/e2e/credentials.ts filter=git-crypt diff=git-crypt
