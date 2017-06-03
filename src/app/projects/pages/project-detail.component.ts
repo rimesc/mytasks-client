@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { OnInit } from '@angular/core';
 
 import { ModalService } from '../../core/modal.service';
-import { UnsavedChanges } from '../../core/unsaved-changes-guard.service';
+import { CanDeactivateComponent } from '../../core/unsaved-changes-guard.service';
 import { DeleteProjectModalComponent } from '../modals/delete-project-modal.component';
 import { EditProjectModalComponent } from '../modals/edit-project-modal.component';
 import { NotesComponent } from '../../shared/components/notes.component';
@@ -21,7 +21,7 @@ import { TaskService } from '../../services/task.service';
   templateUrl: './project-detail.component.html',
   styleUrls: ['./project-detail.component.scss']
 })
-export class ProjectDetailComponent implements OnInit, UnsavedChanges {
+export class ProjectDetailComponent implements OnInit, CanDeactivateComponent {
 
   @ViewChild(NotesComponent)
   private notesComponent: NotesComponent;
@@ -44,8 +44,8 @@ export class ProjectDetailComponent implements OnInit, UnsavedChanges {
     );
   }
 
-  hasUnsavedChanges(): boolean {
-    return this.notesComponent.hasUnsavedChanges();
+  canDeactivate(): Promise<boolean> {
+    return this.notesComponent.cancel().then(() => true).catch(() => false);
   }
 
   updateProject(form: ProjectForm): void {

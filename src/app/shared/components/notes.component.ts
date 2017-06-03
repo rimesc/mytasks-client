@@ -1,14 +1,15 @@
 import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { NgControl } from '@angular/forms';
 
-import { UnsavedChanges } from '../../core/unsaved-changes-guard.service';
+import { ModalService } from '../../core/modal.service';
+import { DiscardChangesModalComponent } from '../../shared/components/discard-changes-modal.component';
 
 @Component({
   selector: 'my-notes',
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.scss']
 })
-export class NotesComponent implements UnsavedChanges {
+export class NotesComponent {
 
   @Input()
   title: string = 'Notes';
@@ -28,6 +29,8 @@ export class NotesComponent implements UnsavedChanges {
   draft: string;
 
   activeTab: Tab = 'edit';
+
+  constructor(private modals: ModalService) { }
 
   get hasNotes(): boolean {
     return this.notes && this.notes.length > 0;
@@ -58,7 +61,15 @@ export class NotesComponent implements UnsavedChanges {
     this.update.emit(this.notes);
   }
 
-  cancel(): void {
+  cancel(): Promise<void> {
+    return this.checkForUnsavedChanges().then(() => this.doCancel());
+  }
+
+  private checkForUnsavedChanges(): Promise<void> {
+    return this.hasUnsavedChanges() ? this.modals.ask(DiscardChangesModalComponent) : Promise.resolve();
+  }
+
+  private doCancel(): void {
     this.draft = undefined;
   }
 

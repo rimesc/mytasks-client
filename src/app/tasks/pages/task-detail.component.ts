@@ -4,7 +4,7 @@ import { OnInit } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { UnsavedChanges } from '../../core/unsaved-changes-guard.service';
+import { CanDeactivateComponent } from '../../core/unsaved-changes-guard.service';
 import { EditTaskModalComponent } from '../modals/edit-task-modal.component';
 import { DeleteTaskModalComponent } from '../modals/delete-task-modal.component';
 import { NotesComponent } from '../../shared/components/notes.component';
@@ -30,7 +30,7 @@ const transitions: Transition[] = [
   templateUrl: './task-detail.component.html',
   styleUrls: ['./task-detail.component.scss']
 })
-export class TaskDetailComponent implements OnInit, UnsavedChanges {
+export class TaskDetailComponent implements OnInit, CanDeactivateComponent {
 
   @ViewChild(NotesComponent)
   private notesComponent: NotesComponent;
@@ -48,8 +48,8 @@ export class TaskDetailComponent implements OnInit, UnsavedChanges {
     this.getTask();
   }
 
-  hasUnsavedChanges(): boolean {
-    return this.notesComponent.hasUnsavedChanges();
+  canDeactivate(): Promise<boolean> {
+    return this.notesComponent.cancel().then(() => true).catch(() => false);
   }
 
   getTask(): void {
