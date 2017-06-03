@@ -2,8 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { OnInit } from '@angular/core';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import { ModalService } from '../../core/modal.service';
 import { CanDeactivateComponent } from '../../core/unsaved-changes-guard.service';
 import { EditTaskModalComponent } from '../modals/edit-task-modal.component';
 import { DeleteTaskModalComponent } from '../modals/delete-task-modal.component';
@@ -40,7 +39,7 @@ export class TaskDetailComponent implements OnInit, CanDeactivateComponent {
   messages: Message[] = [];
 
   constructor(private taskService: TaskService,
-              private modalService: NgbModal,
+              private modals: ModalService,
               private router: Router,
               private route: ActivatedRoute) { }
 
@@ -66,24 +65,22 @@ export class TaskDetailComponent implements OnInit, CanDeactivateComponent {
   }
 
   deleteTask(): void {
-    let ref = this.modalService.open(DeleteTaskModalComponent);
-    (ref.componentInstance as DeleteTaskModalComponent).projectName = this.task.project.name;
-    ref.result
+    this.modals.open(DeleteTaskModalComponent)
       .then(() => this.taskService.deleteTask(this.task.id))
       .then(() => this.router.navigate(['projects/' + this.task.project.id + '/tasks']), () => {});
   }
 
   editTask(): void {
-    let ref = this.modalService.open(EditTaskModalComponent);
-    (ref.componentInstance as EditTaskModalComponent).task = {
-      summary: this.task.summary, priority: this.task.priority, tags: this.task.tags.slice(0)
-    };
-    ref.result.then((task: TaskForm) => {
-      this.task.summary = task.summary;
-      this.task.priority = task.priority;
-      this.task.tags = task.tags;
+    this.modals.open(EditTaskModalComponent, {
+      summary: this.task.summary,
+      priority: this.task.priority,
+      tags: this.task.tags.slice(0)
+    })
+    .then((task: TaskForm) => {
+      Object.assign(this.task, task);
       this.updateTask(task);
-    }, () => {});
+    })
+    .catch(() => { });
   }
 
   availableTransitions(): Transition[] {

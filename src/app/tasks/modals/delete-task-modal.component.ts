@@ -2,20 +2,14 @@ import { Component } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { ModalContent } from '../../core/modal-content';
+
 @Component({
   selector: 'my-delete-task-modal',
   templateUrl: '../modals/delete-task-modal.component.html'
 })
-export class DeleteTaskModalComponent {
-  projectName: string;
-
-  constructor(public activeModal: NgbActiveModal) { }
-
-  submit(): void {
-    this.activeModal.close();
-  }
-
-  cancel(): void {
-    this.activeModal.dismiss();
+export class DeleteTaskModalComponent extends ModalContent<void> {
+  constructor(activeModal: NgbActiveModal) {
+    super(activeModal);
   }
 }
