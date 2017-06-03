@@ -13,4 +13,12 @@ export class EditTaskModalComponent extends ModalContent<TaskForm> {
   constructor(activeModal: NgbActiveModal) {
     super(activeModal);
   }
+
+  set task(task: TaskForm) {
+    this.form = task;
+  }
+
+  get task() {
+    return this.form;
+  }
 }
