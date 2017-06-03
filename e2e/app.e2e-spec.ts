@@ -9,8 +9,8 @@ describe('MyTasks client', () => {
     page.navigateTo();
   });
 
-  it('redirects to the dashboard', () => {
-    browser.wait(ExpectedConditions.urlIs('http://localhost:4200/dashboard'));
+  it('redirects to the projects page', () => {
+    browser.wait(ExpectedConditions.urlIs('http://localhost:4200/projects'));
   });
 
   describe('the main navbar', () => {
@@ -20,6 +20,7 @@ describe('MyTasks client', () => {
     });
 
     it('links to the projects page', () => {
+      browser.get('/dashboard');  // go to a different page first
       page.navbar.goToPage('Projects');
       browser.wait(ExpectedConditions.urlIs('http://localhost:4200/projects'));
     });
@@ -30,7 +31,6 @@ describe('MyTasks client', () => {
     });
 
     it('links to the dashboard', () => {
-      browser.get('/projects');  // go to a different page first
       page.navbar.goToPage('Dashboard');
       browser.wait(ExpectedConditions.urlIs('http://localhost:4200/dashboard'));
     });
