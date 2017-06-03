@@ -45,7 +45,7 @@ export class ProjectDetailComponent implements OnInit, CanDeactivateComponent {
   }
 
   canDeactivate(): Promise<boolean> {
-    return this.notesComponent.cancel().then(() => true).catch(() => false);
+    return this.notesComponent.tryCancel().then(() => true).catch(() => false);
   }
 
   updateProject(form: ProjectForm): void {

@@ -5,11 +5,13 @@ import { DeleteModal } from './delete-modal.po';
 import { NotesEditor } from './notes-editor.po';
 import { ProjectModal } from './project-modal.po';
 import { TaskModal } from './task-modal.po';
+import { DiscardChangesModal } from './discard-changes-modal.po';
 
 export class ProjectPage extends AnyPage {
 
   editProjectModal = new ProjectModal();
   deleteProjectModal = new DeleteModal();
+  discardChangesModal = new DiscardChangesModal();
   newTaskModal = new TaskModal();
   notesEditor = new NotesEditor();
 

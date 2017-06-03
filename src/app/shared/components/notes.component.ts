@@ -61,15 +61,19 @@ export class NotesComponent {
     this.update.emit(this.notes);
   }
 
-  cancel(): Promise<void> {
-    return this.checkForUnsavedChanges().then(() => this.doCancel());
+  tryCancel(): Promise<void> {
+    return this.checkForUnsavedChanges().then(() => this.discardChanges());
+  }
+
+  cancel(): void {
+    this.tryCancel().catch(() => {});
   }
 
   private checkForUnsavedChanges(): Promise<void> {
     return this.hasUnsavedChanges() ? this.modals.ask(DiscardChangesModalComponent) : Promise.resolve();
   }
 
-  private doCancel(): void {
+  private discardChanges(): void {
     this.draft = undefined;
   }
 

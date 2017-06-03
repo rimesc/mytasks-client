@@ -181,7 +181,7 @@ describe('the project page', () => {
 
   });
 
-  describe('the edit notes dialog', () => {
+  describe('the notes editor', () => {
 
     afterEach(() => {
       resetData();
@@ -191,6 +191,9 @@ describe('the project page', () => {
       page.editNotesButton.click();
       page.notesEditor.markdownInput.enter('These notes have been edited.');
       page.notesEditor.cancel();
+      page.discardChangesModal.waitUntilOpen();
+      page.discardChangesModal.submit();
+      page.notesEditor.waitUntilClosed();
       expect(page.notes).toStartWith('Lorem ipsum');
       expect(page.notes).toEndWith('Cras tempor nunc');
     });

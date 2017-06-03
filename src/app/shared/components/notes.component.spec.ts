@@ -8,6 +8,9 @@ import { MarkdownModule } from 'angular2-markdown';
 
 import { click } from '../../testing/component-utils';
 import { NotesComponent } from './notes.component';
+import { ModalService } from '../../core/modal.service';
+
+import { ModalServiceStub } from '../../testing/modal-stubs';
 
 describe('NotesComponent', () => {
   const TITLE = 'My notes';
@@ -15,13 +18,19 @@ describe('NotesComponent', () => {
   Lorem ipsum dolor sit amet, [consectetur adipiscing elit](http://www.example.com).
   `;
 
+  let modalServiceStub: ModalServiceStub;
+
   let fixture: ComponentFixture<NotesComponent>;
   let component: NotesComponent;
 
   beforeEach(() => {
+    modalServiceStub = new ModalServiceStub();
     TestBed.configureTestingModule({
       imports: [ MarkdownModule.forRoot(), FormsModule ],
       declarations: [ NotesComponent ],
+      providers: [
+        { provide: ModalService, useValue: modalServiceStub }
+      ],
       schemas: [NO_ERRORS_SCHEMA]
     });
   });
@@ -203,12 +212,44 @@ describe('NotesComponent', () => {
 
     describe('the cancel button', () => {
 
-      it ('discards the current draft note when clicked', () => {
-        let editedMarkdown = '# Lorem ipsum dolor';
-        component.draft = editedMarkdown;
+      const EDITED_MARKDOWN = '# Lorem ipsum dolor';
+
+      beforeEach(() => {
+        component.draft = EDITED_MARKDOWN;
+        page.editor.triggerEventHandler('input', { target: { value: '# Lorem ipsum dolor' } });
+        fixture.detectChanges();
+      });
+
+      it ('displays a confirmation dialog when clicked if there are changes', () => {
         click(page.cancelButton);
         fixture.detectChanges();
-        expect(component.notes).toEqual(MARKDOWN);
+        expect(modalServiceStub.contentName).toEqual('DiscardChangesModalComponent');
+      });
+
+      describe('when the dialog is confirmed', () => {
+
+        beforeEach(() => {
+          modalServiceStub.userInput = {};
+        });
+
+        it('discards the current draft and exits editing mode', fakeAsync(() => {
+          click(page.cancelButton);
+          tick();
+          expect(component.editing).toBeFalse();
+          expect(component.notes).toEqual(MARKDOWN);
+        }));
+
+      });
+
+      describe('when the dialog is dismissed', () => {
+
+        it('keeps the current draft and remains in editing mode', fakeAsync(() => {
+          click(page.cancelButton);
+          tick();
+          expect(component.editing).toBeTrue();
+          expect(component.draft).toEqual(EDITED_MARKDOWN);
+        }));
+
       });
 
     });

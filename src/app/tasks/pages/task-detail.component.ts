@@ -49,7 +49,7 @@ export class TaskDetailComponent implements OnInit, CanDeactivateComponent {
   }
 
   canDeactivate(): Promise<boolean> {
-    return this.notesComponent.cancel().then(() => true).catch(() => false);
+    return this.notesComponent.tryCancel().then(() => true).catch(() => false);
   }
 
   getTask(): void {
