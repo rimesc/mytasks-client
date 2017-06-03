@@ -43,7 +43,7 @@
 		<div class="card-block">
 			<div class="tab-content">
 				<div class="tab-pane" [class.active]="activeTab === 'edit'" id="edit-tab-content">
-					<textarea [(ngModel)]="draft" rows="40" class="form-control" id="markdown" name="markdown" placeholder="Add some notes." #editor="ngModel"></textarea>
+					<textarea [(ngModel)]="draft" rows="40" class="form-control" id="markdown" name="markdown" autofocus placeholder="Add some notes." #editor="ngModel"></textarea>
 				</div>
 				<div class="tab-pane" [class.active]="activeTab === 'preview'" id="preview-tab-content">
 					<markdown [data]="draft"></markdown>
