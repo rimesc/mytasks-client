@@ -275,10 +275,10 @@ class Page {
   notes: DebugElement;
 
   constructor(private fixture: ComponentFixture<ProjectDetailComponent>) {
-    this.getProjectSpy = fixture.debugElement.injector.get(ProjectService).getProject;
-    this.updateProjectSpy = fixture.debugElement.injector.get(ProjectService).updateProject;
-    this.deleteProjectSpy = fixture.debugElement.injector.get(ProjectService).deleteProject;
-    this.createTaskSpy = fixture.debugElement.injector.get(TaskService).createTask;
+    this.getProjectSpy = fixture.debugElement.injector.get(ProjectService).getProject as jasmine.Spy;
+    this.updateProjectSpy = fixture.debugElement.injector.get(ProjectService).updateProject as jasmine.Spy;
+    this.deleteProjectSpy = fixture.debugElement.injector.get(ProjectService).deleteProject as jasmine.Spy;
+    this.createTaskSpy = fixture.debugElement.injector.get(TaskService).createTask as jasmine.Spy;
     this.router = fixture.debugElement.injector.get(Router);
     this.modalService = fixture.debugElement.injector.get(ModalService);
   }
