@@ -1,3 +1,5 @@
+/// <reference types="jasmine-expect" />
+
 import { DashboardPage } from './dashboard.po';
 
 describe('the dashboard page', () => {
