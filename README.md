@@ -2,7 +2,7 @@
 
 Client side of a toy web application I'm writing as a learning exercise. It's a variation on the traditional 'todo' application, but with some of the features of an issue tracker.
 
-This part uses [Angular 2](https://angular.io).
+This part uses [Angular 4](https://angular.io).
 
 ## Development server
 
