@@ -17,7 +17,7 @@ import { DeleteProjectModalComponent } from '../modals/delete-project-modal.comp
 import { EditProjectModalComponent } from '../modals/edit-project-modal.component';
 import { PluralisePipe } from '../../shared/pipes/pluralise.pipe';
 
-import { ModalServiceStub } from '../../testing/modal-stubs';
+import { ModalServiceSpy } from '../../testing/modal-service-spy';
 import { ActivatedRouteStub } from '../../testing/router-stubs';
 import { DummyComponent } from '../../testing/dummy.component';
 
@@ -29,7 +29,7 @@ describe('ProjectDetailComponent', () => {
   };
 
   let location: Location;
-  let modalService: ModalServiceStub;
+  let modalService: ModalServiceSpy;
   let activatedRoute: ActivatedRouteStub;
 
   let fixture: ComponentFixture<ProjectDetailComponent>;
@@ -62,7 +62,7 @@ describe('ProjectDetailComponent', () => {
         { provide: ProjectService, useValue: fakeProjectService },
         { provide: TaskService, useValue: fakeTaskService },
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
-        { provide: ModalService, useClass: ModalServiceStub }
+        { provide: ModalService, useClass: ModalServiceSpy }
       ]
     });
     location = TestBed.get(Location);

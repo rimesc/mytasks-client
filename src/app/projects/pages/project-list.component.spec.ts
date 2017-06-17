@@ -10,7 +10,7 @@ import { ModalService } from '../../core/modal.service';
 import { NewProjectModalComponent } from '../modals/new-project-modal.component';
 
 import { ProjectServiceSpy } from '../../testing/project-service-spy';
-import { ModalServiceStub } from '../../testing/modal-stubs';
+import { ModalServiceSpy } from '../../testing/modal-service-spy';
 import { RouterLinkStubDirective } from '../../testing/router-stubs';
 
 describe('ProjectListComponent', () => {
@@ -20,7 +20,7 @@ describe('ProjectListComponent', () => {
     { id: 3, name: 'My third project', description: 'This is my third project.', tasks: { total: 3, open: 2, closed: 1 } }
   ];
 
-  let modalService: ModalServiceStub;
+  let modalService: ModalServiceSpy;
   let projectService: ProjectServiceSpy;
 
   let fixture: ComponentFixture<ProjectListComponent>;
@@ -32,7 +32,7 @@ describe('ProjectListComponent', () => {
       declarations: [ ProjectListComponent, RouterLinkStubDirective ],
       providers: [
         { provide: ProjectService, useClass: ProjectServiceSpy },
-        { provide: ModalService, useClass: ModalServiceStub }
+        { provide: ModalService, useClass: ModalServiceSpy }
       ]
     });
     modalService = TestBed.get(ModalService);

@@ -9,7 +9,7 @@ import { NotesComponent } from './notes.component';
 import { ModalService } from '../../core/modal.service';
 import { DiscardChangesModalComponent } from './discard-changes-modal.component';
 
-import { ModalServiceStub } from '../../testing/modal-stubs';
+import { ModalServiceSpy } from '../../testing/modal-service-spy';
 import { click } from '../../testing/component-utils';
 
 describe('NotesComponent', () => {
@@ -18,7 +18,7 @@ describe('NotesComponent', () => {
   Lorem ipsum dolor sit amet, [consectetur adipiscing elit](http://www.example.com).
   `;
 
-  let modalService: ModalServiceStub;
+  let modalService: ModalServiceSpy;
 
   let fixture: ComponentFixture<NotesComponent>;
   let component: NotesComponent;
@@ -28,7 +28,7 @@ describe('NotesComponent', () => {
       imports: [ MarkdownModule.forRoot(), FormsModule ],
       declarations: [ NotesComponent ],
       providers: [
-        { provide: ModalService, useClass: ModalServiceStub }
+        { provide: ModalService, useClass: ModalServiceSpy }
       ],
       schemas: [ NO_ERRORS_SCHEMA ]
     });
