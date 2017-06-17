@@ -1,16 +1,17 @@
 import { TestBed, async, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 
+import { ProjectListComponent } from './project-list.component';
 import { Project } from '../../api/project';
 import { ProjectForm } from '../../api/project-form';
 import { ProjectService } from '../../services/project.service';
-import { ProjectListComponent } from './project-list.component';
 import { ModalService } from '../../core/modal.service';
+import { NewProjectModalComponent } from '../modals/new-project-modal.component';
 
-import { RouterLinkStubDirective } from '../../testing/router-stubs';
+import { ProjectServiceSpy } from '../../testing/project-service-spy';
 import { ModalServiceStub } from '../../testing/modal-stubs';
+import { RouterLinkStubDirective } from '../../testing/router-stubs';
 
 describe('ProjectListComponent', () => {
   let projects: Project[] = [
@@ -19,42 +20,41 @@ describe('ProjectListComponent', () => {
     { id: 3, name: 'My third project', description: 'This is my third project.', tasks: { total: 3, open: 2, closed: 1 } }
   ];
 
-  let modalServiceStub;
-  let fakeProjectService;
+  let modalService: ModalServiceStub;
+  let projectService: ProjectServiceSpy;
 
   let fixture: ComponentFixture<ProjectListComponent>;
   let page: Page;
 
   beforeEach(() => {
-    modalServiceStub = new ModalServiceStub();
-    fakeProjectService = {
-      getProjects: jasmine.createSpy('getProjects').and.callFake(
-        () => Promise.resolve(true).then(() => projects.map(p => Object.assign({}, p)))
-      ),
-      createProject: jasmine.createSpy('createProject').and.callFake(
-        (project: ProjectForm) => Promise.resolve(true).then(() => Object.assign({}, project))
-      )
-    };
     TestBed.configureTestingModule({
-      schemas: [NO_ERRORS_SCHEMA],
+      schemas: [ NO_ERRORS_SCHEMA ],
       declarations: [ ProjectListComponent, RouterLinkStubDirective ],
       providers: [
-        ProjectListComponent,
-        { provide: ProjectService, useValue: fakeProjectService },
-        { provide: ModalService, useValue: modalServiceStub }
+        { provide: ProjectService, useClass: ProjectServiceSpy },
+        { provide: ModalService, useClass: ModalServiceStub }
       ]
     });
+    modalService = TestBed.get(ModalService);
+    projectService = TestBed.get(ProjectService);
+    projectService.getProjects.and.callFake(
+      () => Promise.resolve(true).then(() => projects.map(p => Object.assign({}, p)))
+    );
+    projectService.createProject.and.callFake(
+      (project: ProjectForm) => Promise.resolve(true).then(() => Object.assign({}, project))
+    );
+    TestBed.compileComponents();
   });
 
   describe('when navigating to the projects page', () => {
 
     beforeEach(async(() => {
-      TestBed.compileComponents().then(createComponent);
+      createComponent();
     }));
 
     it('should load the list of projects', () => {
       expect(page.projects).toEqual(projects);
-      expect(page.getProjectsSpy.calls.count()).toEqual(1);
+      expect(projectService.getProjects.calls.count()).toEqual(1);
     });
 
     it('should display the list of projects', () => {
@@ -75,7 +75,7 @@ describe('ProjectListComponent', () => {
   describe('when a project link is clicked', () => {
 
     beforeEach(async(() => {
-      TestBed.compileComponents().then(createComponent);
+      createComponent();
     }));
 
     it('should navigate to the selected project', () => {
@@ -92,28 +92,29 @@ describe('ProjectListComponent', () => {
     let userInput: ProjectForm = { name: 'My new project', description: 'This is my new project.'};
 
     beforeEach(async(() => {
-      TestBed.compileComponents().then(createComponent);
+      createComponent();
+      modalService.open.and.callFake(() => Promise.reject(''));
     }));
 
     it('should open the new project modal dialog', fakeAsync(() => {
       page.newProjectButton.triggerEventHandler('click', null);
       tick();
-      expect(page.modalService.contentName).toEqual('NewProjectModalComponent');
+      expect(modalService.open.calls.mostRecent().args).toEqual([NewProjectModalComponent]);
     }));
 
     describe('when the dialog is confirmed', () => {
 
       beforeEach(async(() => {
-        page.modalService.userInput = userInput;
+        modalService.open.and.returnValue(Promise.resolve(userInput));
       }));
 
       it('should create a new project and reload the project list', fakeAsync(() => {
-        expect(page.getProjectsSpy.calls.count()).toEqual(1);
+        expect(projectService.getProjects.calls.count()).toEqual(1);
         page.newProjectButton.triggerEventHandler('click', null);
         tick();
-        expect(page.createProjectSpy.calls.count()).toEqual(1);
-        expect(page.createProjectSpy.calls.mostRecent().args).toEqual([userInput]);
-        expect(page.getProjectsSpy.calls.count()).toEqual(2);
+        expect(projectService.createProject.calls.count()).toEqual(1);
+        expect(projectService.createProject.calls.mostRecent().args).toEqual([userInput]);
+        expect(projectService.getProjects.calls.count()).toEqual(2);
       }));
 
     });
@@ -123,7 +124,7 @@ describe('ProjectListComponent', () => {
       it('should do nothing', fakeAsync(() => {
         page.newProjectButton.triggerEventHandler('click', null);
         tick();
-        expect(page.createProjectSpy.calls.count()).toEqual(0);
+        expect(projectService.createProject.calls.count()).toEqual(0);
       }));
 
     });
@@ -133,7 +134,7 @@ describe('ProjectListComponent', () => {
   describe('when there are no projects to display', () => {
 
     beforeEach(async(() => {
-      fakeProjectService.getProjects.and.callFake(() => Promise.resolve(true).then(() => []));
+      projectService.getProjects.and.callFake(() => Promise.resolve(true).then(() => []));
       TestBed.compileComponents().then(createComponent);
     }));
 
@@ -160,19 +161,11 @@ class Page {
 
   component: ProjectListComponent;
 
-  modalService: ModalServiceStub;
-  getProjectsSpy: jasmine.Spy;
-  createProjectSpy: jasmine.Spy;
-
   placeholderText: string;
   items: ListItem[];
   newProjectButton: DebugElement;
 
-  constructor(private fixture: ComponentFixture<ProjectListComponent>) {
-    this.getProjectsSpy = fixture.debugElement.injector.get(ProjectService).getProjects;
-    this.createProjectSpy = fixture.debugElement.injector.get(ProjectService).createProject;
-    this.modalService = fixture.debugElement.injector.get(ModalService);
-  }
+  constructor(private fixture: ComponentFixture<ProjectListComponent>) { }
 
   addPageElements() {
     this.component = this.fixture.componentInstance;

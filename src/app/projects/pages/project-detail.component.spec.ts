@@ -1,21 +1,25 @@
 import { TestBed, async, inject, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { Router, ActivatedRoute } from '@angular/router';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
+import { ProjectDetailComponent } from './project-detail.component';
 import { Project } from '../../api/project';
 import { ProjectForm } from '../../api/project-form';
 import { TaskForm } from '../../api/task-form';
 import { Priority } from '../../api/priority';
 import { ProjectService } from '../../services/project.service';
 import { TaskService } from '../../services/task.service';
-import { ProjectDetailComponent } from './project-detail.component';
-import { PluralisePipe } from '../../shared/pipes/pluralise.pipe';
 import { ModalService } from '../../core/modal.service';
+import { DeleteProjectModalComponent } from '../modals/delete-project-modal.component';
+import { EditProjectModalComponent } from '../modals/edit-project-modal.component';
+import { PluralisePipe } from '../../shared/pipes/pluralise.pipe';
 
-import { ActivatedRouteStub, RouterStub } from '../../testing/router-stubs';
 import { ModalServiceStub } from '../../testing/modal-stubs';
+import { ActivatedRouteStub } from '../../testing/router-stubs';
+import { DummyComponent } from '../../testing/dummy.component';
 
 describe('ProjectDetailComponent', () => {
   let project: Project = {
@@ -24,19 +28,15 @@ describe('ProjectDetailComponent', () => {
     notes: { raw: 'Lorem *ipsum* dolor sit amet.', html: '<p>Lorem <em>ipsum</em> dolor sit amet.</p>' }
   };
 
-  let routerStub = new RouterStub();
-  let activatedRouteStub;
-  let modalServiceStub;
-  let fakeProjectService;
-  let fakeTaskService;
+  let location: Location;
+  let modalService: ModalServiceStub;
+  let activatedRoute: ActivatedRouteStub;
 
   let fixture: ComponentFixture<ProjectDetailComponent>;
   let page: Page;
 
   beforeEach(() => {
-    modalServiceStub = new ModalServiceStub();
-    activatedRouteStub = new ActivatedRouteStub();
-    fakeProjectService = {
+    let fakeProjectService = {
       getProject: jasmine.createSpy('getProject').and.callFake(
         (id: number) => Promise.resolve(true).then(() => Object.assign({}, project))
       ),
@@ -47,30 +47,35 @@ describe('ProjectDetailComponent', () => {
         (id: number) => Promise.resolve(true).then(() => {})
       )
     };
-    fakeTaskService = {
+    let fakeTaskService = {
       createTask: jasmine.createSpy('createTask').and.callFake(
         (pid: number, task: TaskForm) => Promise.resolve(true).then(() => Object.assign({}, task))
       )
     };
     TestBed.configureTestingModule({
-      schemas: [NO_ERRORS_SCHEMA],
-      declarations: [ ProjectDetailComponent, PluralisePipe  ],
+      schemas: [ NO_ERRORS_SCHEMA ],
+      imports: [
+        RouterTestingModule.withRoutes([ { path: 'projects', component: DummyComponent } ])
+      ],
+      declarations: [ ProjectDetailComponent, PluralisePipe, DummyComponent ],
       providers: [
-        ProjectDetailComponent,
         { provide: ProjectService, useValue: fakeProjectService },
         { provide: TaskService, useValue: fakeTaskService },
-        { provide: ModalService, useValue: modalServiceStub },
-        { provide: Router, useValue: routerStub },
-        { provide: ActivatedRoute, useValue: activatedRouteStub }
+        { provide: ActivatedRoute, useClass: ActivatedRouteStub },
+        { provide: ModalService, useClass: ModalServiceStub }
       ]
     });
+    location = TestBed.get(Location);
+    modalService = TestBed.get(ModalService);
+    activatedRoute = TestBed.get(ActivatedRoute);
+    TestBed.compileComponents();
   });
 
   describe('when navigating to an existing project', () => {
 
     beforeEach(async(() => {
-      activatedRouteStub.testData = { project: Object.assign({}, project) };
-      TestBed.compileComponents().then(createComponent);
+      activatedRoute.testData = { project: Object.assign({}, project) };
+      createComponent();
     }));
 
     it('should load the project', () => {
@@ -106,7 +111,7 @@ describe('ProjectDetailComponent', () => {
   describe('when navigating to a non-existent project', () => {
 
     beforeEach(async(() => {
-      activatedRouteStub.testError = { code: 'Not Found', message: 'The requested project could not be found.' };
+      activatedRoute.testError = { code: 'Not Found', message: 'The requested project could not be found.' };
       TestBed.compileComponents().then(createComponent);
     }));
 
@@ -130,15 +135,16 @@ describe('ProjectDetailComponent', () => {
   describe('when the edit button is clicked', () => {
 
     beforeEach(async(() => {
-      activatedRouteStub.testData = { project: Object.assign({}, project) };
+      activatedRoute.testData = { project: Object.assign({}, project) };
       TestBed.compileComponents().then(createComponent);
+      modalService.open.and.callFake(() => Promise.reject(''));
     }));
 
     it('should open the edit project modal dialog', fakeAsync(() => {
       page.toolbar.triggerEventHandler('edit', null);
       tick();
-      expect(page.modalService.contentName).toEqual('EditProjectModalComponent');
-      expect(page.modalService.initialForm).toEqual({ name: 'My sample project', description: 'This is my sample project.' });
+      expect(modalService.open.calls.mostRecent().args)
+        .toEqual([EditProjectModalComponent, { name: 'My sample project', description: 'This is my sample project.' }]);
     }));
 
     describe('when the dialog is confirmed', () => {
@@ -146,7 +152,7 @@ describe('ProjectDetailComponent', () => {
       let userInput = { name: 'My edited project', description: 'This is my edited project.' };
 
       beforeEach(async(() => {
-        page.modalService.userInput = userInput;
+        modalService.open.and.returnValue(Promise.resolve(userInput));
       }));
 
       it('should update the project', fakeAsync(() => {
@@ -163,7 +169,7 @@ describe('ProjectDetailComponent', () => {
     describe('when the dialog is dismissed', () => {
 
       beforeEach(async(() => {
-        page.modalService.userInput = undefined;
+        modalService.open.and.callFake(() => Promise.reject(''));
       }));
 
       it('should do nothing', fakeAsync(() => {
@@ -182,20 +188,21 @@ describe('ProjectDetailComponent', () => {
   describe('when the delete button is clicked', () => {
 
     beforeEach(async(() => {
-      activatedRouteStub.testData = { project: Object.assign({}, project) };
+      activatedRoute.testData = { project: Object.assign({}, project) };
       TestBed.compileComponents().then(createComponent);
+      modalService.open.and.callFake(() => Promise.reject(''));
     }));
 
     it('should open the delete project modal dialog', fakeAsync(() => {
       page.toolbar.triggerEventHandler('delete', null);
       tick();
-      expect(page.modalService.contentName).toEqual('DeleteProjectModalComponent');
+      expect(modalService.open.calls.mostRecent().args).toEqual([DeleteProjectModalComponent]);
     }));
 
     describe('when the dialog is confirmed', () => {
 
       beforeEach(async(() => {
-        page.modalService.userInput = {};
+        modalService.open.and.returnValue(Promise.resolve({}));
       }));
 
       it('should delete the project', fakeAsync(() => {
@@ -203,15 +210,19 @@ describe('ProjectDetailComponent', () => {
         tick();
         expect(page.deleteProjectSpy.calls.count()).toEqual(1);
         expect(page.deleteProjectSpy.calls.mostRecent().args).toEqual([1]);
-        expect(page.router.lastNavigatedTo).toEqual(['projects']);
+        expect(location.path()).toEqual('/projects');
       }));
 
     });
 
     describe('when the dialog is dismissed', () => {
 
+      beforeEach(async(() => {
+        modalService.open.and.callFake(() => Promise.reject(''));
+      }));
+
       it('should do nothing', fakeAsync(() => {
-        page.toolbar.triggerEventHandler('edit', null);
+        page.toolbar.triggerEventHandler('delete', null);
         tick();
         expect(page.deleteProjectSpy.calls.count()).toEqual(0);
       }));
@@ -225,7 +236,7 @@ describe('ProjectDetailComponent', () => {
     let userInput: TaskForm = { summary: 'My new task', priority: Priority.HIGH, tags: ['foo', 'bar']};
 
     beforeEach(async(() => {
-      activatedRouteStub.testData = { project: Object.assign({}, project) };
+      activatedRoute.testData = { project: Object.assign({}, project) };
       TestBed.compileComponents().then(createComponent);
     }));
 
@@ -260,8 +271,6 @@ class Page {
 
   component: ProjectDetailComponent;
 
-  router: RouterStub;
-  modalService: ModalServiceStub;
   getProjectSpy: jasmine.Spy;
   updateProjectSpy: jasmine.Spy;
   deleteProjectSpy: jasmine.Spy;
@@ -279,8 +288,6 @@ class Page {
     this.updateProjectSpy = fixture.debugElement.injector.get(ProjectService).updateProject as jasmine.Spy;
     this.deleteProjectSpy = fixture.debugElement.injector.get(ProjectService).deleteProject as jasmine.Spy;
     this.createTaskSpy = fixture.debugElement.injector.get(TaskService).createTask as jasmine.Spy;
-    this.router = fixture.debugElement.injector.get(Router);
-    this.modalService = fixture.debugElement.injector.get(ModalService);
   }
 
   addPageElements() {

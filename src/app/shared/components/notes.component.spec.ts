@@ -1,16 +1,16 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
+import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { MarkdownModule } from 'angular2-markdown';
 
-import { click } from '../../testing/component-utils';
 import { NotesComponent } from './notes.component';
 import { ModalService } from '../../core/modal.service';
+import { DiscardChangesModalComponent } from './discard-changes-modal.component';
 
 import { ModalServiceStub } from '../../testing/modal-stubs';
+import { click } from '../../testing/component-utils';
 
 describe('NotesComponent', () => {
   const TITLE = 'My notes';
@@ -18,21 +18,21 @@ describe('NotesComponent', () => {
   Lorem ipsum dolor sit amet, [consectetur adipiscing elit](http://www.example.com).
   `;
 
-  let modalServiceStub: ModalServiceStub;
+  let modalService: ModalServiceStub;
 
   let fixture: ComponentFixture<NotesComponent>;
   let component: NotesComponent;
 
   beforeEach(() => {
-    modalServiceStub = new ModalServiceStub();
     TestBed.configureTestingModule({
       imports: [ MarkdownModule.forRoot(), FormsModule ],
       declarations: [ NotesComponent ],
       providers: [
-        { provide: ModalService, useValue: modalServiceStub }
+        { provide: ModalService, useClass: ModalServiceStub }
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [ NO_ERRORS_SCHEMA ]
     });
+    modalService = TestBed.get(ModalService);
   });
 
   beforeEach(async(() => {
@@ -163,6 +163,7 @@ describe('NotesComponent', () => {
       it('displays an HTML rendering of the initial draft note', () => {
         expect(page.preview).not.toBeNull();
         expect(page.preview.h1).toEqual('Lorem ipsum');
+        // N.B. this assertion will fail without https://github.com/dimpu/angular2-markdown/pull/59
         expect(page.preview.p).toEqual('Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
         expect(page.preview.a.href).toEqual('http://www.example.com');
         expect(page.preview.a.textContent).toEqual('consectetur adipiscing elit');
@@ -216,6 +217,7 @@ describe('NotesComponent', () => {
 
       beforeEach(() => {
         component.draft = EDITED_MARKDOWN;
+        modalService.ask.and.callFake(() => Promise.reject(''));
         page.editor.triggerEventHandler('input', { target: { value: '# Lorem ipsum dolor' } });
         fixture.detectChanges();
       });
@@ -223,13 +225,13 @@ describe('NotesComponent', () => {
       it ('displays a confirmation dialog when clicked if there are changes', () => {
         click(page.cancelButton);
         fixture.detectChanges();
-        expect(modalServiceStub.contentName).toEqual('DiscardChangesModalComponent');
+        expect(modalService.ask.calls.mostRecent().args).toEqual([DiscardChangesModalComponent]);
       });
 
       describe('when the dialog is confirmed', () => {
 
         beforeEach(() => {
-          modalServiceStub.userInput = {};
+          modalService.ask.and.returnValue(Promise.resolve({}));
         });
 
         it('discards the current draft and exits editing mode', fakeAsync(() => {
