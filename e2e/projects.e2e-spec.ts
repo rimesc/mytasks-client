@@ -1,3 +1,5 @@
+/// <reference types="jasmine-expect" />
+
 import { browser, ExpectedConditions } from 'protractor';
 
 import { ProjectsPage } from './projects.po';

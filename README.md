@@ -18,8 +18,10 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`. You also need to be running the [server side](https://github.com/rimesc/mytasks-server) in dev mode. See the notes about authentication below.
+Run `ng e2e --port 4200` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).  The `--port`
+option is important because otherwise the client is served on a random port, which won't match the allowed callback URL.
+Before running the tests make sure you are running the [server side](https://github.com/rimesc/mytasks-server) in dev mode.
+See the notes about authentication below.
 
 ## Authentication
 

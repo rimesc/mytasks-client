@@ -53,7 +53,7 @@ export class Select extends FormInput {
    */
   choose(option: string) {
     browser.wait(ExpectedConditions.visibilityOf(this.input));
-    return this.input.all(by.tagName('option')).filter(opt => opt.getText() === '').click();
+    return this.input.all(by.tagName('option')).filter(opt => opt.getText().then(text => text === '')).click();
   }
 
 }
