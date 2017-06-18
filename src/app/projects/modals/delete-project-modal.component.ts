@@ -12,4 +12,8 @@ export class DeleteProjectModalComponent extends ModalContent<void> {
   constructor(activeModal: NgbActiveModal) {
     super(activeModal);
   }
+
+  doSubmit(): void {
+    this.submit(null);
+  }
 }

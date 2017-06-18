@@ -10,7 +10,7 @@ import { AuthService } from './auth/auth.service';
 })
 export class NavBarComponent {
   showAdminOptions = true;
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(public auth: AuthService, private router: Router) { }
 
   login() {
     this.auth.login(this.router.routerState.snapshot.url);
