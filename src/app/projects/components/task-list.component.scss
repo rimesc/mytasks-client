@@ -5,7 +5,12 @@ a.task-summary {
 }
 
 a.task-summary.completed {
+	@extend .text-muted;
 	text-decoration: line-through;
+}
+
+a.task-summary.completed:hover {
+	text-decoration: underline line-through;
 }
 
 ul.inline-list {
