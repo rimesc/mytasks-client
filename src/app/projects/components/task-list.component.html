@@ -12,10 +12,10 @@
         <div class="d-flex w-100 justify-content-between">
           <my-task-badges [task]="task"></my-task-badges>
           <div>
-            <span class="text-muted modification-time"><small>
+            <span class="modification-time">
               <span *ngIf="!isModified(task)">Created {{task.created | amTimeAgo}}</span>
               <span *ngIf="isModified(task)">Updated {{task.updated | amTimeAgo}}</span>
-            </small></span>
+            </span>
           </div>
         </div>
       </div>

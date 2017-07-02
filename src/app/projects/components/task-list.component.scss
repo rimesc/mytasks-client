@@ -58,3 +58,8 @@ ul.item-details {
 .state-done {
   @extend .invisible;
 }
+
+.modification-time {
+  @extend .small;
+  color: #aaa;
+}
