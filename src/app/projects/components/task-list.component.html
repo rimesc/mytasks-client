@@ -6,8 +6,8 @@
       </div>
       <div class="flex-column align-items-start w-100">
         <div class="d-flex w-100 justify-content-between">
-          <a class="task-summary" routerLink="/tasks/{{task.id}}">{{task.summary}}</a>
-        	<my-state-badge [state]="task.state"></my-state-badge>
+          <a class="task-summary" [ngClass]="{completed: task.state === states.DONE}" routerLink="/tasks/{{task.id}}">{{task.summary}}</a>
+          <span class="state state-{{states[task.state] | lowercase}}">{{states[task.state] | titlecase}}</span>
         </div>
         <div class="d-flex w-100 justify-content-between">
           <my-task-badges [task]="task"></my-task-badges>

@@ -91,9 +91,9 @@ describe('TaskListComponent', () => {
   });
 
   it('should display the task state', () => {
-    expect(page.items[0].stateIcon).toEqual('clock-o');
-    expect(page.items[1].stateIcon).toEqual('play-circle-o');
-    expect(page.items[2].stateIcon).toEqual('check-circle-o');
+    expect(page.items[0].state).toEqual('To Do');
+    expect(page.items[1].state).toEqual('In Progress');
+    expect(page.items[2].state).toEqual('Done');
   });
 
   describe('task created/modified date', () => {
@@ -153,14 +153,14 @@ class ListItem {
 
   link: DebugElement;
   summary: string;
-  stateIcon: string;
+  state: string;
   tags: string[];
   priority: string;
 
   constructor(public debugElement: DebugElement) {
     this.link = debugElement.query(By.directive(RouterLinkStubDirective));
     this.summary = (debugElement.query(By.css('.task-summary')).nativeElement as Element).textContent.trim();
-    this.stateIcon = (debugElement.query(By.css('.badge .fa')).nativeElement as Element).classList[1].replace('fa-', '');
+    this.state = (debugElement.query(By.css('.state')).nativeElement as Element).textContent.trim();
     this.tags = debugElement.queryAll(By.css('ul.item-details .badge')).map(e => (e.nativeElement as Element).textContent.trim());
     this.priority = (debugElement.query(By.css('span.priority')).nativeElement as Element).attributes.getNamedItem('title').textContent;
   }

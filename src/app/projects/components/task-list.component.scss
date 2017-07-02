@@ -4,6 +4,10 @@ a.task-summary {
 	color: $body-color;
 }
 
+a.task-summary.completed {
+	text-decoration: line-through;
+}
+
 ul.inline-list {
 	list-style: none;
 	padding: 0px;
@@ -33,4 +37,24 @@ ul.tags {
 
 ul.item-details {
 	@extend ul.inline-list;
+}
+
+.state {
+  font-size: $small-font-size;
+}
+
+.state-in_progress {
+  @extend .text-success;
+}
+
+.state-to_do {
+  @extend .invisible;
+}
+
+.state-on_hold {
+  @extend .text-warning;
+}
+
+.state-done {
+  @extend .invisible;
 }

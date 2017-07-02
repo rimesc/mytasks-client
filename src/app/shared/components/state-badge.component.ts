@@ -13,7 +13,7 @@ export class StateBadgeComponent {
   state: State;
 
   @Input()
-  mode: string = 'normal';
+  mode = 'normal';
 
   states = State;
 
