@@ -160,9 +160,9 @@ class ListItem {
   constructor(public debugElement: DebugElement) {
     this.link = debugElement.query(By.directive(RouterLinkStubDirective));
     this.summary = (debugElement.query(By.css('.task-summary')).nativeElement as Element).textContent.trim();
-    this.stateIcon = (debugElement.query(By.css('.fa')).nativeElement as Element).classList[1].replace('fa-', '');
+    this.stateIcon = (debugElement.query(By.css('.badge .fa')).nativeElement as Element).classList[1].replace('fa-', '');
     this.tags = debugElement.queryAll(By.css('ul.item-details .badge')).map(e => (e.nativeElement as Element).textContent.trim());
-    this.priority = (debugElement.query(By.directive(PriorityBadgeComponent)).nativeElement as Element).textContent.trim();
+    this.priority = (debugElement.query(By.css('span.priority')).nativeElement as Element).attributes.getNamedItem('title').textContent;
   }
 
   get timestamp() {

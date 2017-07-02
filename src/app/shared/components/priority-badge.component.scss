@@ -1,0 +1,20 @@
+@import '../../../../node_modules/bootstrap/scss/bootstrap.scss';
+
+.priority-low {
+  @extend .text-success;
+  opacity: 0.75;
+}
+
+.priority-normal {
+  @extend .text-info;
+  opacity: 0.25;
+}
+
+.priority-high {
+  @extend .text-warning;
+}
+
+.priority-critical {
+  @extend .text-danger;
+}
+
