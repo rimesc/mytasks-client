@@ -5,8 +5,9 @@
         <my-priority-badge [priority]="task.priority"></my-priority-badge>
       </div>
       <div class="flex-column align-items-start w-100">
-        <div>
+        <div class="d-flex w-100 justify-content-between">
           <a class="task-summary" routerLink="/tasks/{{task.id}}">{{task.summary}}</a>
+        	<my-state-badge [state]="task.state"></my-state-badge>
         </div>
         <div class="d-flex w-100 justify-content-between">
           <my-task-badges [task]="task"></my-task-badges>

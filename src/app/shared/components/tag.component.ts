@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'my-tag',
-  template: `<my-badge [label]="tag" icon="tag"></my-badge>`,
-  styles: []
+  templateUrl: './tag.component.html',
+  styleUrls: ['./tag.component.scss']
 })
 export class TagComponent {
   @Input()
