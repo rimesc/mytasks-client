@@ -1,5 +1,5 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
+import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
@@ -17,6 +17,7 @@ describe('PriorityBadgeComponent', () => {
     TestBed.configureTestingModule({
       imports: [ Angular2FontawesomeModule ],
       declarations: [ PriorityBadgeComponent, TitleCasePipe ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     });
   });
 
@@ -30,40 +31,44 @@ describe('PriorityBadgeComponent', () => {
   it('should display LOW priority', () => {
     component.priority = Priority.LOW;
     fixture.detectChanges();
-    let span: Element = fixture.debugElement.query(By.css('span')).nativeElement;
-    let icon: DebugElement = fixture.debugElement.query(By.css('fa'));
-    expect(span.classList).toContain('priority-low');
-    expect(span.attributes.getNamedItem('title').textContent.trim()).toEqual('Low Priority');
+    let span = fixture.debugElement.query(By.css('.priority'));
+    let icon = fixture.debugElement.query(By.css('fa'));
+    let tooltipParent = span.query(By.css('span'));
+    expect(span.nativeElement.classList).toContain('priority-low');
+    expect(tooltipParent.properties['ngbTooltip']).toEqual('Low Priority');
     expect(icon.componentInstance.name).toEqual('chevron-circle-down');
   });
 
   it('should display NORMAL priority', () => {
     component.priority = Priority.NORMAL;
     fixture.detectChanges();
-    let span: Element = fixture.debugElement.query(By.css('span')).nativeElement;
-    let icon: DebugElement = fixture.debugElement.query(By.css('fa'));
-    expect(span.classList).toContain('priority-normal');
-    expect(span.attributes.getNamedItem('title').textContent.trim()).toEqual('Normal Priority');
+    let span = fixture.debugElement.query(By.css('.priority'));
+    let icon = fixture.debugElement.query(By.css('fa'));
+    let tooltipParent = span.query(By.css('span'));
+    expect(span.nativeElement.classList).toContain('priority-normal');
+    expect(tooltipParent.properties['ngbTooltip']).toEqual('Normal Priority');
     expect(icon.componentInstance.name).toEqual('minus-circle');
   });
 
   it('should display HIGH priority', () => {
     component.priority = Priority.HIGH;
     fixture.detectChanges();
-    let span: Element = fixture.debugElement.query(By.css('span')).nativeElement;
-    let icon: DebugElement = fixture.debugElement.query(By.css('fa'));
-    expect(span.classList).toContain('priority-high');
-    expect(span.attributes.getNamedItem('title').textContent.trim()).toEqual('High Priority');
+    let span = fixture.debugElement.query(By.css('.priority'));
+    let icon = fixture.debugElement.query(By.css('fa'));
+    let tooltipParent = span.query(By.css('span'));
+    expect(span.nativeElement.classList).toContain('priority-high');
+    expect(tooltipParent.properties['ngbTooltip']).toEqual('High Priority');
     expect(icon.componentInstance.name).toEqual('chevron-circle-up');
   });
 
   it('should display CRITICAL priority', () => {
     component.priority = Priority.CRITICAL;
     fixture.detectChanges();
-    let span: Element = fixture.debugElement.query(By.css('span')).nativeElement;
-    let icon: DebugElement = fixture.debugElement.query(By.css('fa'));
-    expect(span.classList).toContain('priority-critical');
-    expect(span.attributes.getNamedItem('title').textContent.trim()).toEqual('Critical Priority');
+    let span = fixture.debugElement.query(By.css('.priority'));
+    let icon = fixture.debugElement.query(By.css('fa'));
+    let tooltipParent = span.query(By.css('span'));
+    expect(span.nativeElement.classList).toContain('priority-critical');
+    expect(tooltipParent.properties['ngbTooltip']).toEqual('Critical Priority');
     expect(icon.componentInstance.name).toEqual('exclamation-circle');
   });
 

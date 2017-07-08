@@ -1,6 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
 import { RouterLinkStubDirective } from '../../testing/router-stubs';
 
@@ -52,6 +52,7 @@ describe('TaskListComponent', () => {
         TitleCasePipe,
         RouterLinkStubDirective
       ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     });
   });
 
@@ -111,7 +112,7 @@ describe('TaskListComponent', () => {
       expect(page.items[0].timestamp).toEqual('Created 3 days ago');
     });
 
-    it('should displayed for modified tasks', () => {
+    it('should be displayed for modified tasks', () => {
       tasks[0].updated = moment().subtract(7, 'hours').toDate();
       fixture.detectChanges();
       expect(page.items[0].timestamp).toEqual('Updated 7 hours ago');
@@ -162,7 +163,7 @@ class ListItem {
     this.summary = (debugElement.query(By.css('.task-summary')).nativeElement as Element).textContent.trim();
     this.state = (debugElement.query(By.css('.state')).nativeElement as Element).textContent.trim();
     this.tags = debugElement.queryAll(By.css('ul.item-details .badge')).map(e => (e.nativeElement as Element).textContent.trim());
-    this.priority = (debugElement.query(By.css('span.priority')).nativeElement as Element).attributes.getNamedItem('title').textContent;
+    this.priority = debugElement.query(By.css('.priority-icon')).properties['ngbTooltip'];
   }
 
   get timestamp() {

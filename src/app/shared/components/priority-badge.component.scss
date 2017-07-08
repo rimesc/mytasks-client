@@ -1,20 +1,38 @@
-@import '../../../../node_modules/bootstrap/scss/bootstrap.scss';
+@import '~bootstrap/scss/bootstrap.scss';
+
+@mixin priority-tooltip($context) {
+  /deep/ {
+    .tooltip-inner {
+      background-color: $context;
+    }
+    .tooltip.tooltip-top .tooltip-inner::before {
+      border-top-color: $context;
+    }
+  }
+}
 
 .priority-low {
   @extend .text-success;
-  opacity: 0.66;
+  @include priority-tooltip($brand-success);
+  .priority-icon {
+    opacity: 0.66;
+  }
 }
 
 .priority-normal {
   @extend .text-info;
-  opacity: 0.25;
+  @include priority-tooltip($brand-info);
+  .priority-icon {
+    opacity: 0.25;
+  }
 }
 
 .priority-high {
   @extend .text-warning;
+  @include priority-tooltip($brand-warning);
 }
 
 .priority-critical {
   @extend .text-danger;
+  @include priority-tooltip($brand-danger);
 }
-

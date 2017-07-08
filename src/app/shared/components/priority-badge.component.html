@@ -1,3 +1,5 @@
-<span title="{{priorities[priority] | titlecase}} Priority" class="priority priority-{{priorities[priority] | lowercase}}">
-  <fa [name]="icon" [size]="1"></fa>
+<span class="priority priority-{{priorities[priority] | lowercase}}">
+  <span class="priority-icon" placement="top" ngbTooltip="{{priorities[priority] | titlecase}} Priority">
+    <fa [name]="icon" [size]="1"></fa>
+  </span>
 </span>
