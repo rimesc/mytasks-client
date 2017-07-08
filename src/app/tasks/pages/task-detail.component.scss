@@ -1,0 +1,10 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+.task-header {
+  @extend .mt-2;
+  h1 {
+    @extend .mt-1;
+    font-size: $font-size-h2;
+    margin-bottom: 0px;
+  }
+}

@@ -33,7 +33,7 @@ describe('PriorityBadgeComponent', () => {
     let span: Element = fixture.debugElement.query(By.css('span')).nativeElement;
     let icon: DebugElement = fixture.debugElement.query(By.css('fa'));
     expect(span.classList).toContain('priority-low');
-    expect(span.attributes.getNamedItem('title').textContent.trim()).toEqual('Low');
+    expect(span.attributes.getNamedItem('title').textContent.trim()).toEqual('Low Priority');
     expect(icon.componentInstance.name).toEqual('chevron-circle-down');
   });
 
@@ -43,7 +43,7 @@ describe('PriorityBadgeComponent', () => {
     let span: Element = fixture.debugElement.query(By.css('span')).nativeElement;
     let icon: DebugElement = fixture.debugElement.query(By.css('fa'));
     expect(span.classList).toContain('priority-normal');
-    expect(span.attributes.getNamedItem('title').textContent.trim()).toEqual('Normal');
+    expect(span.attributes.getNamedItem('title').textContent.trim()).toEqual('Normal Priority');
     expect(icon.componentInstance.name).toEqual('minus-circle');
   });
 
@@ -53,7 +53,7 @@ describe('PriorityBadgeComponent', () => {
     let span: Element = fixture.debugElement.query(By.css('span')).nativeElement;
     let icon: DebugElement = fixture.debugElement.query(By.css('fa'));
     expect(span.classList).toContain('priority-high');
-    expect(span.attributes.getNamedItem('title').textContent.trim()).toEqual('High');
+    expect(span.attributes.getNamedItem('title').textContent.trim()).toEqual('High Priority');
     expect(icon.componentInstance.name).toEqual('chevron-circle-up');
   });
 
@@ -63,7 +63,7 @@ describe('PriorityBadgeComponent', () => {
     let span: Element = fixture.debugElement.query(By.css('span')).nativeElement;
     let icon: DebugElement = fixture.debugElement.query(By.css('fa'));
     expect(span.classList).toContain('priority-critical');
-    expect(span.attributes.getNamedItem('title').textContent.trim()).toEqual('Critical');
+    expect(span.attributes.getNamedItem('title').textContent.trim()).toEqual('Critical Priority');
     expect(icon.componentInstance.name).toEqual('exclamation-circle');
   });
 

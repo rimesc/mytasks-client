@@ -85,9 +85,9 @@ describe('TaskListComponent', () => {
   });
 
   it('should display the task priority', () => {
-    expect(page.items[0].priority).toEqual('Normal');
-    expect(page.items[1].priority).toEqual('High');
-    expect(page.items[2].priority).toEqual('Low');
+    expect(page.items[0].priority).toEqual('Normal Priority');
+    expect(page.items[1].priority).toEqual('High Priority');
+    expect(page.items[2].priority).toEqual('Low Priority');
   });
 
   it('should display the task state', () => {
