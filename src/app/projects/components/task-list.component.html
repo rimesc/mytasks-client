@@ -1,17 +1,23 @@
 <ul class="list-group task-list">
-  <li *ngFor="let task of tasks" class="list-group-item flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <div>
-        <a class="task-summary" routerLink="/tasks/{{task.id}}">{{task.summary}}</a>
+  <li *ngFor="let task of tasks" class="list-group-item">
+    <div class="d-flex w-100 align-items-center">
+      <div class="mr-3">
+        <my-priority-badge [priority]="task.priority"></my-priority-badge>
       </div>
-    </div>
-    <div class="d-flex w-100 justify-content-between">
-			<my-task-badges [task]="task"></my-task-badges>
-      <div>
-        <span class="text-muted modification-time"><small>
-          <span *ngIf="!isModified(task)">Created {{task.created | amTimeAgo}}</span>
-          <span *ngIf="isModified(task)">Updated {{task.updated | amTimeAgo}}</span>
-        </small></span>
+      <div class="flex-column align-items-start w-100">
+        <div class="d-flex w-100 justify-content-between">
+          <a class="task-summary" [ngClass]="{completed: task.state === states.DONE}" routerLink="/tasks/{{task.id}}">{{task.summary}}</a>
+          <span class="state state-{{states[task.state] | lowercase}}">{{states[task.state] | titlecase}}</span>
+        </div>
+        <div class="d-flex w-100 justify-content-between">
+          <my-task-badges [task]="task"></my-task-badges>
+          <div>
+            <span class="modification-time">
+              <span *ngIf="!isModified(task)">Created {{task.created | amTimeAgo}}</span>
+              <span *ngIf="isModified(task)">Updated {{task.updated | amTimeAgo}}</span>
+            </span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="clearfix"></div>

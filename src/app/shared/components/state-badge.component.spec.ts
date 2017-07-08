@@ -17,7 +17,7 @@ import { BadgeComponent } from './badge.component';
 })
 export class HostComponent {
   state: State;
-  mode: string = 'normal';
+  mode = 'normal';
 }
 
 describe('StateBadgeComponent', () => {
@@ -42,9 +42,9 @@ describe('StateBadgeComponent', () => {
   it('should display the TO_DO state', () => {
     component.state = State.TO_DO;
     fixture.detectChanges();
-    let span: Element = fixture.debugElement.query(By.css('.badge')).nativeElement;
+    let span: Element = fixture.debugElement.query(By.css('.state')).nativeElement;
     expect(span.classList.length).toEqual(2);
-    expect(span.classList[1]).toEqual('badge-primary');
+    expect(span.classList[1]).toEqual('state-to_do');
     expect(span.textContent.trim()).toEqual('To Do');
     let icon: Element = fixture.debugElement.query(By.css('.fa')).nativeElement;
     expect(icon.classList[1]).toEqual('fa-clock-o');
@@ -54,8 +54,8 @@ describe('StateBadgeComponent', () => {
   it('should display the IN_PROGRESS state', () => {
     component.state = State.IN_PROGRESS;
     fixture.detectChanges();
-    let span: Element = fixture.debugElement.query(By.css('.badge')).nativeElement;
-    expect(span.classList[1]).toEqual('badge-success');
+    let span: Element = fixture.debugElement.query(By.css('.state')).nativeElement;
+    expect(span.classList[1]).toEqual('state-in_progress');
     expect(span.textContent.trim()).toEqual('In Progress');
     let icon: Element = fixture.debugElement.query(By.css('.fa')).nativeElement;
     expect(icon.classList[1]).toEqual('fa-play-circle-o');
@@ -65,8 +65,8 @@ describe('StateBadgeComponent', () => {
   it('should display the ON_HOLD state', () => {
     component.state = State.ON_HOLD;
     fixture.detectChanges();
-    let span: Element = fixture.debugElement.query(By.css('.badge')).nativeElement;
-    expect(span.classList[1]).toEqual('badge-warning');
+    let span: Element = fixture.debugElement.query(By.css('.state')).nativeElement;
+    expect(span.classList[1]).toEqual('state-on_hold');
     expect(span.textContent.trim()).toEqual('On Hold');
     let icon: Element = fixture.debugElement.query(By.css('.fa')).nativeElement;
     expect(icon.classList[1]).toEqual('fa-pause-circle-o');
@@ -76,8 +76,8 @@ describe('StateBadgeComponent', () => {
   it('should display the DONE state', () => {
     component.state = State.DONE;
     fixture.detectChanges();
-    let span: Element = fixture.debugElement.query(By.css('.badge')).nativeElement;
-    expect(span.classList[1]).toEqual('badge-danger');
+    let span: Element = fixture.debugElement.query(By.css('.state')).nativeElement;
+    expect(span.classList[1]).toEqual('state-done');
     expect(span.textContent.trim()).toEqual('Done');
     let icon: Element = fixture.debugElement.query(By.css('.fa')).nativeElement;
     expect(icon.classList[1]).toEqual('fa-check-circle-o');

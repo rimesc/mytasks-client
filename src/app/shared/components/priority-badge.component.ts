@@ -2,10 +2,17 @@ import { Component, Input } from '@angular/core';
 
 import { Priority } from '../../api/priority';
 
+const ICONS = {
+  LOW: 'chevron-circle-down',
+  NORMAL: 'minus-circle',
+  HIGH: 'chevron-circle-up',
+  CRITICAL: 'exclamation-circle'
+};
+
 @Component({
   selector: 'my-priority-badge',
-  template: '<my-badge label="{{priorities[priority] | titlecase}}" icon="warning" [context]="context()"></my-badge>',
-  styles: []
+  templateUrl: './priority-badge.component.html',
+  styleUrls: ['./priority-badge.component.scss']
 })
 export class PriorityBadgeComponent {
   @Input()
@@ -13,18 +20,8 @@ export class PriorityBadgeComponent {
 
   priorities = Priority;
 
-  context(): string {
-    switch (this.priority) {
-      case Priority.LOW:
-        return 'success';
-      case Priority.NORMAL:
-        return 'info';
-      case Priority.HIGH:
-        return 'warning';
-      case Priority.CRITICAL:
-        return 'danger';
-      default:
-        return 'default';
-    }
+  get icon(): string {
+    return ICONS[Priority[this.priority]];
   }
+
 }

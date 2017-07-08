@@ -1,6 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
 import { RouterLinkStubDirective } from '../../testing/router-stubs';
 
@@ -52,6 +52,7 @@ describe('TaskListComponent', () => {
         TitleCasePipe,
         RouterLinkStubDirective
       ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     });
   });
 
@@ -85,15 +86,15 @@ describe('TaskListComponent', () => {
   });
 
   it('should display the task priority', () => {
-    expect(page.items[0].priority).toEqual('Normal');
-    expect(page.items[1].priority).toEqual('High');
-    expect(page.items[2].priority).toEqual('Low');
+    expect(page.items[0].priority).toEqual('Normal Priority');
+    expect(page.items[1].priority).toEqual('High Priority');
+    expect(page.items[2].priority).toEqual('Low Priority');
   });
 
   it('should display the task state', () => {
-    expect(page.items[0].stateIcon).toEqual('clock-o');
-    expect(page.items[1].stateIcon).toEqual('play-circle-o');
-    expect(page.items[2].stateIcon).toEqual('check-circle-o');
+    expect(page.items[0].state).toEqual('To Do');
+    expect(page.items[1].state).toEqual('In Progress');
+    expect(page.items[2].state).toEqual('Done');
   });
 
   describe('task created/modified date', () => {
@@ -111,7 +112,7 @@ describe('TaskListComponent', () => {
       expect(page.items[0].timestamp).toEqual('Created 3 days ago');
     });
 
-    it('should displayed for modified tasks', () => {
+    it('should be displayed for modified tasks', () => {
       tasks[0].updated = moment().subtract(7, 'hours').toDate();
       fixture.detectChanges();
       expect(page.items[0].timestamp).toEqual('Updated 7 hours ago');
@@ -153,16 +154,16 @@ class ListItem {
 
   link: DebugElement;
   summary: string;
-  stateIcon: string;
+  state: string;
   tags: string[];
   priority: string;
 
   constructor(public debugElement: DebugElement) {
     this.link = debugElement.query(By.directive(RouterLinkStubDirective));
     this.summary = (debugElement.query(By.css('.task-summary')).nativeElement as Element).textContent.trim();
-    this.stateIcon = (debugElement.query(By.css('.fa')).nativeElement as Element).classList[1].replace('fa-', '');
+    this.state = (debugElement.query(By.css('.state')).nativeElement as Element).textContent.trim();
     this.tags = debugElement.queryAll(By.css('ul.item-details .badge')).map(e => (e.nativeElement as Element).textContent.trim());
-    this.priority = (debugElement.query(By.directive(PriorityBadgeComponent)).nativeElement as Element).textContent.trim();
+    this.priority = debugElement.query(By.css('.priority-icon')).properties['ngbTooltip'];
   }
 
   get timestamp() {

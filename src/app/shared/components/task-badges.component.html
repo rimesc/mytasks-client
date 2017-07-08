@@ -1,5 +1,3 @@
 <ul class="badges">
-	<li><my-state-badge [state]="task.state"></my-state-badge>
-	<li><my-priority-badge [priority]="task.priority"></my-priority-badge>
 	<li *ngFor="let tag of task.tags"><my-tag [tag]="tag"></my-tag>
 </ul>
