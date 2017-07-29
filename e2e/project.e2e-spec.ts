@@ -36,6 +36,23 @@ describe('the project page', () => {
     expect(page.notes).toContain('Proin quam odio, pulvinar vitae quam ac, cursus accumsan nibh.');
   });
 
+  describe('the project navigation bar', () => {
+
+    it ('is the active tab', () => {
+      expect(page.header.activeTab).toEqual('Overview');
+    });
+
+    it ('displays the number of incomplete tasks', () => {
+      expect(page.header.numberOfOpenTasks).toEqual(2);
+    });
+
+    it ('navigates to the task list', () => {
+      page.header.switchTab('Tasks');
+      browser.wait(ExpectedConditions.urlIs('http://localhost:4200/projects/1/tasks?filter=open'));
+    });
+
+  });
+
   describe('the edit project button', () => {
 
     it('opens the edit project modal when clicked', () => {

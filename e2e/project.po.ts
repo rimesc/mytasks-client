@@ -1,6 +1,7 @@
 import { element, by } from 'protractor';
 
 import { AnyPage } from './any.po';
+import { ProjectHeaderPage } from './project-header.po';
 import { DeleteModal } from './delete-modal.po';
 import { NotesEditor } from './notes-editor.po';
 import { ProjectModal } from './project-modal.po';
@@ -14,6 +15,7 @@ export class ProjectPage extends AnyPage {
   discardChangesModal = new DiscardChangesModal();
   newTaskModal = new TaskModal();
   notesEditor = new NotesEditor();
+  header = new ProjectHeaderPage();
 
   constructor(id: number) {
     super();

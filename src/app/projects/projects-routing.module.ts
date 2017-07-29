@@ -25,6 +25,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
+        redirectTo: 'overview',
+        pathMatch: 'full'
+      },
+      {
+        path: 'overview',
         component: ProjectDetailComponent,
         canDeactivate: [UnsavedChangesGuard],
         resolve: {
