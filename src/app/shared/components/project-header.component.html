@@ -1,12 +1,28 @@
 <div class="project-header">
-	<div class="d-flex align-items-center">
-		<div class="project-icon-container">
-			<span class="project-icon">
-				<fa name="archive"></fa>
+	<div class="nav-tabs d-flex justify-content-end">
+		<div class="d-flex align-items-center mr-auto">
+			<div class="project-icon-container">
+				<span class="project-icon">
+					<fa name="archive"></fa>
+				</span>
+			</div>
+			<span class="project-name">
+				<a routerLink="/projects/{{project.id}}"><strong>{{project.name}}</strong></a>
 			</span>
 		</div>
-		<span class="project-name">
-			<a routerLink="/projects/{{project.id}}"><strong>{{project.name}}</strong></a>
-		</span>
+		<div class="project-nav">
+			<ul class="nav">
+				<li class="nav-item">
+					<a class="nav-link" routerLink="/projects/{{project.id}}/overview" routerLinkActive="active">Overview</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLink="/projects/{{project.id}}/tasks" [queryParams]="{ filter: 'open' }" routerLinkActive="active">Tasks <span *ngIf="project.tasks" class="badge">{{project.tasks.open}}</span></a> 
+					
+				</li>
+				<li class="nav-item">
+					<a class="nav-link disabled">Notes <span class="badge">1</span></a>
+				</li>
+			</ul>
+		</div>
 	</div>
 </div>

@@ -55,7 +55,7 @@ describe('the projects page', () => {
 
       it('navigates to the project detail page', () => {
         page.item(0).then(item => item.go());
-        browser.wait(ExpectedConditions.urlIs('http://localhost:4200/projects/1'));
+        browser.wait(ExpectedConditions.urlIs('http://localhost:4200/projects/1/overview'));
       });
 
     });

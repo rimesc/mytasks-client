@@ -1,12 +1,15 @@
 <my-messages [messages]="messages"></my-messages>
 <div *ngIf="project">
+  <div>
+    <my-project-header [project]="project"></my-project-header>
+  </div>
   <my-project-toolbar (edit)="editProject()" (delete)="deleteProject()" (newTask)="createTask($event)"></my-project-toolbar>
   <div class="project-header">
     <h1>{{project.name}}</h1>
     <p class="lead">{{project.description}}</p>
     <ul>
       <li>
-        <a routerLink="tasks" [queryParams]="{ filter: 'open' }">
+        <a routerLink="../tasks" [queryParams]="{ filter: 'open' }">
           <fa name="check-square-o"></fa>
           <span class="open-tasks">{{project.tasks.open | pluralise:'open task'}}</span>
         </a>
