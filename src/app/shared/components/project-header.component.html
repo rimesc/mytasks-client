@@ -16,7 +16,7 @@
 					<a class="nav-link" routerLink="/projects/{{project.id}}/overview" routerLinkActive="active">Overview</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" routerLink="/projects/{{project.id}}/tasks" [queryParams]="{ filter: 'open' }" routerLinkActive="active">Tasks <span *ngIf="project.tasks" class="badge">{{project.tasks.open}}</span></a> 
+					<a class="nav-link" routerLink="/projects/{{project.id}}/tasks" routerLinkActive="active">Tasks <span *ngIf="project.tasks" class="badge">{{project.tasks.open}}</span></a> 
 					
 				</li>
 				<li class="nav-item">

@@ -14,7 +14,7 @@
         <div class="col d-flex align-items-start">
           <ul class="nav nav-pills card-header-pills">
             <li class="nav-item" *ngFor="let key of filterKeys">
-              <a class="nav-link btn-sm" [routerLink]="['.']" [queryParams]="{ filter: key }" routerLinkActive="active">{{filters[key].label}}</a>
+              <a class="nav-link btn-sm" [routerLink]="['.']" [queryParams]="{ filter: key }" [ngClass]="{ active: key === activeFilter }">{{filters[key].label}}</a>
             </li>
           </ul>
         </div>
