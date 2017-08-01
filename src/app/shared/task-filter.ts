@@ -6,7 +6,7 @@ export const TaskFilters = {
   all: { label: 'All tasks', states: [] }
 };
 
-export const DEFAULT_FILTER = 'all';
+export const DEFAULT_FILTER = 'open';
 
 export class TaskFilter {
   label: string;
