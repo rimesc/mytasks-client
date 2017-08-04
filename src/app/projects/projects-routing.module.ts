@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // pages
-import { ProjectsRootComponent } from './projects-root.component';
+import { ProjectRootComponent } from './pages/project-root.component';
 import { ProjectListComponent } from './pages/project-list.component';
-import { ProjectDetailComponent } from './pages/project-detail.component';
+import { ProjectOverviewComponent } from './pages/project-overview.component';
 import { ProjectTasksComponent } from './pages/project-tasks.component';
 
 // guards
@@ -21,7 +21,10 @@ const routes: Routes = [
   },
   {
     path: ':projectId',
-    component: ProjectsRootComponent,
+    component: ProjectRootComponent,
+    resolve: {
+      project: ProjectDetailResolver
+    },
     children: [
       {
         path: '',
@@ -30,17 +33,13 @@ const routes: Routes = [
       },
       {
         path: 'overview',
-        component: ProjectDetailComponent,
-        canDeactivate: [UnsavedChangesGuard],
-        resolve: {
-          project: ProjectDetailResolver
-        }
+        component: ProjectOverviewComponent,
+        canDeactivate: [UnsavedChangesGuard]
       },
       {
         path: 'tasks',
         component: ProjectTasksComponent,
         resolve: {
-          project: ProjectDetailResolver,
           tasks: ProjectTasksResolver
         }
       }
