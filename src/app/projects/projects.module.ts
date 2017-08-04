@@ -5,8 +5,8 @@ import { ProjectsRoutingModule } from './projects-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
 // pages
-import { ProjectsRootComponent } from './projects-root.component';
-import { ProjectDetailComponent } from './pages/project-detail.component';
+import { ProjectRootComponent } from './pages/project-root.component';
+import { ProjectOverviewComponent } from './pages/project-overview.component';
 import { ProjectListComponent } from './pages/project-list.component';
 import { ProjectTasksComponent } from './pages/project-tasks.component';
 
@@ -35,8 +35,8 @@ import { NewTaskModalComponent } from './modals/new-task-modal.component';
     NewProjectModalComponent,
     NewTaskButtonComponent,
     NewTaskModalComponent,
-    ProjectsRootComponent,
-    ProjectDetailComponent,
+    ProjectRootComponent,
+    ProjectOverviewComponent,
     ProjectFormComponent,
     ProjectListComponent,
     ProjectToolbarComponent,

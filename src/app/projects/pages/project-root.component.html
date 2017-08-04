@@ -1,0 +1,7 @@
+<my-messages [messages]="messages"></my-messages>
+<div *ngIf="project">
+  <div>
+    <my-project-header [project]="project"></my-project-header>
+  </div>
+</div>
+<router-outlet></router-outlet>
