@@ -8,6 +8,7 @@ import { Project } from '../../api/project';
 import { TaskForm } from '../../api/task-form';
 
 import { CurrentProjectService } from '../services/current-project.service';
+import { MessagesService } from '../services/messages.service';
 import { TaskService } from '../../services/task.service';
 
 /**
@@ -19,15 +20,14 @@ import { TaskService } from '../../services/task.service';
   selector: 'my-project',
   templateUrl: './project-root.component.html',
   styleUrls: [],
-  providers: [ CurrentProjectService ]
+  providers: [ CurrentProjectService, MessagesService ]
 })
 export class ProjectRootComponent implements OnInit {
-
-  messages: Message[] = [];
 
   constructor(private router: Router,
               private route: ActivatedRoute,
               private projectService: CurrentProjectService,
+              private messagesService: MessagesService,
               private taskService: TaskService
               ) { }
 
@@ -36,12 +36,18 @@ export class ProjectRootComponent implements OnInit {
       (data: { project: Project }) => {
         this.projectService.project = data.project;
       },
-      (error: Error) => this.messages.push({ code: error.code, detail: error.message, severity: 'danger'})
+      (error: Error) => {
+        this.messages.push({ code: error.code, detail: error.message, severity: 'danger'});
+      }
     );
   }
 
   get project(): Project {
     return this.projectService.project;
+  }
+
+  get messages(): Message[] {
+    return this.messagesService.messages;
   }
 
   createTask(task: TaskForm): void {
