@@ -3,8 +3,8 @@ import { OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { CurrentProjectService } from '../services/current-project.service';
+import { MessagesService } from '../services/messages.service';
 import { Error } from '../../api/error';
-import { Message } from '../../shared/components/message';
 import { Project } from '../../api/project';
 import { Task, compareByLastModified } from '../../api/task';
 import { TaskForm } from '../../api/task-form';
@@ -18,7 +18,6 @@ import { TaskFilters, DEFAULT_FILTER } from '../../shared/task-filter';
 })
 export class ProjectTasksComponent implements OnInit {
   _tasks: Task[];
-  messages: Message[] = [];
 
   filters = TaskFilters;
   filterKeys = Object.getOwnPropertyNames(TaskFilters);
@@ -27,14 +26,15 @@ export class ProjectTasksComponent implements OnInit {
   constructor(private taskService: TaskService,
               private router: Router,
               private route: ActivatedRoute,
-              private currentProject: CurrentProjectService) { }
+              private currentProject: CurrentProjectService,
+              private messages: MessagesService) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(
       (data: { tasks: Task[] }) => {
         this.tasks = data.tasks;
       },
-      (error: Error) => this.messages.push({ code: error.code, detail: error.message, severity: 'danger'})
+      (error: Error) => this.messages.error(error.code, error.message)
     );
     this.route.queryParams.map(params => params['filter'] || DEFAULT_FILTER).forEach(filter => this.setActiveFilter(filter));
   }

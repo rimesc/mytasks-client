@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { OnInit } from '@angular/core';
 
+import { MessagesService } from '../services/messages.service';
 import { ModalService } from '../../core/modal.service';
 import { CanDeactivateComponent } from '../../core/unsaved-changes-guard.service';
 import { EditTaskModalComponent } from '../modals/edit-task-modal.component';
@@ -9,7 +10,6 @@ import { DeleteTaskModalComponent } from '../modals/delete-task-modal.component'
 import { NotesComponent } from '../../shared/components/notes.component';
 
 import { Error } from '../../api/error';
-import { Message } from '../../shared/components/message';
 import { Task } from '../../api/task';
 import { TaskForm } from '../../api/task-form';
 import { Priority } from '../../api/priority';
@@ -36,10 +36,10 @@ export class TaskDetailComponent implements OnInit, CanDeactivateComponent {
 
   task: Task;
   priorities = Priority;
-  messages: Message[] = [];
 
   constructor(private taskService: TaskService,
               private modals: ModalService,
+              private messages: MessagesService,
               private router: Router,
               private route: ActivatedRoute) { }
 
@@ -56,7 +56,7 @@ export class TaskDetailComponent implements OnInit, CanDeactivateComponent {
       (data: { task: Task }) => {
         this.task = data.task;
       },
-      (error: Error) => this.messages.push({ code: error.code, detail: error.message, severity: 'danger'})
+      (error: Error) => this.messages.error(error.code, error.message)
     );
   }
 
