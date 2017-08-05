@@ -46,8 +46,14 @@ export class ProjectRootComponent implements OnInit {
 
   createTask(task: TaskForm): void {
     this.taskService.createTask(this.project.id, task).then(newTask => {
-      this.router.navigate(['tasks', newTask.id]);
+      this.router.navigate(['projects', this.project.id, 'tasks', newTask.id]);
     });
+  }
+
+  // workaround for https://github.com/angular/angular/issues/7791
+  // see https://github.com/angular/angular/issues/7791#issuecomment-237897149
+  onActivate(e, outlet) {
+    outlet.scrollTop = 0;
   }
 
 }

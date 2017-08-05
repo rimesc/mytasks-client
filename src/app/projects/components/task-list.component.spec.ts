@@ -82,7 +82,7 @@ describe('TaskListComponent', () => {
   it('should link to the task detail pages', () => {
     let routerLink = page.items[0].link.injector.get(RouterLinkStubDirective) as RouterLinkStubDirective;
     page.items[0].link.triggerEventHandler('click', null);
-    expect(routerLink.navigatedTo).toEqual('/tasks/11');
+    expect(routerLink.navigatedTo).toEqual('/projects/1/tasks/11');
   });
 
   it('should display the task priority', () => {

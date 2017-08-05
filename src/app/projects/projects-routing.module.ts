@@ -5,7 +5,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProjectRootComponent } from './pages/project-root.component';
 import { ProjectListComponent } from './pages/project-list.component';
 import { ProjectOverviewComponent } from './pages/project-overview.component';
+import { ProjectTasksRootComponent } from './pages/project-tasks-root.component';
 import { ProjectTasksComponent } from './pages/project-tasks.component';
+import { TaskDetailComponent } from './pages/task-detail.component';
 
 // guards
 import { UnsavedChangesGuard } from '../core/unsaved-changes-guard.service';
@@ -13,6 +15,7 @@ import { UnsavedChangesGuard } from '../core/unsaved-changes-guard.service';
 // resolvers
 import { ProjectDetailResolver } from './resolvers/project-detail-resolver.service';
 import { ProjectTasksResolver } from './resolvers/project-tasks-resolver.service';
+import { TaskResolver } from './resolvers/task-resolver.service';
 
 const routes: Routes = [
   {
@@ -38,10 +41,24 @@ const routes: Routes = [
       },
       {
         path: 'tasks',
-        component: ProjectTasksComponent,
-        resolve: {
-          tasks: ProjectTasksResolver
-        }
+        component: ProjectTasksRootComponent,
+        children: [
+          {
+            path: '',
+            component: ProjectTasksComponent,
+            resolve: {
+              tasks: ProjectTasksResolver
+            }
+          },
+          {
+            path: ':taskId',
+            component: TaskDetailComponent,
+            canDeactivate: [UnsavedChangesGuard],
+            resolve: {
+              task: TaskResolver
+            }
+          }
+        ]
       }
     ]
   }
@@ -53,7 +70,8 @@ const routes: Routes = [
   ],
   providers: [
     ProjectDetailResolver,
-    ProjectTasksResolver
+    ProjectTasksResolver,
+    TaskResolver
   ],
   exports: [
     RouterModule
