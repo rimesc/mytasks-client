@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Project } from '../../api/project';
+import { TaskForm } from '../../api/task-form';
 
 @Component({
   selector: 'my-project-header',
@@ -10,4 +11,7 @@ import { Project } from '../../api/project';
 export class ProjectHeaderComponent {
   @Input()
   project: Project;
+
+  @Output()
+  newTask = new EventEmitter<TaskForm>();
 }

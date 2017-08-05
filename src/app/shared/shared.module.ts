@@ -20,7 +20,6 @@ import { StateBadgeComponent } from './components/state-badge.component';
 import { TagComponent } from './components/tag.component';
 import { TaskBadgesComponent } from './components/task-badges.component';
 import { TaskFormComponent } from './components/task-form.component';
-import { ProjectHeaderComponent } from './components/project-header.component';
 import { NotesComponent } from './components/notes.component';
 
 // modals
@@ -53,7 +52,6 @@ import { PluralisePipe } from './pipes/pluralise.pipe';
     TagComponent,
     TaskBadgesComponent,
     TaskFormComponent,
-    ProjectHeaderComponent,
     NotesComponent,
     // pipes
     EnumValuesPipe,
@@ -81,7 +79,6 @@ import { PluralisePipe } from './pipes/pluralise.pipe';
     TagComponent,
     TaskBadgesComponent,
     TaskFormComponent,
-    ProjectHeaderComponent,
     NotesComponent,
     // pipes
     EnumValuesPipe,

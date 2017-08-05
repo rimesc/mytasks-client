@@ -8,8 +8,6 @@ import { DeleteProjectModalComponent } from '../modals/delete-project-modal.comp
 import { EditProjectModalComponent } from '../modals/edit-project-modal.component';
 import { NotesComponent } from '../../shared/components/notes.component';
 import { Project } from '../../api/project';
-import { TaskForm } from '../../api/task-form';
-import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'my-project-detail',
@@ -22,7 +20,6 @@ export class ProjectOverviewComponent implements CanDeactivateComponent {
   private notesComponent: NotesComponent;
 
   constructor(private currentProject: CurrentProjectService,
-              private taskService: TaskService,
               private modals: ModalService,
               private router: Router) { }
 
@@ -53,13 +50,6 @@ export class ProjectOverviewComponent implements CanDeactivateComponent {
 
   updateNotes(markdown: string): void {
     this.currentProject.updateNotes(markdown);
-  }
-
-  createTask(task: TaskForm): void {
-    this.taskService.createTask(this.project.id, task).then(() => {
-      this.project.tasks.total += 1;
-      this.project.tasks.open += 1;
-    });
   }
 
 }

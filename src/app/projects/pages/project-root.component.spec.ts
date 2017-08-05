@@ -1,13 +1,19 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
 import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { ProjectRootComponent } from './project-root.component';
 import { ProjectService } from '../../services/project.service';
+import { TaskService } from '../../services/task.service';
+import { Priority } from '../../api/priority';
 import { Project } from '../../api/project';
+import { TaskForm } from '../../api/task-form';
 
 import { ActivatedRouteStub } from '../../testing/router-stubs';
+import { DummyComponent } from '../../testing/dummy.component';
 
 describe('ProjectRootComponent', () => {
 
@@ -18,23 +24,34 @@ describe('ProjectRootComponent', () => {
   };
 
   let activatedRoute: ActivatedRouteStub;
+  let location: Location;
 
   let fixture: ComponentFixture<ProjectRootComponent>;
   let page: Page;
 
   beforeEach(() => {
     let fakeProjectService = { }; // required, but never used, in these tests
+    let fakeTaskService = {
+      createTask: jasmine.createSpy('createTask').and.callFake(
+        (pid: number, task: TaskForm) => Promise.resolve(true).then(() => Object.assign({ id: 1 }, task))
+      )
+    };
 
     TestBed.configureTestingModule({
       schemas: [ NO_ERRORS_SCHEMA ],
-      declarations: [ ProjectRootComponent ],
+      imports: [
+        RouterTestingModule.withRoutes([ { path: 'tasks/:taskId', component: DummyComponent } ])
+      ],
+      declarations: [ ProjectRootComponent, DummyComponent ],
       providers: [
         { provide: ProjectService, useValue: fakeProjectService },
-        { provide: ActivatedRoute, useClass: ActivatedRouteStub }
+        { provide: ActivatedRoute, useClass: ActivatedRouteStub },
+        { provide: TaskService, useValue: fakeTaskService }
       ]
     });
 
     activatedRoute = TestBed.get(ActivatedRoute);
+    location = TestBed.get(Location);
 
     TestBed.compileComponents();
   });
@@ -56,6 +73,22 @@ describe('ProjectRootComponent', () => {
 
     it('should have no error messages', () => {
       expect(page.messages.properties['messages']).toBeEmptyArray();
+    });
+
+    describe('when the new task button is clicked', () => {
+
+      let userInput: TaskForm = { summary: 'My new task', priority: Priority.HIGH, tags: ['foo', 'bar']};
+
+      // the header component is responsible for creating the modal dialog and passing
+      // back the user input
+      it('should create a new task and navigate to it', fakeAsync(() => {
+        page.header.triggerEventHandler('newTask', userInput);
+        tick();
+        expect(page.createTaskSpy.calls.count()).toEqual(1);
+        expect(page.createTaskSpy.calls.mostRecent().args).toEqual([1, userInput]);
+        expect(location.path()).toEqual('/tasks/1');
+      }));
+
     });
 
   });
@@ -99,12 +132,15 @@ class Page {
   header: DebugElement;
   messages: DebugElement;
 
+  createTaskSpy: jasmine.Spy;
+
   constructor(private fixture: ComponentFixture<ProjectRootComponent>) { }
 
   addPageElements() {
     this.component = this.fixture.componentInstance;
     this.header = this.fixture.debugElement.query(By.css('my-project-header'));
     this.messages = this.fixture.debugElement.query(By.css('my-messages'));
+    this.createTaskSpy = this.fixture.debugElement.injector.get(TaskService).createTask as jasmine.Spy;
   }
 
   get project() {

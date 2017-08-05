@@ -12,6 +12,9 @@
 		</div>
 		<div class="project-nav">
 			<ul class="nav">
+				<li class="nav-item d-flex align-items-center mr-4">
+					<my-new-task-button (submit)="newTask.emit($event)"></my-new-task-button>
+				</li>
 				<li class="nav-item">
 					<a class="nav-link" routerLink="/projects/{{project.id}}/overview" routerLinkActive="active">Overview</a>
 				</li>
