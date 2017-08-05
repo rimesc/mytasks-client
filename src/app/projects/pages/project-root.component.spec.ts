@@ -40,7 +40,7 @@ describe('ProjectRootComponent', () => {
     TestBed.configureTestingModule({
       schemas: [ NO_ERRORS_SCHEMA ],
       imports: [
-        RouterTestingModule.withRoutes([ { path: 'tasks/:taskId', component: DummyComponent } ])
+        RouterTestingModule.withRoutes([ { path: 'projects/:projectId/tasks/:taskId', component: DummyComponent } ])
       ],
       declarations: [ ProjectRootComponent, DummyComponent ],
       providers: [
@@ -86,7 +86,7 @@ describe('ProjectRootComponent', () => {
         tick();
         expect(page.createTaskSpy.calls.count()).toEqual(1);
         expect(page.createTaskSpy.calls.mostRecent().args).toEqual([1, userInput]);
-        expect(location.path()).toEqual('/tasks/1');
+        expect(location.path()).toEqual('/projects/1/tasks/1');
       }));
 
     });

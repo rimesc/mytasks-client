@@ -8,7 +8,9 @@ import { SharedModule } from '../shared/shared.module';
 import { ProjectRootComponent } from './pages/project-root.component';
 import { ProjectOverviewComponent } from './pages/project-overview.component';
 import { ProjectListComponent } from './pages/project-list.component';
+import { ProjectTasksRootComponent } from './pages/project-tasks-root.component';
 import { ProjectTasksComponent } from './pages/project-tasks.component';
+import { TaskDetailComponent } from './pages/task-detail.component';
 
 // components
 import { ProjectHeaderComponent } from './components/project-header.component';
@@ -22,6 +24,9 @@ import { DeleteProjectModalComponent } from './modals/delete-project-modal.compo
 import { EditProjectModalComponent } from './modals/edit-project-modal.component';
 import { NewProjectModalComponent } from './modals/new-project-modal.component';
 import { NewTaskModalComponent } from './modals/new-task-modal.component';
+import { DeleteTaskModalComponent } from './modals/delete-task-modal.component';
+import { EditTaskModalComponent } from './modals/edit-task-modal.component';
+
 
 @NgModule({
   imports: [
@@ -42,15 +47,21 @@ import { NewTaskModalComponent } from './modals/new-task-modal.component';
     ProjectListComponent,
     ProjectHeaderComponent,
     ProjectToolbarComponent,
+    ProjectTasksRootComponent,
     ProjectTasksComponent,
-    TaskListComponent
+    TaskListComponent,
+    TaskDetailComponent,
+    DeleteTaskModalComponent,
+    EditTaskModalComponent
   ],
   entryComponents: [
     // modal dialogs
     DeleteProjectModalComponent,
     EditProjectModalComponent,
     NewProjectModalComponent,
-    NewTaskModalComponent
+    NewTaskModalComponent,
+    EditTaskModalComponent,
+    DeleteTaskModalComponent
   ]
 })
 export class ProjectsModule { }
