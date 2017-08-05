@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { OnInit } from '@angular/core';
 
 import { Error } from '../../api/error';
 import { Message } from '../../shared/components/message';
 import { Project } from '../../api/project';
+import { TaskForm } from '../../api/task-form';
 
 import { CurrentProjectService } from '../services/current-project.service';
+import { TaskService } from '../../services/task.service';
 
 /**
  * The root project page.
@@ -23,7 +25,11 @@ export class ProjectRootComponent implements OnInit {
 
   messages: Message[] = [];
 
-  constructor(private route: ActivatedRoute, private projectService: CurrentProjectService) { }
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private projectService: CurrentProjectService,
+              private taskService: TaskService
+              ) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(
@@ -36,6 +42,12 @@ export class ProjectRootComponent implements OnInit {
 
   get project(): Project {
     return this.projectService.project;
+  }
+
+  createTask(task: TaskForm): void {
+    this.taskService.createTask(this.project.id, task).then(newTask => {
+      this.router.navigate(['tasks', newTask.id]);
+    });
   }
 
 }

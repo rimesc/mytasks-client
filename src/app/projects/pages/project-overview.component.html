@@ -1,5 +1,5 @@
 <div *ngIf="project">
-  <my-project-toolbar (edit)="editProject()" (delete)="deleteProject()" (newTask)="createTask($event)"></my-project-toolbar>
+  <my-project-toolbar (edit)="editProject()" (delete)="deleteProject()"></my-project-toolbar>
   <div class="project-header">
     <h1>{{project.name}}</h1>
     <p class="lead">{{project.description}}</p>

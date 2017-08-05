@@ -11,6 +11,7 @@ import { ProjectListComponent } from './pages/project-list.component';
 import { ProjectTasksComponent } from './pages/project-tasks.component';
 
 // components
+import { ProjectHeaderComponent } from './components/project-header.component';
 import { NewTaskButtonComponent } from './components/new-task-button.component';
 import { ProjectFormComponent } from './components/project-form.component';
 import { ProjectToolbarComponent } from './components/project-toolbar.component';
@@ -39,6 +40,7 @@ import { NewTaskModalComponent } from './modals/new-task-modal.component';
     ProjectOverviewComponent,
     ProjectFormComponent,
     ProjectListComponent,
+    ProjectHeaderComponent,
     ProjectToolbarComponent,
     ProjectTasksComponent,
     TaskListComponent

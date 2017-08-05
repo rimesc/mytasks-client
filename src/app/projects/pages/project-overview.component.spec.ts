@@ -6,10 +6,7 @@ import { Location } from '@angular/common';
 
 import { ProjectOverviewComponent } from './project-overview.component';
 import { Project } from '../../api/project';
-import { TaskForm } from '../../api/task-form';
-import { Priority } from '../../api/priority';
 import { CurrentProjectService } from '../services/current-project.service';
-import { TaskService } from '../../services/task.service';
 import { ModalService } from '../../core/modal.service';
 import { DeleteProjectModalComponent } from '../modals/delete-project-modal.component';
 import { EditProjectModalComponent } from '../modals/edit-project-modal.component';
@@ -35,11 +32,6 @@ describe('ProjectOverviewComponent', () => {
   let page: Page;
 
   beforeEach(() => {
-    let fakeTaskService = {
-      createTask: jasmine.createSpy('createTask').and.callFake(
-        (pid: number, task: TaskForm) => Promise.resolve(true).then(() => Object.assign({}, task))
-      )
-    };
     TestBed.configureTestingModule({
       schemas: [ NO_ERRORS_SCHEMA ],
       imports: [
@@ -48,7 +40,6 @@ describe('ProjectOverviewComponent', () => {
       declarations: [ ProjectOverviewComponent, PluralisePipe, DummyComponent ],
       providers: [
         { provide: CurrentProjectService, useClass: CurrentProjectServiceSpy },
-        { provide: TaskService, useValue: fakeTaskService },
         { provide: ModalService, useClass: ModalServiceSpy }
       ]
     });
@@ -179,25 +170,6 @@ describe('ProjectOverviewComponent', () => {
 
   });
 
-  describe('when the new task button is clicked', () => {
-
-    let userInput: TaskForm = { summary: 'My new task', priority: Priority.HIGH, tags: ['foo', 'bar']};
-
-    // in this case, the toolbar is responsible for creating the modal dialog and passing
-    // back the user input
-    it('should create a new task and update the project', fakeAsync(() => {
-      expect(page.project.tasks.open).toEqual(2);
-      expect(page.project.tasks.total).toEqual(3);
-      page.toolbar.triggerEventHandler('newTask', userInput);
-      tick();
-      expect(page.createTaskSpy.calls.count()).toEqual(1);
-      expect(page.createTaskSpy.calls.mostRecent().args).toEqual([1, userInput]);
-      expect(page.project.tasks.open).toEqual(3);
-      expect(page.project.tasks.total).toEqual(4);
-    }));
-
-  });
-
   function createComponent() {
     fixture = TestBed.createComponent(ProjectOverviewComponent);
     page = new Page(fixture);
@@ -216,7 +188,6 @@ class Page {
 
   updateProjectSpy: jasmine.Spy;
   deleteProjectSpy: jasmine.Spy;
-  createTaskSpy: jasmine.Spy;
 
   title: DebugElement;
   description: DebugElement;
@@ -227,7 +198,6 @@ class Page {
   constructor(private fixture: ComponentFixture<ProjectOverviewComponent>) {
     this.updateProjectSpy = fixture.debugElement.injector.get(CurrentProjectService).update as jasmine.Spy;
     this.deleteProjectSpy = fixture.debugElement.injector.get(CurrentProjectService).delete as jasmine.Spy;
-    this.createTaskSpy = fixture.debugElement.injector.get(TaskService).createTask as jasmine.Spy;
   }
 
   addPageElements() {
