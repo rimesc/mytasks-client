@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { OnInit } from '@angular/core';
-
-import { Error } from '../../api/error';
 import { Message } from '../../shared/components/message';
 import { Project } from '../../api/project';
+import { Resolved } from '../resolvers/error-handling-resolver';
 import { TaskForm } from '../../api/task-form';
 
 import { CurrentProjectService } from '../services/current-project.service';
@@ -33,11 +32,11 @@ export class ProjectRootComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.data.subscribe(
-      (data: { project: Project }) => {
-        this.projectService.project = data.project;
-      },
-      (error: Error) => {
-        this.messages.push({ code: error.code, detail: error.message, severity: 'danger'});
+      (data: { project: Resolved<Project> }) => {
+        data.project.handle(
+          project => this.projectService.project = project,
+          error => this.messagesService.error(error.code, error.message)
+        );
       }
     );
   }

@@ -1,5 +1,4 @@
 import { Headers, Response } from '@angular/http';
-
 import 'rxjs/add/operator/toPromise';
 
 import { Error } from '../api/error';

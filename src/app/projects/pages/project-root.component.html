@@ -1,7 +1,7 @@
-<my-messages [messages]="messages"></my-messages>
 <div *ngIf="project">
   <div>
     <my-project-header [project]="project" (newTask)="createTask($event)"></my-project-header>
   </div>
 </div>
-<router-outlet (activate)="onActivate($event, outlet)" #outlet></router-outlet>
+<my-messages [messages]="messages"></my-messages>
+<router-outlet *ngIf="project" (activate)="onActivate($event, outlet)" #outlet></router-outlet>
