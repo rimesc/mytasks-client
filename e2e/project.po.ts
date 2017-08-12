@@ -35,7 +35,7 @@ export class ProjectPage extends AnyPage {
   }
 
   get newTaskButton() {
-    return element(by.css('.project-toolbar button.btn-primary'));
+    return element(by.css('.project-nav button.btn-success'));
   }
 
   get editProjectButton() {
