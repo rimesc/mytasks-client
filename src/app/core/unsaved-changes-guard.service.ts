@@ -23,6 +23,6 @@ export class UnsavedChangesGuard implements CanDeactivate<CanDeactivateComponent
   canDeactivate(component: CanDeactivateComponent,
                 currentRoute: ActivatedRouteSnapshot,
                 currentState: RouterStateSnapshot): boolean | Promise<boolean> {
-    return component.canDeactivate ? component.canDeactivate() : true;
+    return component && component.canDeactivate ? component.canDeactivate() : true;
   }
 }
