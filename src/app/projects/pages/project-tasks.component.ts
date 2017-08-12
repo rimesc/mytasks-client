@@ -4,8 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { CurrentProjectService } from '../services/current-project.service';
 import { MessagesService } from '../services/messages.service';
-import { Error } from '../../api/error';
 import { Project } from '../../api/project';
+import { Resolved } from '../resolvers/error-handling-resolver';
 import { Task, compareByLastModified } from '../../api/task';
 import { TaskForm } from '../../api/task-form';
 import { TaskService } from '../../services/task.service';
@@ -31,10 +31,12 @@ export class ProjectTasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.data.subscribe(
-      (data: { tasks: Task[] }) => {
-        this.tasks = data.tasks;
-      },
-      (error: Error) => this.messages.error(error.code, error.message)
+      (data: { tasks: Resolved<Task[]> }) => {
+        data.tasks.handle(
+          tasks => this.tasks = tasks,
+          error => this.messages.error(error.code, error.message)
+        );
+      }
     );
     this.route.queryParams.map(params => params['filter'] || DEFAULT_FILTER).forEach(filter => this.setActiveFilter(filter));
   }
@@ -54,7 +56,7 @@ export class ProjectTasksComponent implements OnInit {
   setActiveFilter(filter: string): void {
     if (!!this.activeFilter) {
       // the resolver will take care of the initial load
-      this.taskService.getFilteredTasks(this.project.id, TaskFilters[filter].states).subscribe(tasks => this.tasks = tasks);
+      this.taskService.getFilteredTasks(this.project.id, TaskFilters[filter].states).then(tasks => this.tasks = tasks);
     }
     this.activeFilter = filter;
   }

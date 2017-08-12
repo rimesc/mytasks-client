@@ -1,8 +1,6 @@
 import { Injectable, Inject }    from '@angular/core';
 import { Headers } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
-
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 
 import { API_BASE } from './service-constants';
@@ -19,21 +17,24 @@ export class TaskService extends ServiceUtil {
     super(api + 'tasks/');
   }
 
-  getTasks(projectId: number): Observable<Task[]> {
+  getTasks(projectId: number): Promise<Task[]> {
     return this.http.get(this.url('', { project: projectId }))
-               .map(response => JSON.parse(response.text(), revive))
+               .toPromise()
+               .then(response => JSON.parse(response.text(), revive))
                .catch(this.handleError);
   }
 
-  getFilteredTasks(projectId: number, states: State[]): Observable<Task[]> {
+  getFilteredTasks(projectId: number, states: State[]): Promise<Task[]> {
     return this.http.get(this.url('', { project: projectId, state: states.map(s => State[s]) }))
-               .map(response => JSON.parse(response.text(), revive))
+               .toPromise()
+               .then(response => JSON.parse(response.text(), revive))
                .catch(this.handleError);
   }
 
-  getTask(id: number): Observable<Task> {
+  getTask(id: number): Promise<Task> {
     return this.http.get(this.url(id))
-               .map(response => JSON.parse(response.text(), revive))
+               .toPromise()
+               .then(response => JSON.parse(response.text(), revive))
                .catch(this.handleError);
   }
 
@@ -51,9 +52,10 @@ export class TaskService extends ServiceUtil {
                .catch(this.handleError);
   }
 
-  deleteTask(id: number) {
+  deleteTask(id: number): Promise<void> {
     return this.http.delete(this.url(id))
                .toPromise()
+               .then(response => {})
                .catch(this.handleError);
   }
 

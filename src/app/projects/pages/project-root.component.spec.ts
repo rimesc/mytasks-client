@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { resolve, fail } from '../resolvers/error-handling-resolver';
 import { ProjectRootComponent } from './project-root.component';
 import { ProjectService } from '../../services/project.service';
 import { TaskService } from '../../services/task.service';
@@ -59,7 +60,7 @@ describe('ProjectRootComponent', () => {
   describe('when navigating to an existing project', () => {
 
     beforeEach(async(() => {
-      activatedRoute.testData = { project: Object.assign({}, PROJECT) };
+      activatedRoute.testData = { project: resolve(Object.assign({}, PROJECT)) };
       createComponent();
     }));
 
@@ -96,7 +97,7 @@ describe('ProjectRootComponent', () => {
   describe('when navigating to a non-existent project', () => {
 
     beforeEach(async(() => {
-      activatedRoute.testError = { code: 'Not Found', message: 'The requested project could not be found.' };
+      activatedRoute.testData = { project: fail({ code: 'Not Found', message: 'The requested project could not be found.' }) };
       TestBed.compileComponents().then(createComponent);
     }));
 

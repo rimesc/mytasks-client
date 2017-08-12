@@ -1,8 +1,6 @@
 import { Injectable, Inject }    from '@angular/core';
 import { Headers } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
-
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -27,10 +25,11 @@ export class ProjectService extends ServiceUtil {
                .catch(this.handleError);
   }
 
-  getProject(id: number): Observable<Project> {
+  getProject(id: number): Promise<Project> {
     return this.http.get(this.url(id))
-      .map(response => response.json() as Project)
-      .catch(this.handleError);
+               .toPromise()
+               .then(response => response.json() as Project)
+               .catch(this.handleError);
   }
 
   createProject(project: ProjectForm): Promise<Project> {
@@ -40,7 +39,7 @@ export class ProjectService extends ServiceUtil {
                .catch(this.handleError);
   }
 
-  updateProject(id: number, project: ProjectForm) {
+  updateProject(id: number, project: ProjectForm): Promise<Project> {
     return this.http.post(this.url(id), JSON.stringify(project), {headers: this.headers})
                .toPromise()
                .then(response => response.json() as Project)
@@ -54,9 +53,10 @@ export class ProjectService extends ServiceUtil {
                .catch(this.handleError);
   }
 
-  deleteProject(id: number) {
+  deleteProject(id: number): Promise<void> {
     return this.http.delete(this.url(id))
                .toPromise()
+               .then(response => {})
                .catch(this.handleError);
   }
 

@@ -48,7 +48,7 @@ describe('the project page', () => {
 
     it ('navigates to the task list', () => {
       page.header.switchTab('Tasks');
-      browser.wait(ExpectedConditions.urlIs('http://localhost:4200/projects/1/tasks?filter=open'));
+      browser.wait(ExpectedConditions.urlIs('http://localhost:4200/projects/1/tasks'));
     });
 
   });

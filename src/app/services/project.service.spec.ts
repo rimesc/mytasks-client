@@ -112,7 +112,7 @@ describe('ProjectService', () => {
         "numberOfOpenTasks": 2,
         "href": "/api/projects/1"
       }`;
-      service.getProject(1).toPromise().then(project => {
+      service.getProject(1).then(project => {
         expect(actualRequest.url).toEqual('http://www.example.com/api/projects/1');
         expect(actualRequest.method).toEqual(RequestMethod.Get);
         expect(project).toEqual({
@@ -130,7 +130,7 @@ describe('ProjectService', () => {
         "code": "Not Found",
         "message": "The requested project could not be found."
       }`;
-      service.getProject(1).toPromise().then(project => fail('Unexpectedly succeeded in loading project' + project)).catch(error =>
+      service.getProject(1).then(project => fail('Unexpectedly succeeded in loading project' + project)).catch(error =>
         expect(error).toEqual({ code: 'Not Found', message: 'The requested project could not be found.'})
       );
     })));

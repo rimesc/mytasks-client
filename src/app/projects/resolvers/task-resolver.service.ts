@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
+import { Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 
-import { Observable } from 'rxjs/Observable';
-
+import { ErrorHandlingResolver } from '../resolvers/error-handling-resolver';
 import { Task } from '../../api/task';
 import { TaskService } from '../../services/task.service';
 import { routeParam } from '../../util/routing-util';
 
 @Injectable()
-export class TaskResolver implements Resolve<Task> {
+export class TaskResolver extends ErrorHandlingResolver<Task> {
 
-  constructor(private taskService: TaskService, private router: Router) {}
+  constructor(private taskService: TaskService, private router: Router) {
+    super();
+  }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Task> {
+  doResolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<Task> {
     let id = routeParam(route, 'taskId');
     return this.taskService.getTask(id);
   }

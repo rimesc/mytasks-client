@@ -9,7 +9,7 @@ import { EditTaskModalComponent } from '../modals/edit-task-modal.component';
 import { DeleteTaskModalComponent } from '../modals/delete-task-modal.component';
 import { NotesComponent } from '../../shared/components/notes.component';
 
-import { Error } from '../../api/error';
+import { Resolved } from '../resolvers/error-handling-resolver';
 import { Task } from '../../api/task';
 import { TaskForm } from '../../api/task-form';
 import { Priority } from '../../api/priority';
@@ -53,10 +53,12 @@ export class TaskDetailComponent implements OnInit, CanDeactivateComponent {
 
   getTask(): void {
     this.route.data.subscribe(
-      (data: { task: Task }) => {
-        this.task = data.task;
-      },
-      (error: Error) => this.messages.error(error.code, error.message)
+      (data: { task: Resolved<Task> }) => {
+        data.task.handle(
+          task => this.task = task,
+          error => this.messages.error(error.code, error.message)
+        );
+      }
     );
   }
 
