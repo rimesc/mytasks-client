@@ -185,7 +185,7 @@ describe('the project page', () => {
       page.newTaskModal.summaryInput.enter('My new task');
       page.newTaskModal.selectPriority('High');
       page.newTaskModal.submit();
-      expect(page.openTasks).toEqual(3);
+      expect(page.pageTitle).toEqual('My new task');
       // TODO assert task details once there is a page objects for the project tasks page
     });
 
